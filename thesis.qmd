@@ -3,7 +3,7 @@ title: Untitled
 format:
   ctu-thesis-pdf: default
 author: vitpe
-bibliography: ctutest.bib
+bibliography: citation.bib
 csl: ctustyle/style.csl
 date: last-modified
 tbl-cap-location: bottom
