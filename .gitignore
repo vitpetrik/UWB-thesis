@@ -1,3 +1,5 @@
 /.quarto/
 /template_files/
 render/
+.DS_Store
+UWB-thesis.code-workspace
