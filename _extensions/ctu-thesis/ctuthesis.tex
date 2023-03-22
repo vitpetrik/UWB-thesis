@@ -1,0 +1,153 @@
+\documentclass[twoside]{ctustyle/ctuthesis}
+
+\ctusetup{
+  % preprint = \ctuverlog,
+%	mainlanguage = english,
+%	titlelanguage = czech,
+	mainlanguage = english,
+	otherlanguages = {slovak,english},
+	title-czech = {Fúze senzoru vzdálenosti na báze UWB se systémem vizuální relativní lokalizace},
+	title-english = {Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System},
+	% subtitle-czech = {todo},
+	% subtitle-english = {todo},
+	doctype = B,
+	faculty = F3,
+	department-czech = {Katedra kybernetiky},
+	department-english = {Department of Cybernetics},
+	author = {Vít Petřík},
+	supervisor = {Ing. Viktor Walter},
+	fieldofstudy-english = {Cybernetics and robotics},
+	fieldofstudy-czech = {Kybernetik a robotika},
+	keywords-czech = {slovo, klíč},
+	keywords-english = {word, key},
+	day = 10,
+	month = 5,
+	year = 2023,
+	specification-file = {Thesis_Assignment.pdf},
+	front-specification = true,
+%	front-list-of-figures = false,
+%	front-list-of-tables = false,
+%	monochrome = true,
+%	layout-short = true,
+}
+
+\ctuprocess
+
+\addto\ctucaptionsczech{%
+	\def\supervisorname{Vedoucí}%
+	\def\subfieldofstudyname{Studijní program}%
+}
+
+\ctutemplateset{maketitle twocolumn default}{
+	\begin{twocolumnfrontmatterpage}
+		\ctutemplate{twocolumn.thanks}
+		\ctutemplate{twocolumn.declaration}
+		\ctutemplate{twocolumn.abstract.in.titlelanguage}
+		\ctutemplate{twocolumn.abstract.in.secondlanguage}
+		\ctutemplate{twocolumn.tableofcontents}
+		\ctutemplate{twocolumn.listoffigures}
+	\end{twocolumnfrontmatterpage}
+}
+
+% Theorem declarations, this is the reasonable default, anybody can do what they wish.
+% If you prefer theorems in italics rather than slanted, use \theoremstyle{plainit}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{note}
+\newtheorem*{remark*}{Remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\setlength{\parskip}{5ex plus 0.2ex minus 0.2ex}
+
+% Abstract in Czech
+\begin{abstract-czech}
+  sadhfasdf
+\end{abstract-czech}
+
+% Abstract in English
+\begin{abstract-english}
+dajfsdlfk
+\end{abstract-english}
+
+% Acknowledgements / Podekovani
+\begin{thanks}
+Děkuji ČVUT, že mi je tak dobrou \emph{alma mater}.
+\end{thanks}
+
+% Declaration / Prohlaseni
+\begin{declaration}
+Prohlašuji, že jsem předloženou práci vypracoval samostatně, a že jsem uvedl veškerou použitou literaturu.
+
+V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
+\end{declaration}
+
+% Only for testing purposes
+\listfiles
+\usepackage[pagewise]{lineno}
+\usepackage{lipsum,blindtext}
+\usepackage{mathrsfs} % provides \mathscr used in the ridiculous examples
+\usepackage{longtable}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(csl-refs)$
+% Pandoc citation processing
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+% for Pandoc 2.8 to 2.10.1
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par}
+% For Pandoc 2.11+
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+
+\begin{document}
+
+\maketitle
+
+$body$
+
+% \medskip
+
+% \appendix
+
+% \printindex
+
+% \appendix
+
+% \bibliographystyle{amsalpha}
+% \bibliography{ctutest}
+
+\end{document}

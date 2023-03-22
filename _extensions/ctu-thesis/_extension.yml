@@ -1,0 +1,16 @@
+title: Ctu-thesis
+author: Oslejsek Stepan
+version: 1.0.0
+quarto-required: ">=1.2.0"
+contributes:
+  formats:
+    pdf:
+      toc: true
+      template: ctuthesis.tex
+      keep-tex: true
+      documentclass: report
+      pdf-engine: pdflatex
+      pdf-engine-opt: -no-shell-escape
+      echo: true
+  jupyter: python3
+

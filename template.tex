@@ -1,0 +1,277 @@
+\documentclass[twoside]{ctustyle/ctuthesis}
+
+\ctusetup{
+  % preprint = \ctuverlog,
+%	mainlanguage = english,
+%	titlelanguage = czech,
+	mainlanguage = english,
+	otherlanguages = {slovak,english},
+	title-czech = {Fúze senzoru vzdálenosti na báze UWB se systémem vizuální relativní lokalizace},
+	title-english = {Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System},
+	% subtitle-czech = {todo},
+	% subtitle-english = {todo},
+	doctype = B,
+	faculty = F3,
+	department-czech = {Katedra kybernetiky},
+	department-english = {Department of Cybernetics},
+	author = {Vít Petřík},
+	supervisor = {Ing. Viktor Walter},
+	fieldofstudy-english = {Cybernetics and robotics},
+	fieldofstudy-czech = {Kybernetik a robotika},
+	keywords-czech = {slovo, klíč},
+	keywords-english = {word, key},
+	day = 10,
+	month = 5,
+	year = 2023,
+	specification-file = {Thesis_Assignment.pdf},
+	front-specification = true,
+%	front-list-of-figures = false,
+%	front-list-of-tables = false,
+%	monochrome = true,
+%	layout-short = true,
+}
+
+\ctuprocess
+
+\addto\ctucaptionsczech{%
+	\def\supervisorname{Vedoucí}%
+	\def\subfieldofstudyname{Studijní program}%
+}
+
+\ctutemplateset{maketitle twocolumn default}{
+	\begin{twocolumnfrontmatterpage}
+		\ctutemplate{twocolumn.thanks}
+		\ctutemplate{twocolumn.declaration}
+		\ctutemplate{twocolumn.abstract.in.titlelanguage}
+		\ctutemplate{twocolumn.abstract.in.secondlanguage}
+		\ctutemplate{twocolumn.tableofcontents}
+		\ctutemplate{twocolumn.listoffigures}
+	\end{twocolumnfrontmatterpage}
+}
+
+% Theorem declarations, this is the reasonable default, anybody can do what they wish.
+% If you prefer theorems in italics rather than slanted, use \theoremstyle{plainit}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{note}
+\newtheorem*{remark*}{Remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\setlength{\parskip}{5ex plus 0.2ex minus 0.2ex}
+
+% Abstract in Czech
+\begin{abstract-czech}
+  sadhfasdf
+\end{abstract-czech}
+
+% Abstract in English
+\begin{abstract-english}
+dajfsdlfk
+\end{abstract-english}
+
+% Acknowledgements / Podekovani
+\begin{thanks}
+Děkuji ČVUT, že mi je tak dobrou \emph{alma mater}.
+\end{thanks}
+
+% Declaration / Prohlaseni
+\begin{declaration}
+Prohlašuji, že jsem předloženou práci vypracoval samostatně, a že jsem uvedl veškerou použitou literaturu.
+
+V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
+\end{declaration}
+
+% Only for testing purposes
+\listfiles
+\usepackage[pagewise]{lineno}
+\usepackage{lipsum,blindtext}
+\usepackage{mathrsfs} % provides \mathscr used in the ridiculous examples
+\usepackage{longtable}
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+% Pandoc citation processing
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+% for Pandoc 2.8 to 2.10.1
+\newenvironment{cslreferences}%
+  {}%
+  {\par}
+% For Pandoc 2.11+
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\begin{document}
+
+\maketitle
+
+\hypertarget{first-part}{%
+\chapter{First part}\label{first-part}}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\emph{TODO} Create an example file that demonstrates the formatting and
+features of your format. \(E = mc^2\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
+\NormalTok{r }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\FloatTok{0.01}\NormalTok{)}
+\NormalTok{theta }\OperatorTok{=} \DecValTok{2} \OperatorTok{*}\NormalTok{ np.pi }\OperatorTok{*}\NormalTok{ r}
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots(}
+\NormalTok{  subplot\_kw }\OperatorTok{=}\NormalTok{ \{}\StringTok{\textquotesingle{}projection\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}polar\textquotesingle{}}\NormalTok{\} }
+\NormalTok{)}
+\NormalTok{ax.plot(theta, r)}
+\NormalTok{ax.set\_rticks([}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\DecValTok{2}\NormalTok{])}
+\NormalTok{ax.grid(}\VariableTok{True}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{template_files/figure-pdf/fig-polar-output-1.pdf}
+
+}
+
+\caption{\label{fig-polar}A line plot on a polar axis}
+
+\end{figure}
+
+\hypertarget{more-information}{%
+\section{More Information}\label{more-information}}
+
+You can learn more about controlling the appearance of PDF output here:
+\url{https://quarto.org/docs/output-formats/pdf-basics.html}
+\[\dot{\boldsymbol{x}} = Ax + Bu\] As you can see on
+Figure~\ref{fig-polar} this is polar plot WOW. As it is stated in
+{[}2{]} {[}1{]}
+
+\hypertarget{second-part}{%
+\chapter{Second part}\label{second-part}}
+
+\hypertarget{idk}{%
+\section{IDk}\label{idk}}
+
+\hypertarget{tbl-table}{}
+\begin{longtable}[]{@{}llrc@{}}
+\toprule()
+Default & Left & Right & Center \\
+\midrule()
+\endfirsthead
+\toprule()
+Default & Left & Right & Center \\
+\midrule()
+\endhead
+12 & 12 & 12 & 12 \\
+123 & 123 & 123 & 123 \\
+1 & 1 & 1 & 1 \\
+\bottomrule()
+\caption{\label{tbl-table}Demonstration of pipe table
+syntax}\tabularnewline
+\end{longtable}
+
+Reference to basic table Table~\ref{tbl-table}
+
+\appendix
+
+\hypertarget{bibliography}{%
+\chapter*{Bibliography}\label{bibliography}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-cite:11}{}}%
+\CSLLeftMargin{1. }%
+\CSLRightInline{G. Wang and G. Selberg. 1992. Some convexity results for
+unconditionally {P}oncelet scalars. \emph{{K}uwaiti {M}athematical
+{A}nnals} 33: 520--523.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-cite:1}{}}%
+\CSLLeftMargin{2. }%
+\CSLRightInline{U. Wiles and S. Siegel. 1991. Sub-one-to-one factors of
+isomorphisms and questions of degeneracy. \emph{{J}ournal of
+{R}iemannian Number Theory} 31: 46--57.}
+
+\end{CSLReferences}
+
+% \medskip
+
+% \appendix
+
+% \printindex
+
+% \appendix
+
+% \bibliographystyle{amsalpha}
+% \bibliography{ctutest}
+
+\end{document}
