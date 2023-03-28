@@ -159,7 +159,7 @@
 			% In the first column its right-aligned, in the second left-aligned.
 			% It can't be more than one line.
 			\if@firstcolumn\hfil\fi
-			\leavevmode\color{ctubluetext}\LARGE\strut\bfseries\sffamily##3
+			\leavevmode\color{ctubluetext}\LARGE\strut\bfseries\sffamily\fontspec{Technika}##3
 			\if@firstcolumn\else\hfil\fi
 		}\par
 		\skip_vertical:n { 2pt }
@@ -277,7 +277,7 @@
 \newbox\ctu@title@box
 % macro that boxifies the header and adds the rule
 \long\def\ctu@title@boxify#1#2#3#4{
-	\sffamily
+	\fontspec{Technika}
 	\bfseries
 	\setbox\ctu@title@box\vbox{\hsize\dimexpr\linewidth-\ctu@title@rulewidth-\ctu@title@rulesep\relax
 		\vskip#1
@@ -294,7 +294,7 @@
 	\par
 }
 \long\def\ctu@title@boxify@x#1#2#3#4#5{
-	\sffamily
+	\fontspec{Technika}
 	\bfseries
 	\setbox\ctu@title@box\vbox{\parskip0pt\hsize\dimexpr\linewidth-\ctu@title@rulewidth-\ctu@title@rulesep\relax
 		\vskip#1

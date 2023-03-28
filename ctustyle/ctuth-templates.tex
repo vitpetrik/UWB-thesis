@@ -7,6 +7,8 @@
 
 % The titlepage, includes doctype, faculty, department, title, author,
 % and some auxiliary information at the bottom
+\usepackage{setspace}
+
 \ctutemplateset{titlepage}{
 	\thispagestyle { empty }
 	\noindent
@@ -21,58 +23,52 @@
 		\hsize\dimexpr\linewidth-17pt
 		% No justification, sf bf font
 		\raggedright \sffamily \bfseries
-		\selectctulanguage{title}
-		%
-		% The document type
-		{\ctufield[title]{doctype}\par}
-		%
-		\vspace*{3ex}
 		%
 		% A table containing: the CTU logo and name, faculty number, faculty and deparment name
-		\begin{tabular}{@{}l@{\hspace*{1em}}l@{}}
-			\Large\includegraphics[height=\dimexpr4\normalbaselineskip-1ex]{ctustyle/ctu_logo_black}
-		&
-			\Large\color{ctubluetext}\begin{tabular}[b]{@{}l@{}}\ctufield[title]{university-endl}\end{tabular}
-		\\[3ex]
-%			\begin{tabular}[c]{@{}l@{}}
-			\raisebox{-8pt}{
-			\color{ctubluetext}\fontsize{32.7}{32.7}\selectfont
-			\setbox0\hbox{\smash{\ctufield{facultynum}}\vphantom{X}}
-			\ifdim\wd0>2em \scalebox{0.9}[1]{\textls[-50]{\smash{\ctufield{facultynum}}\vphantom{X}}}\else\box0\fi
-			}
-%			\end{tabular}
-		&
-			\begin{tabular}[c]{@{}l@{}}\rlap{\ctufield[title]{faculty}}\\[2pt]\ctufield[title]{department}\end{tabular}
-		\end{tabular}\par
+		\includegraphics[height=3cm]{ctustyle/logo_CVUT.pdf}\
+		\vspace*{8mm}
+		\begin{tabular}{@{}l@{\hspace*{17.4mm}}l@{}}
+			\\[3ex]
+				\raisebox{-8pt}{
+					\color{ctubluetext}\fontsize{32.7}{32.7}\selectfont\fontspec{Technika}
+					\setbox0\hbox{\smash{\ctufield{facultynum}}\vphantom{X}}
+					\ifdim\wd0>2em \scalebox{0.9}[1]{\textls[-50]{\smash{\ctufield{facultynum}}\vphantom{X}}}\else\box0\fi
+					}
+					%			\end{tabular}
+					&
+					\begin{tabular}[c]{@{}l@{}}\rlap{\fontspec{Technika}\ctufield[title]{faculty}}\\[2pt]\fontspec{Technika}\ctufield[title]{department}\end{tabular}
+		\end{tabular}
+		\par
+		% The document type
+		\vspace{0cm}
+		\selectctulanguage{title}
+		{\fontspec{Technika}\ctufield[title]{doctype}\par}
 		%
-		\vspace{8ex plus 1fill}
+		\vspace{35mm}
 		%
 		% The title, in two languages
-		{\LARGE\color{ctubluetext}
-		\ctufield[title]{title}
-		\par}
+		{\color{ctubluetext}\Huge\fontspec{Technika}
+		\ctufield[title]{title}\par}
 		%
-		\vspace{3ex}
 		%
-		{\Large\color{ctubluetext}
-		\ctufield[title]{subtitle}
-		\par}
+		{\Large\color{ctubluetext}\fontspec{Technika}
+		\ctufield[title]{subtitle}\par}
 		%
-		\vspace*{8ex}
 		%
+		\vspace{15mm}
 		% The author
-		{\Large
-		\ctufield{author}
-		\par}
+		{\Large\fontspec{Technika}
+		\ctufield{author}}
+		\\
 		%
 		\vspace{0pt plus 3fill}
 		{
 		% The "metadata": supervisor, field of study, month and year
 		\parskip 1pt
-		\ctuiffield*{supervisor}{\supervisorname :~{\frenchspacing\ctufield{supervisor}}\par}{}
-		\ctuiffield*{supervisor-specialist}{\supervisorspecialistname :~{\frenchspacing\ctufield{supervisor-specialist}}\par}{}
-		\ctuiffield*[title]{fieldofstudy}{\fieldofstudyname :~\ctufield[title]{fieldofstudy}\par}{}
-		\ctuiffield*[title]{subfieldofstudy}{\subfieldofstudyname :~\ctufield[title]{subfieldofstudy}\par}{}
+		\ctuiffield*{supervisor}{\fontspec{Technika}\supervisorname :~{\frenchspacing\ctufield{supervisor}}\par}{}
+		\ctuiffield*{supervisor-specialist}{\fontspec{Technika}\supervisorspecialistname :~{\frenchspacing\ctufield{supervisor-specialist}}\par}{}
+		\ctuiffield*[title]{fieldofstudy}{\fontspec{Technika}\fieldofstudyname :~\ctufield[title]{fieldofstudy}\par}{}
+		\ctuiffield*[title]{subfieldofstudy}{\fontspec{Technika}\subfieldofstudyname :~\ctufield[title]{subfieldofstudy}\par}{}
 		\monthinlanguage*{title}~\ctufield{year}\par
 		}
 	}
@@ -80,7 +76,6 @@
 	% The titlepage goes all way down to the foot
 	\vspace*{-\footskip}
 	}
-	\par
 }
 
 % This include the specification file, and does nothing more
