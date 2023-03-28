@@ -1,3 +1,3 @@
 now=`date +"%Y-%m-%d"`
-quarto render thesis.qmd --output "out_$now.pdf" --to pdf
-mv "out_$now.pdf" render/"out_$now.pdf"
+quarto render thesis.qmd --output "thesis_$now.pdf"
+mv "thesis_$now.pdf" render/"thesis_$now.pdf"

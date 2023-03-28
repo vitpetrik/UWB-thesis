@@ -3,3 +3,5 @@
 render/
 .DS_Store
 UWB-thesis.code-workspace
+thesis.tex
+thesis_files/
