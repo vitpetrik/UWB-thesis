@@ -277,7 +277,6 @@
 \newbox\ctu@title@box
 % macro that boxifies the header and adds the rule
 \long\def\ctu@title@boxify#1#2#3#4{
-	\fontspec{Technika}
 	\bfseries
 	\setbox\ctu@title@box\vbox{\hsize\dimexpr\linewidth-\ctu@title@rulewidth-\ctu@title@rulesep\relax
 		\vskip#1
@@ -294,7 +293,6 @@
 	\par
 }
 \long\def\ctu@title@boxify@x#1#2#3#4#5{
-	\fontspec{Technika}
 	\bfseries
 	\setbox\ctu@title@box\vbox{\parskip0pt\hsize\dimexpr\linewidth-\ctu@title@rulewidth-\ctu@title@rulesep\relax
 		\vskip#1
@@ -330,9 +328,9 @@
 	% If the chapter is starred, we still want it in the ToC.
 	\ifttl@label\else\addcontentsline{toc}{chapter}{#8}\fi
 	\ctu@title@boxify{#5}{#3}{
-		{#1\strut\ifttl@label#2\fi\par}
-		\medskip
-		{\color{ctubluetext}#4\strut#8\strut\par}
+		{\fontspec{Technika}#1\strut\ifttl@label#2\fi}
+		\\
+		{\fontspec{Technika}\Large\color{ctubluetext}#4\strut#8\strut}
 	}{}
 }
 % The section style, very simply organized, subsection style differs only by a missing check for star variant and mark inclusion
@@ -340,15 +338,15 @@
 \def\ttlh@ctus#1#2#3#4#5#6#7#8{
 	\ifttl@label\else\sectionstarmark{#8}\fi	
 	\ifttl@label\else\addcontentsline{toc}{section}{#8}\fi
-	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
+	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\fontspec{Technika}\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
 }
 \def\ttlh@ctuss#1#2#3#4#5#6#7#8{
 	\ifttl@label\else\addcontentsline{toc}{subsection}{#8}\fi
-	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
+	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\fontspec{Technika}\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
 }
 \def\ttlh@ctusss#1#2#3#4#5#6#7#8{
 	\ifttl@label\else\addcontentsline{toc}{subsubsection}{#8}\fi
-	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
+	\ctu@title@boxify@x{#5}{0pt}{#3}{ #1{\fontspec{Technika}\ifttl@label#2\fi\strut\color{ctubluetext}#8\strut} }{}
 }
 % Modified \ttl@page@ii to use \cleardoublepage instead of some idiocy
 \def\ttl@page@ii#1#2#3#4#5#6#7{%
@@ -387,7 +385,7 @@
 % Tweak into titlesec to make part number contain \numberline. They did not include it for some reason.
 \def\ttl@tocpart{\def\ttl@a{\protect\numberline{\thepart}}}
 % Chapter title setting
-\titleformat \chapter [ctuch] {\huge} {{\LARGE\chaptertitlename\ }\thechapter} {-0\dp\strutbox} {\LARGE} [40pt]
+\titleformat \chapter [ctuch] {\huge} {{\LARGE\chaptertitlename\ }\Huge\thechapter} {-0\dp\strutbox} {\LARGE} [0pt]
 \titlespacing* \chapter {0pt} {40pt} {15pt}
 % Section title setting
 \titleformat \section [ctus] {\Large} {\thesection\quad} {14pt} {} [2pt]
