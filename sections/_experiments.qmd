@@ -1,0 +1,85 @@
+```{julia}
+
+using Statistics
+using DataFrames
+using Plots
+using CSV
+
+gr()
+
+default_plots = (
+    fontfamily="computer modern",
+    lims = :round,
+    minorgrid=true,
+    legend=false,
+    color_palette=:lighttest,
+    widen=true,
+)
+
+```
+
+# Simulations and real-world experiments
+
+A series of experiments have been conducted to evaluate the performance of the proposed measurement system. Experiments took place at Temešvár and Císařský ostrov. A couple of Holybro X500 [@fig-holybrox500] equipped with Qorvo DWM1000 has been chosen as a test platform. These drones were mainly chosen due to the RTK GNSS system onboard, which is crucial for evaluating accuracy and is used as source of ground truth.
+
+![Holybro X500 [^1].](images/holybrox500.jpg){#fig-holybrox500 width="70%"}
+
+[^1]: <http://mrs.felk.cvut.cz/research/micro-aerial-vehicles>
+
+## Line test
+
+This experiment aims to test maximum range and get transfer characteristic of the sensor. The first UAV purpose was to act as an observer and for the entire duration of the test stayed and position $\left(0, 0, 0\right)$. Second UAV was flying in a trajectory predefined by parametric equation @eq-line-test.
+
+$$
+    \mathbf{position}(t) = \begin{pmatrix} 0 \\ 65 + 55 \sin (2 \pi t) \\ 5 \end{pmatrix}, \quad t \in \left(0, 1\right)
+$$ {#eq-line-test}
+
+```{julia}
+#| label: fig-tranfer-function
+#| fig-cap: "Transfer characteristic of UWB"
+#| output: true
+
+data = CSV.File("data/data_line.csv")
+
+offset = mean(data.rtk_distance - data.range_uwb)
+
+@. data.range_uwb += offset
+
+plot(;default_plots..., 
+        xlabel="RTK [m]", 
+        ylabel="UWB [m]",
+    )
+
+plot!(data.rtk_distance, data.range_uwb)
+
+
+```
+
+```{julia}
+#| label: fig-line-in-time
+#| fig-cap: "Transfer characteristic of UWB"
+#| output: true
+
+plot(;default_plots..., 
+        xlabel="Time [s]", 
+        ylabel="Range [m]",
+        legend=true
+    )
+
+plot!(data.timestamp, data.rtk_distance, label="RTK")
+plot!(data.timestamp, data.range_uwb, label="UWB")
+plot!(twinx(), 
+        data.timestamp, 
+        data.rtk_distance - data.range_uwb,
+        lc=:red; 
+        default_plots..., 
+        legend=true, 
+        y_foreground_color_axis=:red,
+        y_foreground_color_border=:red,
+        y_foreground_color_text=:red,
+        label="Absolute error")
+
+
+```
+
+As the results show, the measurements are accurate and reliable. Due to the effects of lag, the measurements have a marginal phase shift compared to the RTK results. The lag is caused by the nature of double-sided two-way ranging as well as the need to transport the data from DWM1000 and process them on the Intel NUC that runs ROS.

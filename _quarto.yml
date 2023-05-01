@@ -11,3 +11,12 @@ csl: ctustyle/style.csl
 date: last-modified
 tbl-cap-location: bottom
 code-line-numbers: true
+execute:
+  echo: false
+  output: false
+crossref:
+  ref-hyperlink: true # (default is true)
+  fig-prefix: ""   # (default is "Figure")
+  tbl-prefix: ""    # (default is "Table")
+  eq-prefix: ""
+  

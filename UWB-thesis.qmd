@@ -1,5 +1,6 @@
 ---
 title: Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System
+jupyter: julia-1.8
 ---
 
 # Introduction
@@ -16,65 +17,9 @@ title: Fusion of UWB-Based Distance Sensors with a Visual Relative Localization 
 
 # Implementation on MAV
 
-# Simulations and real world experiments
+{{< include sections/_experiments.qmd >}}
 
 # Conclusion
-
-## Introduction ahoj
-
-*TODO* Create an example λφα file that demonstrates the formatting and features of your format. $E = mc^2$
-
-::: {#fig-elephants layout-ncol=1}
-
-```{.C}
-#include <stdio.h>
-int main() {
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
-}
-```
-C code example
-:::
-
-```{julia}
-#| label: fig-parametric
-#| fig-cap: "Parametric Plots"
-
-using Plots
-
-plot(sin, 
-     x->sin(2x), 
-     0, 
-     2π)
-```
-
-## More Information
-
-You can learn more about controlling the appearance of PDF output here: <https://quarto.org/docs/output-formats/pdf-basics.html> $$\dot{\boldsymbol{x}} = Ax + Bu$$ As you can see on [@fig-parametric] this is polar [@code] plot WOW. As it is stated in [@cite:1] [@cite:11]
-
-I'm an dumb Person, cause I eat Dog shit. She does his homework.
-# Second part
-
-```{mermaid}
-flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
-```
-
-## IDk
-
-| Default | Left | Right | Center |
-|---------|:-----|------:|:------:|
-| 12      | 12   |    12 |   12   |
-| 123     | 123  |   123 |  123   |
-| 1       | 1    |     1 |   1    |
-
-: Demonstration of pipe table syntax {#tbl-table}
-
-Reference to basic table [@tbl-table]
 
 \appendix
 
