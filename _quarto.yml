@@ -1,12 +1,11 @@
 project:
   title: "UWB-thesis"
-  output-dir: output
-
 format:
-  ctu-thesis-pdf: default
+  html:
+    self-contained: true
 listing: default
 pdf-engine: xelatex
-author: vitpe
+author: Vit Petrik
 bibliography: citation.bib
 csl: ctustyle/style.csl
 date: last-modified

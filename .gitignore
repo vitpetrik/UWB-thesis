@@ -10,3 +10,6 @@ _extensions/ctu-thesis/output
 output
 *.pdf
 .vscode/
+UWB-thesis_files
+*.html
+UWB-thesis.tex
