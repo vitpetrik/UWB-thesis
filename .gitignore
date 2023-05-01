@@ -6,3 +6,7 @@ UWB-thesis.code-workspace
 thesis.tex
 thesis_files/
 _extensions/ctu-thesis/output
+.ipynb_checkpoints/
+output
+*.pdf
+.vscode/

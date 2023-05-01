@@ -1,0 +1,14 @@
+project:
+  title: "UWB-thesis"
+  output-dir: output
+
+format:
+  ctu-thesis-pdf: default
+listing: default
+pdf-engine: xelatex
+author: vitpe
+bibliography: citation.bib
+csl: ctustyle/style.csl
+date: last-modified
+tbl-cap-location: bottom
+code-line-numbers: true
