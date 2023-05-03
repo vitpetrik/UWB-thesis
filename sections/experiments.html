@@ -9,7 +9,7 @@
 <meta name="author" content="Vit Petrik">
 <meta name="dcterms.date" content="2023-05-03">
 
-<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 2&nbsp; Simulations and real-world experiments</title>
+<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 6&nbsp; Simulations and real-world experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -52,7 +52,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../sections/references.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../sections/implementation.html" rel="prev">
 <script src="../site_libs/quarto-listing/list.min.js"></script>
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -127,7 +127,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sections/experiments.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sections/experiments.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -160,8 +160,32 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../sections/uvdar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/uwb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/kalman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Kalman filters</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sections/implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on MAV</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../sections/experiments.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,10 +204,10 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#line-segment-test" id="toc-line-segment-test" class="nav-link active" data-scroll-target="#line-segment-test"><span class="header-section-number">2.0.1</span> Line segment test</a></li>
-  <li><a href="#circular-trajectory" id="toc-circular-trajectory" class="nav-link" data-scroll-target="#circular-trajectory"><span class="header-section-number">2.0.2</span> Circular trajectory</a></li>
-  <li><a href="#leader-follower-algorithm" id="toc-leader-follower-algorithm" class="nav-link" data-scroll-target="#leader-follower-algorithm"><span class="header-section-number">2.0.3</span> Leader follower algorithm</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">2.1</span> Results</a></li>
+  <li><a href="#line-segment-test" id="toc-line-segment-test" class="nav-link active" data-scroll-target="#line-segment-test"><span class="header-section-number">6.0.1</span> Line segment test</a></li>
+  <li><a href="#circular-trajectory" id="toc-circular-trajectory" class="nav-link" data-scroll-target="#circular-trajectory"><span class="header-section-number">6.0.2</span> Circular trajectory</a></li>
+  <li><a href="#leader-follower-algorithm" id="toc-leader-follower-algorithm" class="nav-link" data-scroll-target="#leader-follower-algorithm"><span class="header-section-number">6.0.3</span> Leader follower algorithm</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">6.1</span> Results</a></li>
   </ul>
 </nav>
     </div>
@@ -192,7 +216,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Simulations and real-world experiments</span></h1>
 </div>
 
 
@@ -219,37 +243,37 @@ div.csl-indent {
 
 </header>
 
-<p>A series of experiments have been conducted to evaluate the performance of the proposed measurement system. Experiments took place at Temešvár and Císařský ostrov. A couple of Holybro X500&nbsp;<a href="#fig-holybrox500"><span>2.1</span></a> equipped with Qorvo DWM1000 has been chosen as a test platform. These drones were mainly chosen due to the RTK GNSS system onboard, which is crucial for evaluating accuracy and is used as source of ground truth.</p>
+<p>A series of experiments have been conducted to evaluate the performance of the proposed measurement system. Experiments took place at Temešvár and Císařský ostrov. A couple of Holybro X500&nbsp;<a href="#fig-holybrox500"><span>6.1</span></a> equipped with Qorvo DWM1000 has been chosen as a test platform. These drones were mainly chosen due to the RTK GNSS system onboard, which is crucial for evaluating accuracy and is used as source of ground truth.</p>
 <div id="fig-holybrox500" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/holybrox500.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.1: Holybro X500 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6.1: Holybro X500 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</figcaption>
 </figure>
 </div>
-<section id="line-segment-test" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="line-segment-test"><span class="header-section-number">2.0.1</span> Line segment test</h3>
-<p>This experiment aims to test maximum range and get transfer characteristic of the sensor. The first UAV purpose was to act as an observer and for the entire duration of the test stayed at position <span class="math inline">\(\left(0, 0, 0\right)\)</span>. Second UAV was flying in a trajectory predefined by parametric equation&nbsp;<a href="#eq-line-test"><span>2.1</span></a>.</p>
+<section id="line-segment-test" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1" class="anchored" data-anchor-id="line-segment-test"><span class="header-section-number">6.0.1</span> Line segment test</h3>
+<p>This experiment aims to test maximum range and get transfer characteristic of the sensor. The first UAV purpose was to act as an observer and for the entire duration of the test stayed at position <span class="math inline">\(\left(0, 0, 0\right)\)</span>. Second UAV was flying in a trajectory predefined by parametric equation&nbsp;<a href="#eq-line-test"><span>6.1</span></a>.</p>
 <p><span id="eq-line-test"><span class="math display">\[
     \mathbf{position}(t) = \begin{pmatrix} 0 \\ 65 + 55 \sin (2 \pi t) \\ 5 \end{pmatrix}, \quad t \in \left(0, 1\right)
-\tag{2.1}\]</span></span></p>
+\tag{6.1}\]</span></span></p>
 </section>
-<section id="circular-trajectory" class="level3" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="circular-trajectory"><span class="header-section-number">2.0.2</span> Circular trajectory</h3>
+<section id="circular-trajectory" class="level3" data-number="6.0.2">
+<h3 data-number="6.0.2" class="anchored" data-anchor-id="circular-trajectory"><span class="header-section-number">6.0.2</span> Circular trajectory</h3>
 <p>As it was noted before, the results from UWB should be the same for all orientations. To test whether that is a correct assumption, 4 experiments have been conducted. In each test one UAV acted as an observer and stayed stayed at position <span class="math inline">\(\left(0, 0, 0\right)\)</span>. The second UAV followed a circle of radius 10 m around the first UAV. The difference between the 4 experiments was relative angle respective to velocity vector.</p>
 </section>
-<section id="leader-follower-algorithm" class="level3" data-number="2.0.3">
-<h3 data-number="2.0.3" class="anchored" data-anchor-id="leader-follower-algorithm"><span class="header-section-number">2.0.3</span> Leader follower algorithm</h3>
+<section id="leader-follower-algorithm" class="level3" data-number="6.0.3">
+<h3 data-number="6.0.3" class="anchored" data-anchor-id="leader-follower-algorithm"><span class="header-section-number">6.0.3</span> Leader follower algorithm</h3>
 <p>To test the fusion of UVDAR and UWB in-loop, a leader-follower algorithm has been used. In this test, a leader UAV flies a preplanned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion. The algorithm was inspired by <span class="citation" data-cites="mrs:uvdar">[<a href="references.html#ref-mrs:uvdar" role="doc-biblioref">2</a>]</span>.</p>
 </section>
-<section id="results" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="results"><span class="header-section-number">2.1</span> Results</h2>
-<p>All proposed experiments were successfully conducted. The first experiment [Figure <a href="#fig-tranfer-function"><span>2.2</span></a>] showed that the UWB measurements are indeed precise and do not express any signs of nonlinearity. The maximum range of 120 m was reached by UWB, however, the measurements at the far end are not reliable and often drops out. This can be seen as straight lines in Figure <a href="#fig-tranfer-function"><span>2.2</span></a>. Somehow cite this <span class="citation" data-cites="qorvo:aps011">[<a href="references.html#ref-qorvo:aps011" role="doc-biblioref">1</a>]</span></p>
+<section id="results" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="results"><span class="header-section-number">6.1</span> Results</h2>
+<p>All proposed experiments were successfully conducted. The first experiment [Figure <a href="#fig-tranfer-function"><span>6.2</span></a>] showed that the UWB measurements are indeed precise and do not express any signs of nonlinearity. The maximum range of 120 m was reached by UWB, however, the measurements at the far end are not reliable and often drops out. This can be seen as straight lines in Figure <a href="#fig-tranfer-function"><span>6.2</span></a>. Somehow cite this <span class="citation" data-cites="qorvo:aps011">[<a href="references.html#ref-qorvo:aps011" role="doc-biblioref">1</a>]</span></p>
 <div class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div id="fig-tranfer-function" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="experiments_files/figure-html/fig-tranfer-function-output-1.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.2: Transfer characteristic of UWB</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6.2: Transfer characteristic of UWB</figcaption>
 </figure>
 </div>
 </div>
@@ -259,7 +283,7 @@ div.csl-indent {
 <div id="fig-line-in-time" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="experiments_files/figure-html/fig-line-in-time-output-1.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.3: Transfer characteristic of UWB</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6.3: Transfer characteristic of UWB</figcaption>
 </figure>
 </div>
 </div>
@@ -269,7 +293,7 @@ div.csl-indent {
 <div id="fig-angle" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="experiments_files/figure-html/fig-angle-output-1.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.4: Transfer characteristic of UWB</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6.4: Transfer characteristic of UWB</figcaption>
 </figure>
 </div>
 </div>
@@ -282,7 +306,7 @@ div.csl-indent {
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">2014. <em>A sources of error in DW1000 based two-way ranging scheme APS011</em>. Decawave; <a href="https://www.qorvo.com/products/d/da008446" class="uri">https://www.qorvo.com/products/d/da008446</a>.</div>
 </div>
 <div id="ref-mrs:uvdar" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">Viktor Walter, Nicolas Staub, Antonio Franchi, and Martin Saska. 2019. UVDAR system for visual relative localization with application to leader–follower formations of multirotor UAVs. <em>IEEE Robotics and Automation Letters</em> 4, 3: 2637–2644. <a href="https://doi.org/10.1109/LRA.2019.2901683">https://doi.org/10.1109/LRA.2019.2901683</a></div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Dominik Fischer. 2019. UVDAR system for visual relative localization with application to leader–follower formations of multirotor UAVs. <em>IEEE Robotics and Automation Letters</em> 4, 3: 2637–2644. <a href="https://doi.org/10.1109/LRA.2019.2901683">https://doi.org/10.1109/LRA.2019.2901683</a></div>
 </div>
 </div>
 </section>
@@ -295,7 +319,63 @@ div.csl-indent {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1683123310000" data-listing-file-modified-sort="1683123310231" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1683124658000" data-listing-file-modified-sort="1683124658364" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
+<div class="thumbnail">
+<p><a href="../sections/implementation.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../sections/implementation.html">
+<h3 class="no-anchor listing-title">
+Implementation on MAV
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+ <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../sections/implementation.html">
+<div class="listing-date">
+May 3, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1683124690000" data-listing-file-modified-sort="1683124690526" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../sections/kalman.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../sections/kalman.html">
+<h3 class="no-anchor listing-title">
+Kalman filters
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+ <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../sections/kalman.html">
+<div class="listing-date">
+May 3, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1683123310000" data-listing-file-modified-sort="1683123310231" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="../sections/references.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -308,12 +388,68 @@ References
 
 </div>
 <div class="listing-description">
- <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> 
+ <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../sections/references.html">
+<div class="listing-date">
+May 3, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1683130789000" data-listing-file-modified-sort="1683130789679" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../sections/uvdar.html"> <p class="card-img-top"><img src="images/uvdar.jpg"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="../sections/uvdar.html">
+<h3 class="no-anchor listing-title">
+Ultra-violet Detection and Ranging
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+ <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../sections/uvdar.html">
+<div class="listing-date">
+May 3, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1683124714000" data-listing-file-modified-sort="1683124714912" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
+<div class="thumbnail">
+<p><a href="../sections/uwb.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../sections/uwb.html">
+<h3 class="no-anchor listing-title">
+Ultra-wide band
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+ <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../sections/uwb.html">
 <div class="listing-date">
 May 3, 2023
 </div>
@@ -563,8 +699,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../sections/implementation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on MAV</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
