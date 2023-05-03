@@ -27,7 +27,7 @@ A series of experiments have been conducted to evaluate the performance of the p
 
 [^1]: <http://mrs.felk.cvut.cz/research/micro-aerial-vehicles>
 
-### Line segment test {-}
+### Line segment test
 
 This experiment aims to test maximum range and get transfer characteristic of the sensor. 
 The first UAV purpose was to act as an observer and for the entire duration of the test stayed at position $\left(0, 0, 0\right)$. 
@@ -37,13 +37,13 @@ $$
     \mathbf{position}(t) = \begin{pmatrix} 0 \\ 65 + 55 \sin (2 \pi t) \\ 5 \end{pmatrix}, \quad t \in \left(0, 1\right)
 $$ {#eq-line-test}
 
-### Circular trajectory {-}
+### Circular trajectory
 
 As it was noted before, the results from UWB should be the same for all orientations.
 To test whether that is a correct assumption, 4 experiments have been conducted.
 In each test one UAV acted as an observer and stayed stayed at position $\left(0, 0, 0\right)$. The second UAV followed a circle of radius 10 m around the first UAV. The difference between the 4 experiments was relative angle respective to velocity vector.
 
-### Leader follower algorithm {-}
+### Leader follower algorithm
 
 To test the fusion of UVDAR and UWB in-loop, a leader-follower algorithm has been used.
 In this test, a leader UAV flies a preplanned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion.
