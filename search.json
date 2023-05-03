@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System",
     "section": "",
-    "text": "1 Introduction\nAhoj\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nBibliography\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "1 Introduction\nAhoj\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nReferences\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "sections/experiments.html#results",
@@ -23,7 +23,7 @@
   {
     "objectID": "sections/references.html",
     "href": "sections/references.html",
-    "title": "Bibliography",
+    "title": "References",
     "section": "",
     "text": "1. 2014. A sources of error in DW1000 based\ntwo-way ranging scheme APS011. Decawave; https://www.qorvo.com/products/d/da008446.\n\n\n2. Viktor Walter, Nicolas Staub, Antonio Franchi,\nand Martin Saska. 2019. UVDAR system for visual relative localization\nwith application to leader–follower formations of multirotor UAVs.\nIEEE Robotics and Automation Letters 4, 3: 2637–2644. https://doi.org/10.1109/LRA.2019.2901683\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   }
