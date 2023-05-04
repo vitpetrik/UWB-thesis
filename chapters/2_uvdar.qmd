@@ -1,0 +1,3 @@
+# Ultra-violet Detection and Ranging
+
+![Image from UV camera.](images/uvdar.jpg){#fig-uvdar-img width="70%"}

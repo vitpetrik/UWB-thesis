@@ -7,12 +7,18 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - sections/experiments.qmd
-    - sections/references.qmd
+    - chapters/2_uvdar.qmd
+    - chapters/3_uwb.qmd
+    - chapters/4_kalman.qmd
+    - chapters/5_implementation.qmd
+    - chapters/6_experiments.qmd
+    - chapters/7_conclusion.qmd
+    - chapters/references.qmd
 format:
   html:
     theme: cosmo
   ctu-thesis-pdf:
+    link-citations: true
     include-in-header: 
         text: |
           \usepackage{makeidx}
