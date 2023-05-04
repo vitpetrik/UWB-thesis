@@ -4,62 +4,76 @@
     "href": "index.html",
     "title": "Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System",
     "section": "",
-    "text": "1 Introduction\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nReferences\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "1 Introduction\nIn recent years, the use of unmanned aerial vehicles (UAVs) has been rapidly growing due to their versatility and wide range of applications, from aerial photography and surveillance to delivery services 1 and search and rescue operations [1]. The problem of relative localization in UAV swarms is a critical challenge for enabling cooperative behavior and avoiding collisions.\nTo address this problem, a novel system is proposed in this thesis that combines computer vision and ultra-wideband (UWB) technology for direction and range measurements, respectively. By fusing these measurements using a Kalman filter, the relative positions and orientations of UAVs can be estimated with high accuracy, even in GNSS-denied environments such as undergrounds, buildings or caves [1]. This approach has a significant advantage over existing methods, which often rely on GNSS [2] or motion capture 2 and are therefore limited in their ability to operate in challenging environments or without additional infrastructure onsite.\nThe research question for this thesis is: How can an effective relative localization system for UAV swarms be designed and implemented using computer vision and UWB technology, and how well does it perform in real-world scenarios? Firstly, a review of the existing literature on relative localization and multi-robot systems will be conducted. Secondly, the proposed system and its key components, including the computer vision algorithms for direction estimation and the UWB hardware for range measurement, will be presented. Finally, the performance of the system will be evaluated through a series of experiments in both simulated and real-world environments and compared with existing approaches.\nBy developing and testing this system, a contribution will be made to the growing body of research on multi-robot systems and pave the way for new applications of UAV swarms in challenging environments."
   },
   {
-    "objectID": "sections/uvdar.html",
-    "href": "sections/uvdar.html",
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System",
+    "section": "",
+    "text": "Blood and packages delivery https://www.flyzipline.com↩︎\nMotion capture OptiTrack https://optitrack.com↩︎"
+  },
+  {
+    "objectID": "chapters/2_uvdar.html",
+    "href": "chapters/2_uvdar.html",
     "title": "2  Ultra-violet Detection and Ranging",
     "section": "",
-    "text": "Figure 2.1: Image from UV camera.\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nReferences\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "Figure 2.1: Image from UV camera.\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nBibliography\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "sections/uwb.html",
-    "href": "sections/uwb.html",
+    "objectID": "chapters/3_uwb.html",
+    "href": "chapters/3_uwb.html",
     "title": "3  Ultra-wide band",
     "section": "",
-    "text": "Implementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nReferences\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "Bibliography\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "sections/kalman.html#linear-kalman-filter",
-    "href": "sections/kalman.html#linear-kalman-filter",
+    "objectID": "chapters/4_kalman.html#linear-kalman-filter",
+    "href": "chapters/4_kalman.html#linear-kalman-filter",
     "title": "4  Kalman filters",
     "section": "4.1 Linear Kalman filter",
     "text": "4.1 Linear Kalman filter"
   },
   {
-    "objectID": "sections/kalman.html#unscented-kalman-filter",
-    "href": "sections/kalman.html#unscented-kalman-filter",
+    "objectID": "chapters/4_kalman.html#unscented-kalman-filter",
+    "href": "chapters/4_kalman.html#unscented-kalman-filter",
     "title": "4  Kalman filters",
     "section": "4.2 Unscented Kalman filter",
     "text": "4.2 Unscented Kalman filter"
   },
   {
-    "objectID": "sections/implementation.html",
-    "href": "sections/implementation.html",
+    "objectID": "chapters/5_implementation.html",
+    "href": "chapters/5_implementation.html",
     "title": "5  Implementation on MAV",
     "section": "",
-    "text": "Kalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nReferences\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "Bibliography\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "sections/experiments.html#results",
-    "href": "sections/experiments.html#results",
+    "objectID": "chapters/6_experiments.html#results",
+    "href": "chapters/6_experiments.html#results",
     "title": "6  Simulations and real-world experiments",
     "section": "6.1 Results",
     "text": "6.1 Results\nAll proposed experiments were successfully conducted. The first experiment [Figure 6.2] showed that the UWB measurements are indeed precise and do not express any signs of nonlinearity. The maximum range of 120 m was reached by UWB, however, the measurements at the far end are not reliable and often drops out. This can be seen as straight lines in Figure 6.2. Somehow cite this [1]\n\n\n\n\n\nFigure 6.2: Transfer characteristic of UWB\n\n\n\n\n\n\n\n\n\nFigure 6.3: Transfer characteristic of UWB\n\n\n\n\n\n\n\n\n\nFigure 6.4: Transfer characteristic of UWB\n\n\n\n\n\n\n\n\n\n1. 2014. A sources of error in DW1000 based two-way ranging scheme APS011. Decawave; https://www.qorvo.com/products/d/da008446.\n\n\n2. Dominik Fischer. 2019. UVDAR system for visual relative localization with application to leader–follower formations of multirotor UAVs. IEEE Robotics and Automation Letters 4, 3: 2637–2644. https://doi.org/10.1109/LRA.2019.2901683"
   },
   {
-    "objectID": "sections/experiments.html#footnotes",
-    "href": "sections/experiments.html#footnotes",
+    "objectID": "chapters/6_experiments.html#footnotes",
+    "href": "chapters/6_experiments.html#footnotes",
     "title": "6  Simulations and real-world experiments",
     "section": "",
     "text": "http://mrs.felk.cvut.cz/research/micro-aerial-vehicles↩︎"
   },
   {
-    "objectID": "sections/references.html",
-    "href": "sections/references.html",
-    "title": "References",
+    "objectID": "chapters/7_conclusion.html",
+    "href": "chapters/7_conclusion.html",
+    "title": "7  Conclusion",
     "section": "",
-    "text": "1. 2014. A sources of error in DW1000 based\ntwo-way ranging scheme APS011. Decawave; https://www.qorvo.com/products/d/da008446.\n\n\n2. Dominik Fischer. 2019. UVDAR system for visual\nrelative localization with application to leader–follower formations of\nmultirotor UAVs. IEEE Robotics and Automation Letters 4, 3:\n2637–2644. https://doi.org/10.1109/LRA.2019.2901683\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+    "text": "Bibliography\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "chapters/references.html",
+    "href": "chapters/references.html",
+    "title": "Bibliography",
+    "section": "",
+    "text": "1. 2014. A sources of error in DW1000 based\ntwo-way ranging scheme APS011. Decawave; https://www.qorvo.com/products/d/da008446.\n\n\n2. Dominik Fischer. 2019. UVDAR system for visual\nrelative localization with application to leader–follower formations of\nmultirotor UAVs. IEEE Robotics and Automation Letters 4, 3:\n2637–2644. https://doi.org/10.1109/LRA.2019.2901683\n\n\n3. Matej Petrlik, Pavel Petracek, Vit Kratky,\nTomas Musil, Yurii Stasinchuk, Matous Vrba, Tomas Baca, Daniel Hert,\nMartin Pecka, Tomas Svoboda, and Martin Saska. 2023. UAVs Beneath the Surface: Cooperative Autonomy for\nSubterranean Search and Rescue in DARPA SubT. Field\nRobotics 3: 1–68. https://doi.org/https://doi.org/10.55417/fr.2023001\n\n\n4. G.\nVásárhelyi, Cs. Virágh, G. Somorjai, N. Tarcai, T. Szörenyi, T. Nepusz,\nand T. Vicsek. 2014. Outdoor flocking and formation flight with\nautonomous aerial robots. In 2014 IEEE/RSJ international conference\non intelligent robots and systems, 3866–3873. https://doi.org/10.1109/IROS.2014.6943105\n\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\nMay 4, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nImplementation on MAV\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nKalman filters\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nSimulations and real-world experiments\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-violet Detection and Ranging\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\n  \n\n\n\n\nUltra-wide band\n\n\n\n\n\n\n\n\n\n\n\n\nMay 3, 2023\n\n\nVit Petrik\n\n\n\n\n\n\nNo matching items"
   }
 ]
