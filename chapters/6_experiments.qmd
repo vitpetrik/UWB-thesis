@@ -47,7 +47,7 @@ In each test one UAV acted as an observer and stayed stayed at position $\left(0
 
 To test the fusion of UVDAR and UWB in-loop, a leader-follower algorithm has been used.
 In this test, a leader UAV flies a preplanned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion.
-The algorithm was inspired by @mrs:uvdar.
+The algorithm was inspired by @8651535.
 
 ## Results
 

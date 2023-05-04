@@ -1,3 +1,7 @@
 # Ultra-violet Detection and Ranging
 
+The Ultra-violet Direction and Ranging (UVDAR) is a system for relative localization based on computer vision. The system was developed by the Multi-robot system group at CTU [@uvdd1]. It consists of two parts, active UV LED markers and industrial grade camera with UV bandpass filter and fisheye lens. This allows the system to exactly recognize active markers from the background and work even in a pitch-black environment. This effect can be seen in image @fig-uvdar-img.
+
 ![Image from UV camera.](images/uvdar.jpg){#fig-uvdar-img width="70%"}
+
+![UVDAR processing data flow. [@uvdd2]](images/uvdar_dataflow.pdf){#fig-uvdar-dataflow width="70%"}

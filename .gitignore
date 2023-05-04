@@ -8,9 +8,9 @@ thesis_files/
 _extensions/ctu-thesis/output
 .ipynb_checkpoints/
 output
-*.pdf
 .vscode/
 UWB-thesis_files
 *.html
-UWB-thesis.tex
+*.tex
 _book
+!tools/*.tex
