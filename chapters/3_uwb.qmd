@@ -1,1 +1,48 @@
+```{julia}
+
+using Statistics
+using DataFrames
+using Plots
+using CSV
+using Printf
+
+gr()
+
+default_plots = (
+    fontfamily="computer modern",
+    lims = :round,
+    minorgrid=true,
+    legend=false,
+    color_palette=:lighttest,
+    widen=true,
+)
+
+```
+
 # Ultra-wide band
+
+```{julia}
+
+#| label: fig-uwb-reference pulse
+#| fig-cap: "Reference pulse of UWB radio."
+#| output: true
+#| width: 70%
+
+β = 0.5
+Tp = 2e-9
+r(t) = 4*β*(cos((1+β)*pi*t/Tp)+sin((1-β)*pi*t/Tp)/(4*β*(t/Tp)))/(pi*sqrt(Tp)*(1-(4*β*t/Tp)^2))
+
+t = LinRange(-8e-9, 8e-9, 1000)
+y = r.(t)
+y /= maximum(y)
+
+plot(;default_plots..., 
+        xlabel="Time [ns]", 
+        ylabel="",
+        yformatter=Returns("")
+    )
+
+plot!(1e9.*t, y)
+
+
+```
