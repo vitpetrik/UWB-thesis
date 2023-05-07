@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-03">
+<meta name="dcterms.date" content="2023-05-06">
 
-<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wide band</title>
+<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wideband</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -108,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/3_uwb.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/3_uwb.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/3_uwb.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -187,14 +206,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#history" id="toc-history" class="nav-link active" data-scroll-target="#history"><span class="header-section-number">3.1</span> History</a></li>
+  <li><a href="#mac-layer" id="toc-mac-layer" class="nav-link" data-scroll-target="#mac-layer"><span class="header-section-number">3.2</span> MAC layer</a></li>
+  <li><a href="#physical-layer" id="toc-physical-layer" class="nav-link" data-scroll-target="#physical-layer"><span class="header-section-number">3.3</span> Physical Layer</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></h1>
 </div>
 
 
@@ -211,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 3, 2023</p>
+      <p class="date">May 6, 2023</p>
     </div>
   </div>
   
@@ -221,9 +248,46 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="history" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="history"><span class="header-section-number">3.1</span> History</h2>
+</section>
+<section id="mac-layer" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="mac-layer"><span class="header-section-number">3.2</span> MAC layer</h2>
+</section>
+<section id="physical-layer" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="physical-layer"><span class="header-section-number">3.3</span> Physical Layer</h2>
+<p>The physical (PHY) layer of UWB has been described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>. Newer standards have been released since in year 2015 and 2020, however the UWB radio that has been used in this thesis supports the 2011 release. The standard defines three operation bands:</p>
+<ul>
+<li>sub-gigahertz band consisting of single channel spectrum from 249.6 MHz to 749.6 MHz.</li>
+<li>Low band with spectrum from 3.1 GHz to 4.8 GHz.</li>
+<li>High band with spectrum from 6 GHz to 10.6 GHz.</li>
+</ul>
+<p>PHY</p>
+<div id="fig-uwb-dataflow" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><embed src="figures/uwb_phy_dataflow.pdf" class="img-fluid"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: Data flow according to <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
+</figure>
+</div>
+<div class="cell" width="70%" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="fig-uwb-reference-pulse" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_uwb_files/figure-html/fig-uwb-reference-pulse-output-1.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Reference pulse of UWB radio.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 
+<div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-6012487" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">2011. IEEE standard for local and metropolitan area networks–part 15.4: Low-rate wireless personal area networks (LR-WPANs). <em>IEEE Std 802.15.4-2011 (Revision of IEEE Std 802.15.4-2006)</em>: 1–314. <a href="https://doi.org/10.1109/IEEESTD.2011.6012487">https://doi.org/10.1109/IEEESTD.2011.6012487</a></div>
+</div>
+</div>
+</section>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
@@ -367,7 +431,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1683205791000" data-listing-file-modified-sort="1683205791809" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1683206526000" data-listing-file-modified-sort="1683206526143" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="../chapters/2_uvdar.html"> <p class="card-img-top"><img src="images/uvdar.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
