@@ -19,7 +19,25 @@ default_plots = (
 
 ```
 
-# Ultra-wide band
+# Ultra-wideband
+
+## History
+
+## MAC layer
+
+## Physical Layer
+
+The physical (PHY) layer of UWB has been described in IEEE 802.15.4-2011 [@6012487]. 
+Newer standards have been released since in year 2015 and 2020, however the UWB radio that has been used in this thesis supports the 2011 release.
+The standard defines three operation bands:
+
+* sub-gigahertz band consisting of single channel spectrum from 249.6 MHz to 749.6 MHz.
+* Low band with spectrum from 3.1 GHz to 4.8 GHz.
+* High band with spectrum from 6 GHz to 10.6 GHz.
+
+PHY 
+
+![Data flow according to [@6012487].](figures/uwb_phy_dataflow.pdf){#fig-uwb-dataflow}
 
 ```{julia}
 

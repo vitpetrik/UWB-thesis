@@ -14,3 +14,5 @@ UWB-thesis_files
 *.tex
 _book
 !tools/*.tex
+!chapters/*/*.tex
+!chapters/figures/*.pdf
