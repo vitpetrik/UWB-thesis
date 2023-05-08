@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-07">
+<meta name="dcterms.date" content="2023-05-08">
 
-<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wideband</title>
+<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wide band</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,7 +127,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/3_uwb.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/3_uwb.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +155,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -167,7 +167,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/3_uwb.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,9 +210,9 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#history" id="toc-history" class="nav-link active" data-scroll-target="#history"><span class="header-section-number">3.1</span> History</a></li>
-  <li><a href="#mac-layer" id="toc-mac-layer" class="nav-link" data-scroll-target="#mac-layer"><span class="header-section-number">3.2</span> MAC layer</a></li>
-  <li><a href="#physical-layer" id="toc-physical-layer" class="nav-link" data-scroll-target="#physical-layer"><span class="header-section-number">3.3</span> Physical Layer</a></li>
+  <li><a href="#mac-layer" id="toc-mac-layer" class="nav-link active" data-scroll-target="#mac-layer"><span class="header-section-number">3.1</span> MAC layer</a></li>
+  <li><a href="#physical-layer" id="toc-physical-layer" class="nav-link" data-scroll-target="#physical-layer"><span class="header-section-number">3.2</span> Physical Layer</a></li>
+  <li><a href="#ranging-techniques" id="toc-ranging-techniques" class="nav-link" data-scroll-target="#ranging-techniques"><span class="header-section-number">3.3</span> Ranging techniques</a></li>
   </ul>
 </nav>
     </div>
@@ -221,7 +221,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wideband</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Ultra-wide band</span></h1>
 </div>
 
 
@@ -238,7 +238,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 7, 2023</p>
+      <p class="date">May 8, 2023</p>
     </div>
   </div>
   
@@ -248,25 +248,64 @@ div.csl-indent {
 
 </header>
 
-<section id="history" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="history"><span class="header-section-number">3.1</span> History</h2>
+<p><em>The following chapter will introduce ultra-wide band by means of IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>. There is another definiton by Federal Communications Commision (FCC), however it will not be discussed in this thesis.</em></p>
+<p>To fully understand what ultra-wide band means it is necessary to define what bandwidth means by equation <a href="#eq-3db-bw"><span>3.1</span></a> and what center frequency means by equation <a href="#eq-3db-f-center"><span>3.2</span></a>.</p>
+<p><span id="eq-3db-bw"><span class="math display">\[
+    \mathrm{bandwidth_{-3 dB}} = f_{max} - f_{min}
+\tag{3.1}\]</span></span></p>
+<p><span id="eq-3db-f-center"><span class="math display">\[
+    f_{center} = \frac{f_{max} - f_{min}}{2} = f_{0 db}
+\tag{3.2}\]</span></span></p>
+<p>The ultra-wide band radio use bandwidth of 500 Mhz and more. This facts provides UWB with its unique ranging capabilities. The <em>IEEE 802.15.4 Low-Rate Wireless Personal Area Networks</em> <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> specifies physical and data link layers from the ISO-OSI network model <a href="#fig-iso-osi"><span>3.1</span></a>.</p>
+<p>Today UWB is mainly used in consumer electronics <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> or in a manufacturing plant to track assets, ground vehicles and people <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<div id="fig-iso-osi" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/OSI-ISO.svg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: OSI-ISO network model.</figcaption>
+</figure>
+</div>
+<section id="mac-layer" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="mac-layer"><span class="header-section-number">3.1</span> MAC layer</h2>
+<p>IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. The MAC header has following definition</p>
+<p>‘</p>
+<div class="tabular">
+<p><span>|ccccccc|c|c|</span> &amp; &amp; &amp; &amp; &amp; &amp; 0/5/6/10/14 &amp; variable &amp; 2<br>
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp;<br>
+&amp; &amp; &amp; &amp; &amp;<br>
+&amp;</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">MAC</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Payload</td>
+</tr>
+</tbody>
+</table>
+<p>&amp; MFR<br>
+</p>
+</div>
 </section>
-<section id="mac-layer" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="mac-layer"><span class="header-section-number">3.2</span> MAC layer</h2>
-</section>
-<section id="physical-layer" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="physical-layer"><span class="header-section-number">3.3</span> Physical Layer</h2>
-<p>The physical (PHY) layer of UWB has been described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>. Newer standards have been released since in year 2015 and 2020, however the UWB radio that has been used in this thesis supports the 2011 release. The standard defines three operation bands:</p>
+<section id="physical-layer" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="physical-layer"><span class="header-section-number">3.2</span> Physical Layer</h2>
+<p>The physical (PHY) layer of UWB has been described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>. Newer standards have been released in year 2015 and 2020, however the UWB radio that has been used in this thesis supports the 2011 release. The standard defines three operation bands:</p>
 <ul>
 <li>sub-gigahertz band consisting of single channel spectrum from 249.6 MHz to 749.6 MHz.</li>
 <li>Low band with spectrum from 3.1 GHz to 4.8 GHz.</li>
 <li>High band with spectrum from 6 GHz to 10.6 GHz.</li>
 </ul>
-<p>PHY</p>
+<p>Each physical layer protocol data unit (PPDU) consists of a preamble, PHY header, and the data itself. The process of encoding the whole PPDU can be seen on figure <a href="#fig-uwb-ppdu"><span>3.2</span></a>.</p>
+<div id="fig-uwb-ppdu" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/uwb_ppdu.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: PPDU encoding process <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
+</figure>
+</div>
 <div id="fig-uwb-dataflow" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="figures/uwb_phy_dataflow.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.1: Data flow according to <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
+<p><img src="images/uwb_phy_dataflow.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.3: Data flow according to <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
 </figure>
 </div>
 <div class="cell" width="70%" data-execution_count="2">
@@ -274,11 +313,28 @@ div.csl-indent {
 <div id="fig-uwb-reference-pulse" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_uwb_files/figure-html/fig-uwb-reference-pulse-output-1.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.2: Reference pulse of UWB radio.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.4: Reference pulse of UWB radio.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="ranging-techniques" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="ranging-techniques"><span class="header-section-number">3.3</span> Ranging techniques</h2>
+<section id="time-difference-of-arrival" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="time-difference-of-arrival">Time Difference of Arrival</h3>
+</section>
+<section id="two-way-ranging" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="two-way-ranging">Two way ranging</h3>
+<div id="fig-ds-twr" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/two_way_ranging.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.5: Double sided two way ranging</figcaption>
+</figure>
+</div>
+</section>
+<section id="angle-of-arrival" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="angle-of-arrival">Angle of Arrival</h3>
 
 
 
@@ -287,6 +343,15 @@ div.csl-indent {
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">2011. IEEE standard for local and metropolitan area networks–part 15.4: Low-rate wireless personal area networks (LR-WPANs). <em>IEEE Std 802.15.4-2011 (Revision of IEEE Std 802.15.4-2006)</em>: 1–314. <a href="https://doi.org/10.1109/IEEESTD.2011.6012487">https://doi.org/10.1109/IEEESTD.2011.6012487</a></div>
 </div>
 </div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Apple AirTag <a href="https://www.apple.com/airtag/" class="uri">https://www.apple.com/airtag/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Siemens RTLS <a href="https://www.siemens.com/global/en/products/automation/industrial-identification/simatic-rtls.html/" class="uri">https://www.siemens.com/global/en/products/automation/industrial-identification/simatic-rtls.html/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Sewio real-time location system <a href="https://www.sewio.net/" class="uri">https://www.sewio.net/</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
