@@ -1,5 +1,7 @@
 # Plot the waveform
 using Plots
+using FourierAnalysis
+using Random: bitrand
 gr()
 
 
@@ -23,9 +25,9 @@ T_bpm = T_dsym/2
 T_c = Tp
 N_burst = 8
 N_hop = 2
-N_cpb = 1
+N_cpb = 8
 N_c = 64
-f_s = 40e9 # sampling frequency in Hz
+f_s = 40000000000 # sampling frequency in Hz
 T_s = 1/f_s # sampling period in seconds
 N_s = round(Int, T_c/T_s) # number of samples per chip
 T_burst = T_dsym/N_burst
@@ -49,8 +51,9 @@ function bpmbpsk(bits, position, len)
         burst = 0
 
         for chip in chips
-            pulse = r(time - bits[1]*T_bpm - chip*T_c - position*T_dsym)
+            pulse = (1-2*(chip%2))*r(time - bits[1]*T_bpm - chip*T_c - position*T_dsym)
             if isnan(pulse)
+                pulse = (1-2*(chip%2))*r(time - bits[1]*T_bpm - chip*T_c - 1e-20 - position*T_dsym)
                 pulse = r(time - bits[1]*T_bpm - chip*T_c - 1e-20 - position*T_dsym)
             end
             burst += pulse
@@ -81,16 +84,16 @@ function bpmbpsk_waveform(bits)
 
     wave /= maximum(abs.(wave))
 
-    carrier = cos.(2*pi*f_carrier*t)
-    # wave = wave .* carrier
+
     
     return wave
 end
 
-bits = [0, 0, 0, 1, 1, 0, 1, 1]
+bits = bitrand(12)
 wave = bpmbpsk_waveform(bits)
 
-t = range(time_offset, length=length(wave), step=T_dsym/(N_s*N_c)) # time vector for the waveform
+
+
 pl = plot(t*1e9, wave;default_plots..., legend=true, xlabel="Time (ns)", ylabel="Amplitude", title="BPM-BPSK waveform")
 vline!(pl, [0, 128.21, 256.42, 384.63, 512.84], label="Symbols", color=:black, linestyle=:dash)
 vline!(pl, [T_bpm, 3*T_bpm, 5*T_bpm, 7*T_bpm]*1e9, label="Bursts", color=:blue, linestyle=:dash)

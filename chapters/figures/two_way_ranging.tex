@@ -1,0 +1,63 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage{xcolor}
+\usepackage{rotating} 
+\begin{document}    
+\usetikzlibrary {arrows,shapes.geometric} 
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+
+\begin{tikzpicture}
+  [auto,
+   decision/.style={diamond, draw=blue, thick, fill=blue!20,
+                    text width=4.5em,align=flush center,
+                    inner sep=1pt},
+   block/.style ={rectangle, draw=black, very thick, fill=white!10,
+                    text width=7em, minimum height=5em,
+                    align=center, rounded corners},
+   antenna/.style ={isosceles triangle, isosceles triangle apex angle=60, draw=black, very thick, fill=white!10, rotate=270,
+   minimum size =1cm},
+   line/.style ={draw, thick, -latex',shorten >=2pt},
+   cloud/.style ={draw=red, thick, ellipse,fill=red!20,
+                    minimum height=2em}]
+
+    \draw[node font=\itshape] (1,1) -- +(0,10) node[above] {Initiator};
+    \draw[node font=\itshape] (10,1) -- +(0,10) node[above] {Responder};
+    \draw[arrows={-angle 60[length=3mm]}, draw=red, thick] (1,10.5) -- +(9, -1); 
+    \draw[arrows={-angle 60[length=3mm]}, draw=blue, thick] (10,8.0) -- +(-9, -1); 
+    \draw[arrows={-angle 60[length=3mm]}, draw=red, thick] (1,5.5) -- +(9, -1); 
+    \draw[arrows={-angle 60[length=3mm]}, draw=blue, thick] (10,3.0) -- +(-9, -1);
+    
+    \draw [thick, dashed](1, 10.5) -- +(9, 0);
+    \draw [thick, dashed](1, 9.5) -- +(9, 0);
+    \draw [thick, dashed](1, 8.0) -- +(9, 0);
+    \draw [thick, dashed](1, 7.0) -- +(9, 0);
+    \draw [thick, dashed](1, 5.5) -- +(9, 0);
+    \draw [thick, dashed](1, 4.5) -- +(9, 0);
+    \draw [thick, dashed](1, 3.0) -- +(9, 0);
+    \draw [thick, dashed](1, 2.0) -- +(9, 0);
+    \draw [thick](10, 2.0) -- +(0.6, 0);
+    \draw [thick](0.4, 10.5) -- +(0.6, 0);
+    \draw [thick](0.4, 7.0) -- +(0.6, 0);
+    \draw [thick](0.4, 5.5) -- +(0.6, 0);
+    \draw [thick](0.4, 2) -- +(0.6, 0);
+    \draw [thick](10, 10.5) -- +(0.6, 0);
+    \draw [thick](10, 9.5) -- +(0.6, 0);
+    \draw [thick](10, 8.0) -- +(0.6, 0);
+    \draw [thick](10, 4.5) -- +(0.6, 0);
+    \draw [thick](10, 3.0) -- +(0.6, 0);
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (0.5,10.5) -- +(0,-3.5) node[left,midway] {$R_a$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (0.5,7.0) -- +(0,-1.5) node[left,midway] {$D_a$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (0.5,5.5) -- +(0,-3.5) node[left,midway] {$R_a$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (10.5,10.5) -- +(0,-1.0) node[right,midway] {$T_p$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (10.5,3.0) -- +(0,-1.0) node[right,midway] {$T_p$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (10.5,9.5) -- +(0,-1.5) node[right,midway] {$D_b$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (10.5,8.0) -- +(0,-3.5) node[right,midway] {$R_b$};
+    \draw [arrows={Latex[length=3mm]-Latex[length=3mm]}] (10.5,4.5) -- +(0,-1.5) node[right,midway] {$D_b$};
+    
+
+
+  \begin{scope}[every path/.style=line]
+  \end{scope}
+\end{tikzpicture}
+
+\end{document}

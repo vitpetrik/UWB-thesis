@@ -1,0 +1,25 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage{amsmath}
+\usepackage{multirow, makecell}
+\usepackage[english,slovak]{babel}
+
+\begin{document}
+
+
+\begin{table}[]
+  \catcode`\-=12
+
+  \begin{tabular}{|ccccccc|c|c|}
+  \hline
+  \multicolumn{1}{|c|}{Octets: 2}                                                                & \multicolumn{1}{c|}{1}                                                                          & \multicolumn{1}{c|}{0/2}                                                                     & \multicolumn{1}{c|}{0/2/8}                                                          & \multicolumn{1}{c|}{0/2}                                                               & \multicolumn{1}{c|}{0/2/8}                                                    & 0/5/6/10/14                                                                              & variable                                                                  & 2                    \\ 
+  \hline
+  \multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frame\\ Control\end{tabular}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sequence\\ Number\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Destination\\ PAN \\ Identifier\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Destination \\ Address\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Source\\ PAN\\ Identifier\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Source\\ Address\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Auxiliary \\ Security \\ Header\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frame \\ Payload\end{tabular}} & \multirow{2}{*}{FCS} \\
+  \cline{3-6}
+  \multicolumn{1}{|c|}{}                                                                         & \multicolumn{1}{c|}{}                                                                           & \multicolumn{4}{c|}{Addressing fields}                                                                                                                                                                                                                                                                                                                      &                                                                                          &                                                                           &                      \\ 
+  \hline
+  \multicolumn{7}{|c|}{MHR}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 & \begin{tabular}[c]{@{}c@{}}MAC \\ Payload\end{tabular}                    & MFR                  \\ 
+  \hline
+  \end{tabular}
+  \end{table}
+
+\end{document}

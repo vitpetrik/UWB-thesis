@@ -43,4 +43,6 @@ crossref:
   fig-prefix: ""   # (default is "Figure")
   tbl-prefix: ""    # (default is "Table")
   eq-prefix: ""
+filters:
+  - parse-latex
   

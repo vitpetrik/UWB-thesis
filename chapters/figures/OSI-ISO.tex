@@ -1,0 +1,60 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage{xcolor}
+\usepackage{rotating} 
+\begin{document}    
+\usetikzlibrary {arrows,shapes.geometric} 
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+
+\begin{tikzpicture}
+  [auto,
+   decision/.style={diamond, draw=blue, thick, fill=blue!20,
+                    text width=4.5em,align=flush center,
+                    inner sep=1pt},
+   block/.style ={rectangle, draw=black, very thick, fill=white!10,
+                    text width=7em, minimum height=3em,
+                    align=center, rounded corners},
+   antenna/.style ={isosceles triangle, isosceles triangle apex angle=60, draw=black, very thick, fill=white!10, rotate=270,
+   minimum size =1cm},
+   line/.style ={draw, thick, -latex',shorten >=2pt},
+   cloud/.style ={draw=red, thick, ellipse,fill=red!20,
+                    minimum height=2em}]
+
+  \matrix [column sep=5mm,row sep=7mm]
+  {
+    \node [block] (app-tx) {Application}; & \node [block, white] (spcer) {};; & \node [block] (app-rx) {Application}; \\
+    \node [block] (presentation-tx) {Presentation}; & ; & \node [block] (presentation-rx) {Presentation}; \\
+    \node [block] (Session-tx) {Session}; & ; & \node [block] (Session-rx) {Session}; \\
+    \node [block] (Transport-tx) {Transport}; & ; & \node [block] (Transport-rx) {Transport}; \\
+    \node [block] (Network-tx) {Network}; & ; & \node [block] (Network-rx) {Network}; \\
+    \node [block] (Data-tx) {Data link}; & ; & \node [block] (Data-rx) {Data link}; \\
+    \node [block] (phy-tx) {Physical}; & ; & \node [block] (phy-rx) {Physical}; \\
+    };
+
+  \begin{scope}[every path/.style=line]
+
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (app-tx)  -- (presentation-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (presentation-tx)  -- (Session-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Session-tx)  -- (Transport-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Transport-tx)  -- (Network-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Network-tx)  -- (Data-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Data-tx)  -- (phy-tx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (phy-rx) -- (Data-rx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Data-rx) -- (Network-rx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Network-rx) -- (Transport-rx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Transport-rx) -- (Session-rx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (Session-rx) -- (presentation-rx);
+    \draw[arrows={-angle 60[length=3mm]}, thick]          (presentation-rx) -- (app-rx);
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (app-tx)  -- (app-rx);
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (presentation-tx)  -- (presentation-rx);
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (Session-tx)  -- (Session-rx);
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (Transport-tx)  -- (Transport-rx) node[midway] {Datagram};
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (Network-tx)  -- (Network-rx) node[midway] {Packet};
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, blue, dashed]          (Data-tx)  -- (Data-rx) node[midway] {Frame};
+    \draw[arrows={Latex[length=1.5mm]-Latex[length=1.5mm]}, red, dashed]          (phy-tx)  -- (phy-rx) node[midway] {Symbol} node[midway, below] {Transmission medium};
+    
+
+  \end{scope}
+\end{tikzpicture}
+
+\end{document}

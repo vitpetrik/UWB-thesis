@@ -4,4 +4,4 @@ The Ultra-violet Direction and Ranging (UVDAR) is a system for relative localiza
 
 ![Image from UV camera.](images/uvdar.jpg){#fig-uvdar-img width="70%"}
 
-![UVDAR processing data flow. [@uvdd2]](images/uvdar_dataflow.pdf){#fig-uvdar-dataflow width="70%"}
+![UVDAR processing data flow. [@uvdd2]](images/uvdar_dataflow.svg){#fig-uvdar-dataflow width="70%"}

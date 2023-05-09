@@ -16,3 +16,5 @@ _book
 !tools/*.tex
 !chapters/*/*.tex
 !chapters/figures/*.pdf
+/.luarc.json
+index_files/
