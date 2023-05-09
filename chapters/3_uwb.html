@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-08">
+<meta name="dcterms.date" content="2023-05-09">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wide band</title>
 <style>
@@ -211,7 +211,10 @@ div.csl-indent {
    
   <ul>
   <li><a href="#mac-layer" id="toc-mac-layer" class="nav-link active" data-scroll-target="#mac-layer"><span class="header-section-number">3.1</span> MAC layer</a></li>
-  <li><a href="#physical-layer" id="toc-physical-layer" class="nav-link" data-scroll-target="#physical-layer"><span class="header-section-number">3.2</span> Physical Layer</a></li>
+  <li><a href="#physical-layer" id="toc-physical-layer" class="nav-link" data-scroll-target="#physical-layer"><span class="header-section-number">3.2</span> Physical Layer</a>
+  <ul class="collapse">
+  <li><a href="#symbol-structure" id="toc-symbol-structure" class="nav-link" data-scroll-target="#symbol-structure"><span class="header-section-number">3.2.1</span> Symbol structure</a></li>
+  </ul></li>
   <li><a href="#ranging-techniques" id="toc-ranging-techniques" class="nav-link" data-scroll-target="#ranging-techniques"><span class="header-section-number">3.3</span> Ranging techniques</a></li>
   </ul>
 </nav>
@@ -238,7 +241,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 8, 2023</p>
+      <p class="date">May 9, 2023</p>
     </div>
   </div>
   
@@ -256,7 +259,7 @@ div.csl-indent {
 <p><span id="eq-3db-f-center"><span class="math display">\[
     f_{center} = \frac{f_{max} - f_{min}}{2} = f_{0 db}
 \tag{3.2}\]</span></span></p>
-<p>The ultra-wide band radio use bandwidth of 500 Mhz and more. This facts provides UWB with its unique ranging capabilities. The <em>IEEE 802.15.4 Low-Rate Wireless Personal Area Networks</em> <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> specifies physical and data link layers from the ISO-OSI network model <a href="#fig-iso-osi"><span>3.1</span></a>.</p>
+<p>The ultra-wide band radio use bandwidth of 500 Mhz and more. This fact provides UWB with its unique ranging capabilities. The <em>IEEE 802.15.4 Low-Rate Wireless Personal Area Networks</em> <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> specifies physical and data link layers from the ISO-OSI network model <a href="#fig-iso-osi"><span>3.1</span></a>.</p>
 <p>Today UWB is mainly used in consumer electronics <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> or in a manufacturing plant to track assets, ground vehicles and people <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <div id="fig-iso-osi" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -266,14 +269,20 @@ div.csl-indent {
 </div>
 <section id="mac-layer" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="mac-layer"><span class="header-section-number">3.1</span> MAC layer</h2>
-<p>IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. The MAC header has following definition</p>
+<p>IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. The MAC layer is responsible for coordinating access to the shared wireless channel, managing network associations and disassociations, and providing security and reliability features. The MAC layer inserts a MAC header and a MAC footer before and after a network-layer frame, respectively. The MAC header contains information such as frame type, source and destination addresses, sequence number, and security parameters. The MAC footer contains a CRC check. The IEEE 802.15.4 MAC layer supports two modes of operation: beacon-enabled and non-beacon-enabled. In beacon-enabled mode, a coordinator device periodically broadcasts beacons to synchronize the devices in its network and allocate contention-free periods for data transmission. In non-beacon-enabled mode, devices use a slotted or unslotted carrier sense multiple access with collision avoidance (CSMA-CA) mechanism to access the channel. The exact layout of MAC frame format is described in Table <a href="#tbl-mac-frame" data-reference-type="ref" data-reference="tbl-mac-frame">[tbl-mac-frame]</a>.</p>
 <p>‘</p>
+<div class="adjustbox">
+<p><span>width=</span></p>
 <div class="tabular">
 <p><span>|ccccccc|c|c|</span> &amp; &amp; &amp; &amp; &amp; &amp; 0/5/6/10/14 &amp; variable &amp; 2<br>
 &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp;<br>
 &amp; &amp; &amp; &amp; &amp;<br>
 &amp;</p>
+<div id="tbl-mac-frame" class="tbl-parent quarto-layout-panel anchored">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-mac-frame-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-mac-frame" style="flex-basis: 100.0%;justify-content: center;">
 <table class="table">
+<caption>(a) MAC frame format.</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">MAC</td>
@@ -283,41 +292,142 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="panel-caption table-caption">
+<p>Table&nbsp;3.1: <strong>?(caption)</strong></p>
+</div>
+</div>
 <p>&amp; MFR<br>
 </p>
+</div>
 </div>
 </section>
 <section id="physical-layer" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="physical-layer"><span class="header-section-number">3.2</span> Physical Layer</h2>
-<p>The physical (PHY) layer of UWB has been described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>. Newer standards have been released in year 2015 and 2020, however the UWB radio that has been used in this thesis supports the 2011 release. The standard defines three operation bands:</p>
+<p>The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> as UWB PHY. Later in IEEE 802.15.4-2015 <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span> the PHY was named as High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:</p>
 <ul>
-<li>sub-gigahertz band consisting of single channel spectrum from 249.6 MHz to 749.6 MHz.</li>
+<li>sub-gigahertz band consisting of single a channel spectrum from 249.6 MHz to 749.6 MHz.</li>
 <li>Low band with spectrum from 3.1 GHz to 4.8 GHz.</li>
 <li>High band with spectrum from 6 GHz to 10.6 GHz.</li>
 </ul>
-<p>Each physical layer protocol data unit (PPDU) consists of a preamble, PHY header, and the data itself. The process of encoding the whole PPDU can be seen on figure <a href="#fig-uwb-ppdu"><span>3.2</span></a>.</p>
-<div id="fig-uwb-ppdu" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/uwb_ppdu.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.2: PPDU encoding process <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
-</figure>
-</div>
 <div id="fig-uwb-dataflow" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/uwb_phy_dataflow.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.3: Data flow according to <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Data flow according to <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
 </figure>
 </div>
+<p>It uses an impulse radio signaling scheme with band-limited pulses and supports high data rates and precision ranging applications. It also uses a combination of burst position modulation (BPM) and binary phase-shift keying (BPSK) to modulate symbols. The overview of the physical layer is expressed in figure <a href="#fig-uwb-dataflow"><span>3.2</span></a>.</p>
+<section id="ppdu-format" class="level3 unnumbered unlisted">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="ppdu-format">PPDU format</h3>
+<p>Each physical layer protocol data unit (PPDU) consists of a preamble, PHY header, and the data itself. The process of encoding the whole PPDU can be seen in figure <a href="#fig-uwb-ppdu"><span>3.3</span></a>.</p>
+<p>Reed-Solomon encoding is used to encode the physical service data unit (PSDU) of the HRP UWB PHY. It adds redundant symbols to the original message symbols to form a codeword that can be decoded using polynomial interpolation or factorization techniques. Reed-Solomon encoding improves the error-correction performance of the HRP UWB PHY and enables it to handle burst errors or random errors that may occur in the wireless channel <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>Convolutional encoding is used to encode the PSDU of the HRP UWB PHY after Reed-Solomon encoding. It uses a finite state machine with memory cells to generate output bits based on the current and previous input bits. It adds parity bits to the original information bits to form a codeword that can be decoded using Viterbi algorithm or other sequential decoding techniques. Convolutional encoding improves the error-correction performance of the HRP UWB PHY and enables it to handle noisy or fading channels.</p>
+<div id="fig-uwb-ppdu" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/uwb_ppdu.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.3: PPDU encoding process <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span>.</figcaption>
+</figure>
+</div>
+<p>A preamble in HRP UWB PHY is a sequence of known bits sent at the beginning of each frame. It is used for frame synchronization, channel estimation, and ranging measurements. It consists of two parts: a synchronization header (SHR) <a href="#fig-shr-field"><span>3.4</span></a> and a physical layer header (PHR) <a href="#fig-phr-field"><span>3.5</span></a>.</p>
+<p>The SHR contains a preamble symbol (SYNC) and a start-of-frame delimiter (SFD). The SFD is a fixed sequence of pulses that indicates the start of a frame. The PS is a burst of UWB pulses that can be modulated by burst position modulation (BPM) or binary phase-shift keying (BPSK). The preamble symbol repetitions (PSR) define the number of repeated sequences, ranging from 16 to 4,096 repetitions.</p>
+<div id="fig-shr-field" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/shr_field.svg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.4: SHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+</figure>
+</div>
+<p>The PHR contains information about the data to be received, including the length of the data and the data rate used to transmit the data. It also contains additional information elements to facilitate ranging information exchange</p>
+<div id="fig-phr-field" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/phr_field.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.5: PHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="symbol-structure" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="symbol-structure"><span class="header-section-number">3.2.1</span> Symbol structure</h3>
+<p>A symbol <a href="#fig-symbol-struct"><span>3.7</span></a> is the basic unit of information in HWP UWB PHY. It consists of a short burst of UWB pulses that lasts for 2 ns and occupies a bandwidth of 0.5-1.3 GHz. The burst can be placed in one of the two possible burst intervals, and its phase can be inverted or not. These two choices allow each symbol to carry two bits of information using burst position modulation (BPM) and binary phase-shift keying (BPSK), a example of the modulation can be found in figure <a href="#fig-bpm-bpsk"><span>3.6</span></a>.</p>
 <div class="cell" width="70%" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="3">
+<div id="fig-bpm-bpsk" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="3_uwb_files/figure-html/fig-bpm-bpsk-output-1.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.6: Example of BPS-BPSK modulation,</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Burst hopping position is a parameter that determines the time position of the UWB pulses within a burst interval. Scrambling code is a pseudo-random sequence that is applied to the data bits before modulation. It is used to randomize the data bits and reduce the peak-to-average power ratio (PAPR) of the UWB pulses.</p>
+<div id="fig-symbol-struct" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/symbol_structure.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.7: Symbol stucture. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+</figure>
+</div>
+<p>IEEE defines the reference pulse as a root-raised cosine pulse with roll-off factor <span class="math inline">\(\beta = 0.5\)</span> <a href="#eq-reference-pulse"><span>3.3</span></a>.</p>
+<p><span id="eq-reference-pulse"><span class="math display">\[         
+r(t) = \frac{4 \beta}{\pi \sqrt{T_p}} \frac{\cos{[(1+ \beta) \pi t / T_p]} + \frac{\sin{[(1 - \beta) \pi t / T_p}]}{4 \beta(t / T_p)}}{1-(4 \beta t /  T_p)^2}
+\tag{3.3}\]</span></span></p>
+<p>Parameter <span class="math inline">\(T_p\)</span> stands for duration of the pulse. The duration is defined for each channel by table <a href="#tbl-pulse-duration"><span>3.2</span></a>.</p>
+<div id="tbl-pulse-duration" class="anchored">
+<table class="table">
+<caption>Table&nbsp;3.2: Reference pulse duration for each channel. <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span></caption>
+<colgroup>
+<col style="width: 31%">
+<col style="width: 33%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Channel number</th>
+<th style="text-align: center;">Pulse duration <span class="math inline">\(T_p\)</span> (ns)</th>
+<th style="text-align: center;">Main lobe width <span class="math inline">\(T_w\)</span> (ns)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">{0:3, 5:6, 8:10, 12:14}</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0.92</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">{4, 11}</td>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">0.74</td>
+<td style="text-align: center;">0.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Figure <a href="#fig-uwb-reference-pulse"><span>3.8</span></a> further illustrates a waveform of the pulse. However an actual hardware system cannot fully realize the shape of the reference pulse. Therefore IEEE 802.15.4 constrains transmitted pulse <span class="math inline">\(p(t)\)</span> by a cross-correlation function <a href="#eq-cross-correlation"><span>3.4</span></a>. For PHY to be IEEE compliant the main lobe of the transmitted pulse must have a magnitude of cross correlation <span class="math inline">\(|\phi(\tau)|\)</span> at least 0.8, and the magnitude of sidelobes must not be greater than 0.3.</p>
+<p><span id="eq-cross-correlation"><span class="math display">\[
+    \mathrm{\phi}(\tau) = \frac{1}{\sqrt{E_r E_p}} Re \int^{\infty}_{-\infty} \mathrm{r}(t) \mathrm{p}(t - \tau) \mathrm{dt}
+\tag{3.4}\]</span></span> Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    E_r &amp;= \text{energy of r(t)} \\
+    E_p &amp;= \text{energy of p(t)} \\
+\end{aligned}\]</span></p>
+<div class="cell" width="70%" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div id="fig-uwb-reference-pulse" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="3_uwb_files/figure-html/fig-uwb-reference-pulse-output-1.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.4: Reference pulse of UWB radio.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.8: Reference pulse of UWB radio.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="ranging-techniques" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="ranging-techniques"><span class="header-section-number">3.3</span> Ranging techniques</h2>
@@ -329,7 +439,7 @@ div.csl-indent {
 <div id="fig-ds-twr" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/two_way_ranging.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.5: Double sided two way ranging</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.9: Double sided two way ranging</figcaption>
 </figure>
 </div>
 </section>
@@ -342,6 +452,9 @@ div.csl-indent {
 <div id="ref-6012487" class="csl-entry" role="listitem">
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">2011. IEEE standard for local and metropolitan area networks–part 15.4: Low-rate wireless personal area networks (LR-WPANs). <em>IEEE Std 802.15.4-2011 (Revision of IEEE Std 802.15.4-2006)</em>: 1–314. <a href="https://doi.org/10.1109/IEEESTD.2011.6012487">https://doi.org/10.1109/IEEESTD.2011.6012487</a></div>
 </div>
+<div id="ref-7460875" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">2016. IEEE standard for low-rate wireless networks. <em>IEEE Std 802.15.4-2015 (Revision of IEEE Std 802.15.4-2011)</em>: 1–709. <a href="https://doi.org/10.1109/IEEESTD.2016.7460875">https://doi.org/10.1109/IEEESTD.2016.7460875</a></div>
+</div>
 </div>
 </section>
 </section>
@@ -351,6 +464,7 @@ div.csl-indent {
 <li id="fn1"><p>Apple AirTag <a href="https://www.apple.com/airtag/" class="uri">https://www.apple.com/airtag/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Siemens RTLS <a href="https://www.siemens.com/global/en/products/automation/industrial-identification/simatic-rtls.html/" class="uri">https://www.siemens.com/global/en/products/automation/industrial-identification/simatic-rtls.html/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Sewio real-time location system <a href="https://www.sewio.net/" class="uri">https://www.sewio.net/</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Mathworks HRP UWB IEEE 802.15.4a/z Waveform Generation <a href="https://www.mathworks.com/help/comm/ug/hrp-uwb-ieee-802.15.4az-waveform-generation.html" class="uri">https://www.mathworks.com/help/comm/ug/hrp-uwb-ieee-802.15.4az-waveform-generation.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
