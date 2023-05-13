@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-09">
+<meta name="dcterms.date" content="2023-05-13">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 3&nbsp; Ultra-wide band</title>
 <style>
@@ -241,7 +241,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 9, 2023</p>
+      <p class="date">May 13, 2023</p>
     </div>
   </div>
   
@@ -305,7 +305,7 @@ div.csl-indent {
 </section>
 <section id="physical-layer" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="physical-layer"><span class="header-section-number">3.2</span> Physical Layer</h2>
-<p>The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> as UWB PHY. Later in IEEE 802.15.4-2015 <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span> the PHY was named as High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:</p>
+<p>The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 <span class="citation" data-cites="6012487">[<a href="references.html#ref-6012487" role="doc-biblioref">1</a>]</span> as UWB PHY. Later in IEEE 802.15.4-2015 <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">3</a>]</span> the PHY was named as High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:</p>
 <ul>
 <li>sub-gigahertz band consisting of single a channel spectrum from 249.6 MHz to 749.6 MHz.</li>
 <li>Low band with spectrum from 3.1 GHz to 4.8 GHz.</li>
@@ -334,14 +334,14 @@ div.csl-indent {
 <div id="fig-shr-field" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/shr_field.svg" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.4: SHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.4: SHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
 <p>The PHR contains information about the data to be received, including the length of the data and the data rate used to transmit the data. It also contains additional information elements to facilitate ranging information exchange</p>
 <div id="fig-phr-field" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/phr_field.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.5: PHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.5: PHR field structure. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
 </section>
@@ -362,7 +362,7 @@ div.csl-indent {
 <div id="fig-symbol-struct" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/symbol_structure.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.7: Symbol stucture. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">2</a>]</span></figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.7: Symbol stucture. <span class="citation" data-cites="7460875">[<a href="references.html#ref-7460875" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
 <p>IEEE defines the reference pulse as a root-raised cosine pulse with roll-off factor <span class="math inline">\(\beta = 0.5\)</span> <a href="#eq-reference-pulse"><span>3.3</span></a>.</p>
@@ -433,15 +433,45 @@ r(t) = \frac{4 \beta}{\pi \sqrt{T_p}} \frac{\cos{[(1+ \beta) \pi t / T_p]} + \fr
 <h2 data-number="3.3" class="anchored" data-anchor-id="ranging-techniques"><span class="header-section-number">3.3</span> Ranging techniques</h2>
 <section id="time-difference-of-arrival" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="time-difference-of-arrival">Time Difference of Arrival</h3>
+<p>Time difference of arrival (TDOA) position estimation is a technique that uses the difference in the arrival times of UWB signals at multiple receivers to estimate the position of a transmitter.</p>
+<p>TDOA position estimation requires at least four receivers for 3D localization and one transmitter. The receivers measure the time of arrival (TOA) of the UWB signals. The TOA measurements are then used to calculate the TDOA values between different pairs of receivers <span class="citation" data-cites="9750886">[<a href="references.html#ref-9750886" role="doc-biblioref">6</a>]</span>.</p>
+<p>To estimate the position of the transmitter system of equations <a href="#eq-tdoa"><span>3.5</span></a> is solved <span class="citation" data-cites="MathWork-tdoa">[<a href="references.html#ref-MathWork-tdoa" role="doc-biblioref">4</a>]</span>. For</p>
+<p><span id="eq-tdoa"><span class="math display">\[
+    \sqrt{\mathbf{x_r}^T \mathbf{\hat{x}}} - \sqrt{\mathbf{x_i}^T \mathbf{\hat{x}}} = c(t_r - t_i)
+\tag{3.5}\]</span></span> Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbf{\hat{x}} &amp;= \text{estimated position of the transmitter.} \\
+    \mathbf{x_r} &amp;= \text{Position of the reference receiver.} \\
+    \mathbf{x_i} &amp;= \text{Position of receiver \textit{i}.} \\
+    t_r &amp;= \text{Time of arrival for the reference receiver.} \\
+    t_r &amp;= \text{Time of arrival for the receiver \textit{i}.} \\
+    c &amp;= \text{Speed of light.} \\
+\end{aligned}\]</span></p>
+<p>The main challenge for implementing TDoA is synchronizing the clock across all receivers <span class="citation" data-cites="7472406">[<a href="references.html#ref-7472406" role="doc-biblioref">5</a>]</span>.</p>
+<p>The TDoA system can be used in a variety of applications, such as indoor positioning, tracking of vehicles or people, and asset tracking. The accuracy of the TDoA system depends on the number and placement of the UWB sensors and the timing resolution of the system.</p>
 </section>
 <section id="two-way-ranging" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="two-way-ranging">Two way ranging</h3>
+<p>Two-way ranging (TWR) is a technique used by UWB systems to estimate the distance between two devices. TWR requires two-way communication between two devices, where one device sends a signal to another device and waits for a response, as shown in figure <a href="#fig-ds-twr"><span>3.9</span></a>. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices.</p>
 <div id="fig-ds-twr" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/two_way_ranging.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3.9: Double sided two way ranging</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3.9: Two way ranging with two round trips.</figcaption>
 </figure>
 </div>
+<p>Single-sided two-way ranging (SS-TWR) is a technique where only one device sends a signal and waits for a response from another device. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices. <span class="math display">\[
+    \mathrm{TOF} = \frac{R_a - D_b}{2}
+\]</span> Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathrm{TOF} &amp;= \text{Time of flight.} \\
+    R_a &amp;= \text{Time of round trip} \\
+    D_b &amp;= \text{Response delay.} \\
+\end{aligned}\]</span></p>
+<p>Double-sided two-way ranging (DS-TWR) is a technique where both devices send signals and wait for responses from each other. The time difference between the transmission and reception of signals from both devices is used to calculate the distance between them.</p>
+<p><span class="math display">\[
+    \mathrm{TOF} = \frac{R_a R_b - D_a D_b}{R_a + D_a + R_b + D_b}
+\]</span></p>
+<p>DS-TWR’s main advantage is its ability to compensate for the effect of clock drift <span class="citation" data-cites="qorvo:aps011">[<a href="references.html#ref-qorvo:aps011" role="doc-biblioref">2</a>]</span>. Clock drift refers to several related phenomena where a clock does not run at exactly the same rate as a reference clock. That is, after some time the clock “drifts apart” or gradually desynchronizes from the other clock. All clocks are subject to drift, causing eventual divergence unless resynchronized. Clock drift can be caused by many factors, such as temperature changes, aging of components, and power supply voltage changes <span class="citation" data-cites="qorvo:aps011">[<a href="references.html#ref-qorvo:aps011" role="doc-biblioref">2</a>]</span>.</p>
 </section>
 <section id="angle-of-arrival" class="level3 unnumbered unlisted">
 <h3 class="unnumbered unlisted anchored" data-anchor-id="angle-of-arrival">Angle of Arrival</h3>
@@ -452,8 +482,20 @@ r(t) = \frac{4 \beta}{\pi \sqrt{T_p}} \frac{\cos{[(1+ \beta) \pi t / T_p]} + \fr
 <div id="ref-6012487" class="csl-entry" role="listitem">
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">2011. IEEE standard for local and metropolitan area networks–part 15.4: Low-rate wireless personal area networks (LR-WPANs). <em>IEEE Std 802.15.4-2011 (Revision of IEEE Std 802.15.4-2006)</em>: 1–314. <a href="https://doi.org/10.1109/IEEESTD.2011.6012487">https://doi.org/10.1109/IEEESTD.2011.6012487</a></div>
 </div>
+<div id="ref-qorvo:aps011" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">2014. <em>A sources of error in DW1000 based two-way ranging scheme APS011</em>. Decawave; <a href="https://www.qorvo.com/products/d/da008446" class="uri">https://www.qorvo.com/products/d/da008446</a>.</div>
+</div>
 <div id="ref-7460875" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">2016. IEEE standard for low-rate wireless networks. <em>IEEE Std 802.15.4-2015 (Revision of IEEE Std 802.15.4-2011)</em>: 1–709. <a href="https://doi.org/10.1109/IEEESTD.2016.7460875">https://doi.org/10.1109/IEEESTD.2016.7460875</a></div>
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">2016. IEEE standard for low-rate wireless networks. <em>IEEE Std 802.15.4-2015 (Revision of IEEE Std 802.15.4-2011)</em>: 1–709. <a href="https://doi.org/10.1109/IEEESTD.2016.7460875">https://doi.org/10.1109/IEEESTD.2016.7460875</a></div>
+</div>
+<div id="ref-MathWork-tdoa" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">MathWorks. 2021. Object tracking using time difference of arrival. </div>
+</div>
+<div id="ref-7472406" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Yan Xie, Gerard J. M. Janssen, and Alle-Jan van der Veen. 2016. A practical clock synchronization algorithm for UWB positioning systems. In <em>2016 IEEE international conference on acoustics, speech and signal processing (ICASSP)</em>, 3891–3895. <a href="https://doi.org/10.1109/ICASSP.2016.7472406">https://doi.org/10.1109/ICASSP.2016.7472406</a></div>
+</div>
+<div id="ref-9750886" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Wenda Zhao, Abhishek Goudar, and Angela P. Schoellig. 2022. Finding the right place: Sensor placement for UWB time difference of arrival localization in cluttered indoor environments. <em>IEEE Robotics and Automation Letters</em> 7, 3: 6075–6082. <a href="https://doi.org/10.1109/LRA.2022.3165181">https://doi.org/10.1109/LRA.2022.3165181</a></div>
 </div>
 </div>
 </section>
