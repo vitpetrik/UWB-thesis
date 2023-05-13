@@ -13,6 +13,7 @@ UWB-thesis_files
 *.html
 *.tex
 _book
+chapters/*/*.pdf
 !tools/*.tex
 !chapters/*/*.tex
 !chapters/figures/*.pdf

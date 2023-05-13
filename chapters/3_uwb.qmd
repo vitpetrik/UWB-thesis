@@ -105,13 +105,13 @@ These two choices allow each symbol to carry two bits of information using burst
 
 ```{julia}
 #| label: fig-bpm-bpsk
-#| fig-cap: "Example of BPS-BPSK modulation,"
+#| fig-cap: "Example of BPM-BPSK modulation,"
 #| output: true
 #| width: 70%
 
 l = @layout [a b ; c d]
 
-x = 0:1e-12:128e-9
+x = -20e-9:1e-12:160e-9
 pulse(t) = exp(-t^2)
 
 config = (;default_plots..., 
@@ -120,11 +120,15 @@ config = (;default_plots...,
     ylims=[-1,1]
 )
 
-pl_00 = plot(x*1e9, pulse.((x.-20e-9)*2.5e8), title="0 0";config...)
-pl_01 = plot(x*1e9, pulse.((x.-20e-9 .- 64e-9)*2.5e8), title="0 1";config...)
-pl_10 = plot(x*1e9, -pulse.((x.-20e-9)*2.5e8), title="1 0";config...)
-pl_11 = plot(x*1e9, -pulse.((x.-20e-9 .- 64e-9)*2.5e8), title="1 1";config...)
+pl_00 = plot(x*1e9, pulse.((x .-10e-9)*2.5e8), title="0 0";config...)
+pl_01 = plot(x*1e9, pulse.((x .-10e-9 .- 64e-9)*2.5e8), title="0 1";config...)
+pl_10 = plot(x*1e9, -pulse.((x.-10e-9)*2.5e8), title="1 0";config...)
+pl_11 = plot(x*1e9, -pulse.((x.-10e-9 .- 64e-9)*2.5e8), title="1 1";config..., label="pulse", legend=true)
 
+vline!(pl_00, [0, 128], label="Symbol", color=:black, linestyle=:solid)
+vline!(pl_01, [0, 128], label="Symbol", color=:black, linestyle=:solid)
+vline!(pl_10, [0, 128], label="Symbol", color=:black, linestyle=:solid)
+vline!(pl_11, [0, 128], label="Symbol", color=:black, linestyle=:solid)
 vline!(pl_00, [64], label="Bursts", color=:blue, linestyle=:dash)
 vline!(pl_01, [64], label="Bursts", color=:blue, linestyle=:dash)
 vline!(pl_10, [64], label="Bursts", color=:blue, linestyle=:dash)
@@ -202,8 +206,60 @@ plot!(1e9.*t, y)
 
 ### Time Difference of Arrival {.unnumbered .unlisted}
 
+Time difference of arrival (TDOA) position estimation is a technique that uses the difference in the arrival times of UWB signals at multiple receivers to estimate the position of a transmitter.
+
+TDOA position estimation requires at least four receivers for 3D localization and one transmitter. 
+The receivers measure the time of arrival (TOA) of the UWB signals. 
+The TOA measurements are then used to calculate the TDOA values between different pairs of receivers [@9750886].
+
+To estimate the position of the transmitter system of equations [@eq-tdoa] is solved [@MathWork-tdoa]. For 
+
+$$
+    \sqrt{\mathbf{x_r}^T \mathbf{\hat{x}}} - \sqrt{\mathbf{x_i}^T \mathbf{\hat{x}}} = c(t_r - t_i)
+$$ {#eq-tdoa}
+Where:
+```{=latex}
+\begin{align*}
+    \mathbf{\hat{x}} &= \text{estimated position of the transmitter.} \\
+    \mathbf{x_r} &= \text{Position of the reference receiver.} \\
+    \mathbf{x_i} &= \text{Position of receiver \textit{i}.} \\
+    t_r &= \text{Time of arrival for the reference receiver.} \\
+    t_r &= \text{Time of arrival for the receiver \textit{i}.} \\
+    c &= \text{Speed of light.} \\
+\end{align*}
+```
+
+The main challenge for implementing TDoA is synchronizing the clock across all receivers [@7472406].
+
+The TDoA system can be used in a variety of applications, such as indoor positioning, tracking of vehicles or people, and asset tracking. 
+The accuracy of the TDoA system depends on the number and placement of the UWB sensors and the timing resolution of the system.
+
 ### Two way ranging {.unnumbered .unlisted}
 
-![Double sided two way ranging](images/two_way_ranging.svg){#fig-ds-twr}
+Two-way ranging (TWR) is a technique used by UWB systems to estimate the distance between two devices. TWR requires two-way communication between two devices, where one device sends a signal to another device and waits for a response, as shown in figure @fig-ds-twr. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices.
+
+![Two way ranging with two round trips.](images/two_way_ranging.svg){#fig-ds-twr}
+
+Single-sided two-way ranging (SS-TWR) is a technique where only one device sends a signal and waits for a response from another device. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices.
+$$
+    \mathrm{TOF} = \frac{R_a - D_b}{2} 
+$$
+Where:
+```{=latex}
+\begin{align*}
+    \mathrm{TOF} &= \text{Time of flight.} \\
+    R_a &= \text{Time of round trip} \\
+    D_b &= \text{Response delay.} \\
+\end{align*}
+```
+
+Double-sided two-way ranging (DS-TWR) is a technique where both devices send signals and wait for responses from each other. The time difference between the transmission and reception of signals from both devices is used to calculate the distance between them.
+
+$$
+    \mathrm{TOF} = \frac{R_a R_b - D_a D_b}{R_a + D_a + R_b + D_b} 
+$$
+
+DS-TWR's main advantage is its ability to compensate for the effect of clock drift [@qorvo:aps011]. Clock drift refers to several related phenomena where a clock does not run at exactly the same rate as a reference clock. That is, after some time the clock “drifts apart” or gradually desynchronizes from the other clock. All clocks are subject to drift, causing eventual divergence unless resynchronized. Clock drift can be caused by many factors, such as temperature changes, aging of components, and power supply voltage changes [@qorvo:aps011].
+
 
 ### Angle of Arrival {.unnumbered .unlisted}
