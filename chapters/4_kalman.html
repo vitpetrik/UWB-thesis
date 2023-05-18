@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-15">
+<meta name="dcterms.date" content="2023-05-18">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 4&nbsp; Kalman filters</title>
 <style>
@@ -237,7 +237,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 15, 2023</p>
+      <p class="date">May 18, 2023</p>
     </div>
   </div>
   
@@ -249,7 +249,7 @@ div.csl-indent {
 
 <p>Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it provides the best estimate of the system state given the available measurements and knowledge of the system dynamics. The filter uses a mathematical model of the system, known as a state-space model, to predict the evolution of the system over time and to correct for measurement errors. The Kalman filter is particularly useful in applications where measurements are noisy or incomplete, or where the system dynamics are complex or difficult to model. In this way, the Kalman filter is an essential tool for many real-world applications that require accurate state estimation and control.</p>
 <p>The algorithm involves two steps: prediction and update. The prediction step uses the previous state estimate and the motion model of the system to predict the current state estimate and its uncertainty. The update step uses the current measurement and the measurement model of the system to correct the predicted state estimate and its uncertainty using a weighted average. The weight is determined by the Kalman gain, which balances the trust between the prediction and the measurement. The Kalman gain is computed based on the covariance matrices of the prediction error and the measurement error. The prediction and update steps are performed recursively for each new measurement.</p>
-<p>The linear kalman filter assumes that the system and the measurement models are linear and can be represented by matrices. The extended kalman filter extends the linear kalman filter to handle nonlinear systems by linearizing them around the current estimate using Taylor series expansion. The unscented kalman filter improves the extended kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices <span class="citation" data-cites="9117536">[<a href="references.html#ref-9117536" role="doc-biblioref">2</a>]</span> <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">3</a>]</span>. The unscented kalman filter is more accurate and robust than the extended kalman filter, especially for highly nonlinear systems <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">3</a>]</span> <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">4</a>]</span>.</p>
+<p>The linear kalman filter assumes that the system and the measurement models are linear and can be represented by matrices. The extended kalman filter extends the linear kalman filter to handle nonlinear systems by linearizing them around the current estimate using Taylor series expansion. The unscented kalman filter improves the extended kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices <span class="citation" data-cites="9117536">[<a href="references.html#ref-9117536" role="doc-biblioref">2</a>]</span> <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">4</a>]</span>. The unscented kalman filter is more accurate and robust than the extended kalman filter, especially for highly nonlinear systems <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">4</a>]</span> <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>.</p>
 <section id="linear-kalman-filter" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="linear-kalman-filter"><span class="header-section-number">4.1</span> Linear Kalman filter</h2>
 <p>A linear Kalman filter is a recursive algorithm that uses the Bode-Shannon representation of random processes and the state-transition method of analysis of dynamic systems to estimate the state of a system from noisy measurements. It assumes that the system and the measurements are linear and Gaussian, meaning that they can be expressed as matrix operations with additive noise. The algorithm consists of two steps: prediction and correction. In the prediction step <a href="#eq-lkf-predict"><span>4.1</span></a>, the algorithm uses a state transition matrix to project the current state and its covariance matrix to the next time step.</p>
@@ -258,7 +258,13 @@ div.csl-indent {
     \mathbf{\hat{x}} &amp;= \mathbf{F x + Bu} \\
     \mathbf{\hat{P}} &amp;= \mathbf{F P F^{T} + Q}
 \end{aligned}
-\tag{4.1}\]</span></span></p>
+\tag{4.1}\]</span></span> Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbf{\hat{x}}, \mathbf{\hat{P}} &amp;= \text{State mean and covariance} \\
+    \mathbf{F} &amp;= \text{Transition matrix} \\
+    \mathbf{Q} &amp;= \text{Process matrix} \\
+    \mathbf{B, u} &amp;= \text{Input to the system} \\
+\end{aligned}\]</span></p>
 <p>In the correction step <a href="#eq-lkf-update"><span>4.2</span></a>, the algorithm uses a measurement matrix to update the predicted state and its covariance matrix with the new measurement. The algorithm optimizes the estimation by minimizing the mean squared error between the true state and the estimated state <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>.</p>
 <p><span id="eq-lkf-update"><span class="math display">\[
 \begin{aligned}
@@ -267,11 +273,23 @@ div.csl-indent {
     \mathbf{\hat{x}} &amp;= \mathbf{x + K y} \\
     \mathbf{\hat{P}} &amp;= \mathbf{(I - K H)P} \\
 \end{aligned}
-\tag{4.2}\]</span></span></p>
+\tag{4.2}\]</span></span> Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbf{z}, \mathbf{R} &amp;= \text{Measurement and convariance} \\
+    \mathbf{H} &amp;= \text{Measurement function} \\
+\end{aligned}\]</span></p>
 </section>
 <section id="unscented-kalman-filter" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="unscented-kalman-filter"><span class="header-section-number">4.2</span> Unscented Kalman filter</h2>
-<p>The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics. The UKF employs the unscented transformation (UT), which generates a set of sample points that capture the mean and covariance of the original distribution. The UT can handle any nonlinearity without requiring linearization or Jacobian computation. The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">4</a>]</span>.</p>
+<p>The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>. The UKF employs the unscented transformation (UT), which generates a set of sample points that capture the mean and covariance of the original distribution.</p>
+<p>The unscented transform is a technique for approximating the outcome of applying a nonlinear function to a probability distribution that is described by a mean and a covariance matrix. It does this by choosing a set of points, known as sigma points Figure <a href="#fig-sigma-points"><span>4.1</span></a>.</p>
+<div id="fig-sigma-points" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/ukf.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;4.1: Comparsion between sampling, EKF and sigma points. <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span></figcaption>
+</figure>
+</div>
+<p>The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>.</p>
 
 
 
@@ -282,11 +300,14 @@ div.csl-indent {
 <div id="ref-9117536" class="csl-entry" role="listitem">
 <div class="csl-left-margin">2. </div><div class="csl-right-inline">Priya Shree Madhukar and L. B. Prasad. 2020. State estimation using extended kalman filter and unscented kalman filter. In <em>2020 international conference on emerging trends in communication, control and computing (ICONC3)</em>, 1–4. <a href="https://doi.org/10.1109/ICONC345789.2020.9117536">https://doi.org/10.1109/ICONC345789.2020.9117536</a></div>
 </div>
+<div id="ref-merwe" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Rudolph Merwe and Eric Wan. 2003. Sigma-point kalman filters for probabilistic inference in dynamic state-space models. <em>Proceedings of the Workshop on Advances in Machine Learning</em>.</div>
+</div>
 <div id="ref-1336492" class="csl-entry" role="listitem">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">M. St-Pierre and D. Gingras. 2004. Comparison between the unscented kalman filter and the extended kalman filter for the position estimation module of an integrated navigation information system. In <em>IEEE intelligent vehicles symposium, 2004</em>, 831–835. <a href="https://doi.org/10.1109/IVS.2004.1336492">https://doi.org/10.1109/IVS.2004.1336492</a></div>
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">M. St-Pierre and D. Gingras. 2004. Comparison between the unscented kalman filter and the extended kalman filter for the position estimation module of an integrated navigation information system. In <em>IEEE intelligent vehicles symposium, 2004</em>, 831–835. <a href="https://doi.org/10.1109/IVS.2004.1336492">https://doi.org/10.1109/IVS.2004.1336492</a></div>
 </div>
 <div id="ref-882463" class="csl-entry" role="listitem">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">E. A. Wan and R. Van Der Merwe. 2000. The unscented kalman filter for nonlinear estimation. In <em>Proceedings of the IEEE 2000 adaptive systems for signal processing, communications, and control symposium (cat. no.00EX373)</em>, 153–158. <a href="https://doi.org/10.1109/ASSPCC.2000.882463">https://doi.org/10.1109/ASSPCC.2000.882463</a></div>
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">E. A. Wan and R. Van Der Merwe. 2000. The unscented kalman filter for nonlinear estimation. In <em>Proceedings of the IEEE 2000 adaptive systems for signal processing, communications, and control symposium (cat. no.00EX373)</em>, 153–158. <a href="https://doi.org/10.1109/ASSPCC.2000.882463">https://doi.org/10.1109/ASSPCC.2000.882463</a></div>
 </div>
 </div>
 </section>
