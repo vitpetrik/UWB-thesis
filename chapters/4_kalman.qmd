@@ -1,5 +1,84 @@
 # Kalman filters
 
+Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements.
+Originally developed by Rudolf Kalman in 1960 [@10.1115/1.3662552], Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics.
+The Kalman filter is an optimal estimator, meaning that it provides the best estimate of the system state given the available measurements and knowledge of the system dynamics.
+The filter uses a mathematical model of the system, known as a state-space model, to predict the evolution of the system over time and to correct for measurement errors. 
+The Kalman filter is particularly useful in applications where measurements are noisy or incomplete, or where the system dynamics are complex or difficult to model. 
+In this way, the Kalman filter is an essential tool for many real-world applications that require accurate state estimation and control.
+
+The algorithm involves two steps: prediction and update. 
+The prediction step uses the previous state estimate and the motion model of the system to predict the current state estimate and its uncertainty.
+The update step uses the current measurement and the measurement model of the system to correct the predicted state estimate and its uncertainty using a weighted average.
+The weight is determined by the Kalman gain, which balances the trust between the prediction and the measurement.
+The Kalman gain is computed based on the covariance matrices of the prediction error and the measurement error.
+The prediction and update steps are performed recursively for each new measurement.
+
+The linear kalman filter assumes that the system and the measurement models are linear and can be represented by matrices.
+The extended kalman filter extends the linear kalman filter to handle nonlinear systems by linearizing them around the current estimate using Taylor series expansion.
+The unscented kalman filter improves the extended kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices [@9117536] [@1336492].
+The unscented kalman filter is more accurate and robust than the extended kalman filter, especially for highly nonlinear systems [@1336492] [@882463].
+
 ## Linear Kalman filter
 
+A linear Kalman filter is a recursive algorithm that uses the Bode-Shannon representation of random processes and the state-transition method of analysis of dynamic systems to estimate the state of a system from noisy measurements. 
+It assumes that the system and the measurements are linear and Gaussian, meaning that they can be expressed as matrix operations with additive noise. 
+The algorithm consists of two steps: prediction and correction. 
+In the prediction step @eq-lkf-predict, the algorithm uses a state transition matrix to project the current state and its covariance matrix to the next time step. 
+
+$$
+\begin{aligned}
+    \mathbf{\hat{x}} &= \mathbf{F x + Bu} \\
+    \mathbf{\hat{P}} &= \mathbf{F P F^{T} + Q}
+\end{aligned}
+$$ {#eq-lkf-predict}
+Where:
+```{=latex}
+\begin{align*}
+    \mathbf{\hat{x}}, \mathbf{\hat{P}} &= \text{State mean and covariance} \\
+    \mathbf{F} &= \text{Transition matrix} \\
+    \mathbf{Q} &= \text{Process matrix} \\
+    \mathbf{B, u} &= \text{Input to the system} \\
+\end{align*}
+```
+
+In the correction step @eq-lkf-update, the algorithm uses a measurement matrix to update the predicted state and its covariance matrix with the new measurement.
+The algorithm optimizes the estimation by minimizing the mean squared error between the true state and the estimated state [@10.1115/1.3662552].
+
+
+$$
+\begin{aligned}
+    \mathbf{y} &= \mathbf{z - H x} \\
+    \mathbf{K} &= \mathbf{P H^T (H P H^T + R)^{-1}} \\
+    \mathbf{\hat{x}} &= \mathbf{x + K y} \\
+    \mathbf{\hat{P}} &= \mathbf{(I - K H)P} \\
+\end{aligned}
+$$ {#eq-lkf-update}
+Where:
+```{=latex}
+\begin{align*}
+    \mathbf{z}, \mathbf{R} &= \text{Measurement and convariance} \\
+    \mathbf{H} &= \text{Measurement function} \\
+\end{align*}
+```
+
 ## Unscented Kalman filter
+
+The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics [@882463]. 
+The UKF employs the unscented transformation (UT), which generates a set of sample points that capture the mean and covariance of the original distribution. 
+
+The unscented transform is a technique for approximating the outcome of applying a nonlinear function to a probability distribution that is described by a mean and a covariance matrix. It does this by choosing a set of points, known as sigma points Figure @fig-sigma-points.
+
+![Comparsion between sampling, EKF and sigma points. [@merwe]](images/ukf.svg){#fig-sigma-points width="70%"}
+
+Merwe describes the process of generating the sigma points in his dissertation thesis [@merwe].
+
+```{=latex}
+\begin{align*}
+    \mathbfcal{X_0} &= \bar{x}   &  \omega_0 &= \frac{\kappa}{L + \kappa} & i &= 0  \\
+    \mathbfcal{X_i} &= \bar{x} + \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i   &  \omega_i &= \frac{1}{2(L + \kappa)} & i &= 1,..., L \\
+    \mathbfcal{X_i} &= \bar{x} - \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i & \omega_i &= \frac{1}{2(L + \kappa)} & i &= L+1,...,2L
+\end{align*}
+```
+
+The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation [@882463].
