@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-20">
+<meta name="dcterms.date" content="2023-05-21">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 4&nbsp; Kalman filters</title>
 <style>
@@ -237,7 +237,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 20, 2023</p>
+      <p class="date">May 21, 2023</p>
     </div>
   </div>
   
@@ -289,19 +289,44 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;4.1: Comparsion between sampling, EKF and sigma points. <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
-<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\Sigma_{i=0}^{2L} \omega_i = 1\)</span>.</p>
-<p><span id="eq-sigma-points"><span class="math display">\[
+<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\sum_{i=0}^{2L} \omega_i = 1\)</span>.</p>
+<p><span class="math display">\[\begin{gathered}
+\lambda = \alpha^2 (L + \kappa) - L
+\end{gathered}\]</span> <span id="eq-sigma-points"><span class="math display">\[
 \begin{aligned}
-    \mathbfcal{X_0} &amp;= \bar{x}   &amp;  \omega_0 &amp;= \frac{\kappa}{L + \kappa} &amp; i &amp;= 0  \\
-    \mathbfcal{X_i} &amp;= \bar{x} + \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i   &amp;  \omega_i &amp;= \frac{1}{2(L + \kappa)} &amp; i &amp;= 1,..., L \\
-    \mathbfcal{X_i} &amp;= \bar{x} - \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i &amp; \omega_i &amp;= \frac{1}{2(L + \kappa)} &amp; i &amp;= L+1,...,2L
+    \mathbfcal{X_0} &amp;= \bar{x}   &amp;  \omega^{m}_0 &amp;= \frac{\lambda}{L + \lambda} &amp; i &amp;= 0  \\
+    \mathbfcal{X_i} &amp;= \bar{x} + \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i   &amp;  \omega^{c}_i &amp;= \frac{1}{2(L + \lambda)} + (1 − \alpha^2 + \beta) &amp; i &amp;= 1,..., L \\
+    \mathbfcal{X_i} &amp;= \bar{x} - \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i &amp; \omega^{m}_i &amp;= \omega^{c}_i = \frac{1}{2(L +\lambda)} &amp; i &amp;= L+1,...,2L
 \end{aligned}
 \tag{4.3}\]</span></span> Where:</p>
-<p><span class="math display">\[\begin{aligned}
+<p><span class="math display">\[\begin{gathered}
+\begin{align*}
     \mathbf{\hat{x}}, \mathbf{P_x} &amp;= \text{State vector and covariance} \\
-    L &amp;= \text{Dimension of state vector} \\
-    \kappa &amp;= \text{Scaling factor} \\
-\end{aligned}\]</span></p>
+    L &amp;= \text{Dimension of state vector}
+\end{align*}
+\\
+0 \leq \alpha \leq 1 \\
+0 \leq \kappa \\
+0 \leq \beta
+\end{gathered}\]</span></p>
+<p>The sigma points are used both in predicting <a href="#eq-ukf-predict"><span>4.4</span></a> and update step and need to be regenerated for each new measurement. Instead of matrix <span class="math inline">\(\mathbf{F}\)</span> <a href="#eq-lkf-predict"><span>4.1</span></a> and <span class="math inline">\(\mathbf{H}\)</span> <a href="#eq-lkf-update"><span>4.2</span></a> known from LKF, the UKF is provided with nonlinear functions <span class="math inline">\(\mathbf{f(} \mathbfcal{X} \mathbf{)}\)</span> and <span class="math inline">\(\mathbf{h(} \mathbfcal{X} \mathbf{)}\)</span>.</p>
+<p><span id="eq-ukf-predict"><span class="math display">\[
+\begin{gathered}
+    \mathbfcal{Y} = \mathbf{f(} \mathbfcal{X} \mathbf{)} \\
+    \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
+    \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
+\end{gathered}
+\tag{4.4}\]</span></span></p>
+<p><span id="eq-ukf-update"><span class="math display">\[
+\begin{gathered}
+    \mathbfcal{Z} = \mathbf{h(} \mathbfcal{X} \mathbf{)} \\
+    \mathbf{\mu}_z = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Z}_i \quad\quad
+    \mathbf{P}_z = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Z}_i - \mathbf{\mu}_z)(\mathbfcal{Z}_i - \mathbf{\mu}_z)^T + \mathbf{R} \\
+    \mathbf{y} = \mathbf{z} - \mathbf{\mu}_z \qquad \mathbf{P}_{xz} = \sum_{i=0}^{2L} \omega_i^c (\mathbfcal{X}_i - \mathbf{x}) (\mathbfcal{Z}_i - \mathbf{\mu}_z)^T \\
+    \mathbf{K} = \mathbf{P}_{xz} \mathbf{P}_z^{-1} \\
+    \mathbf{\hat{x}} = \mathbf{x} + \mathbf{K} \mathbf{y} \qquad \mathbf{\hat{P}} = \mathbf{P} - \mathbf{K} \mathbf{P}_z \mathbf{K}^T
+\end{gathered}
+\tag{4.5}\]</span></span></p>
 <p>The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>.</p>
 
 
