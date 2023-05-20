@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-18">
+<meta name="dcterms.date" content="2023-05-20">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 4&nbsp; Kalman filters</title>
 <style>
@@ -237,7 +237,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 18, 2023</p>
+      <p class="date">May 20, 2023</p>
     </div>
   </div>
   
@@ -289,6 +289,19 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;4.1: Comparsion between sampling, EKF and sigma points. <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
+<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eqn:sigma-points" data-reference-type="ref" data-reference="eqn:sigma-points">[eqn:sigma-points]</a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\Sigma_{i=0}^{2L} \omega_i = 1\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbfcal{X_0} &amp;= \bar{x}   &amp;  \omega_0 &amp;= \frac{\kappa}{L + \kappa} &amp; i &amp;= 0  \\
+    \mathbfcal{X_i} &amp;= \bar{x} + \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i   &amp;  \omega_i &amp;= \frac{1}{2(L + \kappa)} &amp; i &amp;= 1,..., L \\
+    \mathbfcal{X_i} &amp;= \bar{x} - \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i &amp; \omega_i &amp;= \frac{1}{2(L + \kappa)} &amp; i &amp;= L+1,...,2L
+    \label{eqn:sigma-points}
+\end{aligned}\]</span></p>
+<p>Where:</p>
+<p><span class="math display">\[\begin{aligned}
+    \mathbf{\hat{x}}, \mathbf{P_x} &amp;= \text{State vector and covariance} \\
+    L &amp;= \text{Dimension of state vector} \\
+    \kappa &amp;= \text{Scaling factor} \\
+\end{aligned}\]</span></p>
 <p>The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>.</p>
 
 
