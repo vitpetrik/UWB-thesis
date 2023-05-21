@@ -289,7 +289,7 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;4.1: Comparsion between sampling, EKF and sigma points. <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
-<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\sum_{i=0}^{2L} \omega_i = 1\)</span>.</p>
+<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. These sigma points are chosen to capture the mean and covariance of the current estimated state, and they are transformed through the nonlinear model to predict the state at the next time step. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\sum_{i=0}^{2L} \omega_i = 1\)</span>.</p>
 <p><span class="math display">\[\begin{gathered}
 \lambda = \alpha^2 (L + \kappa) - L
 \end{gathered}\]</span> <span id="eq-sigma-points"><span class="math display">\[
@@ -309,16 +309,21 @@ div.csl-indent {
 0 \leq \kappa \\
 0 \leq \beta
 \end{gathered}\]</span></p>
-<p>The sigma points are used both in predicting <a href="#eq-ukf-predict"><span>4.4</span></a> and update step and need to be regenerated for each new measurement. Instead of matrix <span class="math inline">\(\mathbf{F}\)</span> <a href="#eq-lkf-predict"><span>4.1</span></a> and <span class="math inline">\(\mathbf{H}\)</span> <a href="#eq-lkf-update"><span>4.2</span></a> known from LKF, the UKF is provided with nonlinear functions <span class="math inline">\(\mathbf{f(} \mathbfcal{X} \mathbf{)}\)</span> and <span class="math inline">\(\mathbf{h(} \mathbfcal{X} \mathbf{)}\)</span>.</p>
+<p>The sigma points are used both in predict step <a href="#eq-ukf-predict"><span>4.4</span></a> and update step <a href="#eq-ukf-update"><span>4.5</span></a> and need to be regenerated for each new measurement. Instead of matrix <span class="math inline">\(\mathbf{F}\)</span> <a href="#eq-lkf-predict"><span>4.1</span></a> and <span class="math inline">\(\mathbf{H}\)</span> <a href="#eq-lkf-update"><span>4.2</span></a> known from LKF, the UKF is provided with nonlinear functions <span class="math inline">\(\mathbf{f(} \mathbfcal{X} \mathbf{)}\)</span> and <span class="math inline">\(\mathbf{h(} \mathbfcal{X} \mathbf{)}\)</span>.</p>
 <p><span id="eq-ukf-predict"><span class="math display">\[
 \begin{gathered}
+    \textit{Predict step} \\
+    \hline
     \mathbfcal{Y} = \mathbf{f(} \mathbfcal{X} \mathbf{)} \\
     \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
     \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
 \end{gathered}
 \tag{4.4}\]</span></span></p>
+<p>By comparing the predicted measurements with the actual measurements, the UKF computes the Kalman gain, which determines the optimal blend between the predicted state and the measurement updates. Finally, the updated state estimate is obtained by incorporating the measurement information into the predicted state estimate using the Kalman gain. The update step of the UKF enables the filter to adaptively adjust the state estimate based on the measurements, providing a more accurate estimation of the system’s true state.</p>
 <p><span id="eq-ukf-update"><span class="math display">\[
 \begin{gathered}
+    \textit{Update step} \\
+    \hline
     \mathbfcal{Z} = \mathbf{h(} \mathbfcal{X} \mathbf{)} \\
     \mathbf{\mu}_z = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Z}_i \quad\quad
     \mathbf{P}_z = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Z}_i - \mathbf{\mu}_z)(\mathbfcal{Z}_i - \mathbf{\mu}_z)^T + \mathbf{R} \\
