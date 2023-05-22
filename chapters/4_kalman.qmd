@@ -71,14 +71,58 @@ The unscented transform is a technique for approximating the outcome of applying
 
 ![Comparsion between sampling, EKF and sigma points. [@merwe]](images/ukf.svg){#fig-sigma-points width="70%"}
 
-Merwe describes the process of generating the sigma points in his dissertation thesis [@merwe].
+Merwe describes generating the sigma points in his dissertation thesis [@merwe]. These sigma points are chosen to capture the mean and covariance of the current estimated state, and they are transformed through the nonlinear model to predict the state at the next time step. The sigma points $\mathbfcal{X}_i$ as well as weights $\omega_i$ for each point are calculated using equation @eq-sigma-points. The weights $\omega_i$ must follow equation $\sum_{i=0}^{2L} \omega_i = 1$.
 
+\begin{gather*}
+\lambda = \alpha^2 (L + \kappa) - L
+\end{gather*}
+$$
+\begin{aligned}
+    \mathbfcal{X_0} &= \hat{x}   &  \omega^{m}_0 &= \frac{\lambda}{L + \lambda} & i &= 0  \\
+    \mathbfcal{X_i} &= \hat{x} + \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i   &  \omega^{c}_i &= \frac{1}{2(L + \lambda)} + (1 − \alpha^2 + \beta) & i &= 1,..., L \\
+    \mathbfcal{X_i} &= \hat{x} - \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i & \omega^{m}_i &= \omega^{c}_i = \frac{1}{2(L +\lambda)} & i &= L+1,...,2L
+\end{aligned}
+$$ {#eq-sigma-points}
+Where:
 ```{=latex}
+\begin{gather*}
 \begin{align*}
-    \mathbfcal{X_0} &= \bar{x}   &  \omega_0 &= \frac{\kappa}{L + \kappa} & i &= 0  \\
-    \mathbfcal{X_i} &= \bar{x} + \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i   &  \omega_i &= \frac{1}{2(L + \kappa)} & i &= 1,..., L \\
-    \mathbfcal{X_i} &= \bar{x} - \left( \sqrt{(L+\kappa) \mathbf{P_x}} \right)_i & \omega_i &= \frac{1}{2(L + \kappa)} & i &= L+1,...,2L
+    \mathbf{\hat{x}}, \mathbf{P_x} &= \text{State vector and covariance} \\
+    L &= \text{Dimension of state vector}
 \end{align*}
+\\
+0 \leq \alpha \leq 1 \\
+0 \leq \kappa \\
+0 \leq \beta
+\end{gather*}
 ```
+
+The sigma points are used both in predict step @eq-ukf-predict and update step  @eq-ukf-update and need to be regenerated for each new measurement. Instead of matrix $\mathbf{F}$ [@eq-lkf-predict] and $\mathbf{H}$ [@eq-lkf-update] known from LKF, the UKF is provided with nonlinear functions $\mathbf{f(} \mathbfcal{X} \mathbf{)}$ and $\mathbf{h(} \mathbfcal{X} \mathbf{)}$. 
+
+$$
+\begin{gathered}
+    \textit{Predict step} \\
+    \hline
+    \mathbfcal{Y} = \mathbf{f(} \mathbfcal{X} \mathbf{)} \\
+    \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
+    \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
+\end{gathered}
+$$ {#eq-ukf-predict}
+
+By comparing the predicted measurements with the actual measurements, the UKF computes the Kalman gain, which determines the optimal blend between the predicted state and the measurement updates. Finally, the updated state estimate is obtained by incorporating the measurement information into the predicted state estimate using the Kalman gain. The update step of the UKF enables the filter to adaptively adjust the state estimate based on the measurements, providing a more 
+accurate estimation of the system's true state.
+
+$$
+\begin{gathered}
+    \textit{Update step} \\
+    \hline
+    \mathbfcal{Z} = \mathbf{h(} \mathbfcal{X} \mathbf{)} \\
+    \mathbf{\mu}_z = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Z}_i \quad\quad
+    \mathbf{P}_z = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Z}_i - \mathbf{\mu}_z)(\mathbfcal{Z}_i - \mathbf{\mu}_z)^T + \mathbf{R} \\
+    \mathbf{y} = \mathbf{z} - \mathbf{\mu}_z \qquad \mathbf{P}_{xz} = \sum_{i=0}^{2L} \omega_i^c (\mathbfcal{X}_i - \mathbf{x}) (\mathbfcal{Z}_i - \mathbf{\mu}_z)^T \\
+    \mathbf{K} = \mathbf{P}_{xz} \mathbf{P}_z^{-1} \\
+    \mathbf{\hat{x}} = \mathbf{x} + \mathbf{K} \mathbf{y} \qquad \mathbf{\hat{P}} = \mathbf{P} - \mathbf{K} \mathbf{P}_z \mathbf{K}^T
+\end{gathered}
+$$ {#eq-ukf-update}
 
 The UKF has been shown to achieve higher accuracy and robustness than the extended Kalman filter (EKF) for various nonlinear estimation problems, such as state estimation, parameter estimation, and dual estimation [@882463].

@@ -15,8 +15,6 @@ book:
     - chapters/7_conclusion.qmd
     - chapters/references.qmd
 format:
-  html:
-    theme: cosmo
   ctu-thesis-pdf:
     link-citations: true
     include-in-header: 
@@ -26,7 +24,9 @@ format:
     include-after-body: 
         text: |
           \printindex
-jupyter: julia-1.8
+  html:
+    theme: cosmo
+jupyter: julia-1.9
 listing: default
 pdf-engine: xelatex
 author: Vit Petrik
