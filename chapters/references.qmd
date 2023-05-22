@@ -1,6 +1,6 @@
 \appendix
 
-# Bibliography {.unnumbered .unlisted}
+# References {.unnumbered .unlisted}
 
 ::: {#refs}
 :::

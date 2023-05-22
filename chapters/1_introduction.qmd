@@ -1,10 +1,15 @@
 # Introduction
 
-In recent years, the use of unmanned aerial vehicles (UAVs) has been rapidly growing due to their versatility and wide range of applications, from aerial photography and surveillance to delivery services [^zipline] and search and rescue operations @petrlik2023uavs. The problem of relative localization in UAV swarms is a critical challenge for enabling cooperative behavior and avoiding collisions.
+In recent years, the use of unmanned aerial vehicles (UAVs) has been rapidly growing due to their versatility and wide range of applications, from aerial photography and surveillance to delivery services [^zipline] and search and rescue operations @petrlik2023uavs. 
+The problem of relative localization in UAV swarms is a critical challenge for enabling cooperative behavior and avoiding collisions.
 
-To address this problem, a novel system is proposed in this thesis that combines computer vision and ultra-wideband (UWB) technology for direction and range measurements, respectively. By fusing these measurements using a Kalman filter, the relative positions and orientations of UAVs can be estimated with high accuracy, even in GNSS-denied environments such as undergrounds, buildings or caves @petrlik2023uavs. This approach has a significant advantage over existing methods, which often rely on GNSS @6943105 or motion capture [^optitrack] and are therefore limited in their ability to operate in challenging environments or without additional infrastructure onsite.
+To address this problem, a novel system is proposed in this thesis that combines computer vision and ultra-wideband (UWB) technology for direction and range measurements, respectively. 
+By fusing these measurements using a Kalman filter, the relative positions and orientations of UAVs can be estimated with high accuracy, even in GNSS-denied environments such as buildings or underground areas @petrlik2023uavs. 
+This approach has a significant advantage over existing methods, which often rely on GNSS @6943105 or motion capture [^optitrack] and are therefore limited in their ability to operate in challenging environments or without additional infrastructure onsite.
 
-The research question for this thesis is: How can an effective relative localization system for UAV swarms be designed and implemented using computer vision and UWB technology, and how well does it perform in real-world scenarios? Firstly, a review of the existing literature on relative localization and multi-robot systems will be conducted. Secondly, the proposed system and its key components, including the computer vision algorithms for direction estimation and the UWB hardware for range measurement, will be presented. Finally, the performance of the system will be evaluated through a series of experiments in both simulated and real-world environments and compared with existing approaches.
+This thesis addresses designing and implementing an effective relative localization system for UAV swarms using computer vision and UWB technology, and evaluates how well does it perform in real-world scenarios. 
+Firstly, a review of the proposed system and its key components, including the computer vision algorithms for direction estimation and the UWB hardware for range measurement, will be presented. 
+Finally, the performance of the system will be evaluated through a series of experiments in both simulated and real-world environments.
 
 By developing and testing this system, a contribution will be made to the growing body of research on multi-robot systems and pave the way for new applications of UAV swarms in challenging environments.
 

@@ -1,1 +1,26 @@
 # Implementation on UAV
+
+The proposed measurement system is designed to work with the existing MRS UAV System that has been developed by the MRS group at CTU.
+The MRS system relies on the use of the Robot Operating System (ROS) in version ROS Noetic released in 2020[^rosnoetic]. 
+
+[^rosnoetic]: ROS Noetic release info <http://wiki.ros.org/noetic>
+
+![System overview.](images/overview-schema.svg){#fig-system-overview width="60%"}
+
+ROS is a robust framework used for developing and controlling robots. 
+It provides a variety of tools and libraries that make robot software development easier. 
+ROS uses a distributed system, allowing different parts of a robot to communicate with each other using a messaging model. 
+It supports multiple programming languages, making it accessible to developers. 
+ROS has a large community and a wide range of pre-existing packages, making it a popular choice for research and industrial applications.
+
+An overview of the proposed system is shown in figure @fig-system-overview. This thesis implements the blue-colored blocks and these blocks will be further explained in this chapter.
+
+
+## DW1000 UWB PHY radio 
+
+DW1000 is a popular UWB PHY radio developed and manufactured by Qorvo[^qorvo-dw1000].
+
+
+[^qorvo-dw1000]: Qorvo DW1000 <https://www.qorvo.com/products/p/DW1000>
+
+## Object tracker

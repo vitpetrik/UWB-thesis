@@ -21,7 +21,7 @@ default_plots = (
 
 # Ultra-wide band
 
-*The following chapter will introduce ultra-wide band by means of IEEE 802.15.4 [@6012487]. There is another definiton by Federal Communications Commision (FCC), however it will not be discussed in this thesis.*
+*The following chapter will introduce ultra-wide band according to IEEE 802.15.4 [@6012487]. Another definiton exists by Federal Communications Commision (FCC), but it will not be discussed in this thesis.*
 
 To fully understand what ultra-wide band means it is necessary to define what bandwidth means by equation @eq-3db-bw and what center frequency means by equation @eq-3db-f-center.
 
@@ -35,7 +35,7 @@ $$ {#eq-3db-f-center}
 
 The ultra-wide band radio use bandwidth of 500 Mhz and more. This fact provides UWB with its unique ranging capabilities. The *IEEE 802.15.4 Low-Rate Wireless Personal Area Networks* [@6012487] specifies physical and data link layers from the ISO-OSI network model [@fig-iso-osi].
 
-Today UWB is mainly used in consumer electronics [^3_uwb-1] or in a manufacturing plant to track assets, ground vehicles and people [^3_uwb-2][^3_uwb-3].
+Today UWB is mainly used in consumer electronics [^3_uwb-1] or in a manufacturing plants to track assets, ground vehicles and people [^3_uwb-2][^3_uwb-3].
 
 [^3_uwb-1]: Apple AirTag <https://www.apple.com/airtag/>
 
@@ -74,7 +74,7 @@ The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 [@6012487] a
 
 ![Data flow according to [@6012487].](images/uwb_phy_dataflow.svg){#fig-uwb-dataflow}
 
-It uses an impulse radio signaling scheme with band-limited pulses and supports high data rates and precision ranging applications. It also uses a combination of burst position modulation (BPM) and binary phase-shift keying (BPSK) to modulate symbols. The overview of the physical layer is expressed in figure @fig-uwb-dataflow.
+The PHY uses an impulse radio signaling scheme with band-limited pulses and supports high data rates and precise ranging applications. It also uses a combination of burst position modulation (BPM) and binary phase-shift keying (BPSK) to modulate symbols. The overview of the physical layer is shown in figure @fig-uwb-dataflow.
 
 ### PPDU format {.unnumbered .unlisted}
 
@@ -100,7 +100,9 @@ The PHR contains information about the data to be received, including the length
 
 ### Symbol structure
 
-A symbol @fig-symbol-struct is the basic unit of information in HWP UWB PHY. It consists of a short burst of UWB pulses that lasts for 2 ns and occupies a bandwidth of 0.5-1.3 GHz. The burst can be placed in one of the two possible burst intervals, and its phase can be inverted or not.
+![Symbol stucture. [@7460875]](images/symbol_structure.svg){#fig-symbol-struct}
+
+A symbol is the basic unit of information in HWP UWB PHY. It consists of a short burst of UWB pulses that lasts for 2 ns and occupies a bandwidth of 0.5-1.3 GHz. The burst can be placed in one of the two possible burst intervals, and its phase can be inverted or not as can be seen in Figure @fig-symbol-struct.
 These two choices allow each symbol to carry two bits of information using burst position modulation (BPM) and binary phase-shift keying (BPSK), a example of the modulation can be found in figure @fig-bpm-bpsk. 
 
 ```{julia}
@@ -142,8 +144,6 @@ Burst hopping position is a parameter that determines the time position of the U
 Scrambling code is a pseudo-random sequence that is applied to the data bits before modulation. 
 It is used to randomize the data bits and reduce the peak-to-average power ratio (PAPR) of the UWB pulses. 
 
-![Symbol stucture. [@7460875]](images/symbol_structure.svg){#fig-symbol-struct}
-
 IEEE defines the reference pulse as a root-raised cosine pulse with roll-off factor $\beta = 0.5$ @eq-reference-pulse.
 
 $$         
@@ -163,27 +163,20 @@ Parameter $T_p$ stands for duration of the pulse. The duration is defined for ea
 
 Figure @fig-uwb-reference-pulse further illustrates a waveform of the pulse. 
 However an actual hardware system cannot fully realize the shape of the reference pulse.
-Therefore IEEE 802.15.4 constrains transmitted pulse $p(t)$ by a cross-correlation function @eq-cross-correlation.
+Therefore IEEE 802.15.4 constrains transmitted pulse $p(t)$ by a cross-correlation function @eq-cross-correlation where $E_r$ is energy of r(t) and $E_p$ is energy of p(t).
 
 $$
     \mathrm{\phi}(\tau) = \frac{1}{\sqrt{E_r E_p}} Re \int^{\infty}_{-\infty} \mathrm{r}(t) \mathrm{p}(t - \tau) \mathrm{dt}
 $$ {#eq-cross-correlation}
-Where:
-```{=latex}
-\begin{align*}
-    E_r &= \text{energy of r(t)} \\
-    E_p &= \text{energy of p(t)} \\
-\end{align*}
-```
 
 For PHY to be IEEE compliant the main lobe of the transmitted pulse must have a magnitude of cross correlation $|\phi(\tau)|$ at least 0.8, and the magnitude of sidelobes must not be greater than 0.3.
 
-```{julia}
+\setkeys{Gin}{width=0.9\textwidth,height=\textheight,keepaspectratio}
 
+```{julia}
 #| label: fig-uwb-reference-pulse
 #| fig-cap: "Reference pulse of UWB radio."
 #| output: true
-#| width: 70%
 
 β = 0.5
 Tp = 2e-9
@@ -196,42 +189,40 @@ y /= maximum(y)
 plot(;default_plots..., 
         xlabel="Time [ns]", 
         ylabel="Amplitude",
-        yformatter=Returns("")
+        yformatter=Returns(""),
     )
 
 plot!(1e9.*t, y)
 
 ```
 
-\newpage
+\setkeys{Gin}{width=\textwidth,height=\textheight,keepaspectratio}
 
 ## Ranging techniques
 ### Time Difference of Arrival {.unnumbered .unlisted}
 
 Time difference of arrival (TDOA) position estimation is a technique that uses the difference in the arrival times of UWB signals at multiple receivers to estimate the position of a transmitter.
 
-TDOA position estimation requires at least four receivers for 3D localization and one transmitter. 
+TDOA position estimation requires at least four receivers and one transmitter for 3D localization. 
 The receivers measure the time of arrival (TOA) of the UWB signals. 
 The TOA measurements are then used to calculate the TDOA values between different pairs of receivers [@9750886].
-
-To estimate the position of the transmitter system of equations [@eq-tdoa] is solved [@MathWork-tdoa]. For 
 
 $$
     \sqrt{\mathbf{x_r}^T \mathbf{\hat{x}}} - \sqrt{\mathbf{x_i}^T \mathbf{\hat{x}}} = c(t_r - t_i)
 $$ {#eq-tdoa}
 Where:
-```{=latex}
-\begin{align*}
+$$
+\begin{aligned}
     \mathbf{\hat{x}} &= \text{estimated position of the transmitter.} \\
     \mathbf{x_r} &= \text{Position of the reference receiver.} \\
     \mathbf{x_i} &= \text{Position of receiver \textit{i}.} \\
     t_r &= \text{Time of arrival for the reference receiver.} \\
     t_r &= \text{Time of arrival for the receiver \textit{i}.} \\
     c &= \text{Speed of light.} \\
-\end{align*}
-```
+\end{aligned}
+$$
 
-The main challenge for implementing TDoA is synchronizing the clock across all receivers [@7472406].
+To estimate the position of the transmitter system of equations [@eq-tdoa] is solved [@MathWork-tdoa]. The main challenge for implementing TDoA is synchronizing the clock across all receivers [@7472406].
 
 The TDoA system can be used in a variety of applications, such as indoor positioning, tracking of vehicles or people, and asset tracking. 
 The accuracy of the TDoA system depends on the number and placement of the UWB sensors and the timing resolution of the system.
@@ -243,17 +234,18 @@ Two-way ranging (TWR) is a technique used by UWB systems to estimate the distanc
 ![Two way ranging with two round trips.](images/two_way_ranging.svg){#fig-ds-twr}
 
 Single-sided two-way ranging (SS-TWR) is a technique where only one device sends a signal and waits for a response from another device. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices.
+
 $$
     \mathrm{TOF} = \frac{R_a - D_b}{2} 
 $$
 Where:
-```{=latex}
-\begin{align*}
+$$
+\begin{aligned}
     \mathrm{TOF} &= \text{Time of flight.} \\
     R_a &= \text{Time of round trip} \\
     D_b &= \text{Response delay.} \\
-\end{align*}
-```
+\end{aligned}
+$$
 
 Double-sided two-way ranging (DS-TWR) is a technique where both devices send signals and wait for responses from each other. The time difference between the transmission and reception of signals from both devices is used to calculate the distance between them.
 
