@@ -16,11 +16,12 @@
 	department-english = {Department of Cybernetics},
 	author = {Vít Petřík},
 	supervisor = {Ing. Viktor Walter},
-	fieldofstudy-english = {Cybernetics and robotics},
-	fieldofstudy-czech = {Kybernetik a robotika},
-	keywords-czech = {slovo, klíč},
-	keywords-english = {word, key},
-	day = 10,
+	supervisor-address = {Czech Technical University \\ Faculty of Electrical Engineering \\  Department of Cybernetics \\ Karlovo náměstí 13 \\121 35 Prague 2 \\ Czech Republic},
+	fieldofstudy-english = {Cybernetics and Robotics},
+	fieldofstudy-czech = {Kybernetik a Robotika},
+	keywords-czech = {fúze dat, ultraširokopásmová technologie, UWB, ROS, UAV, simulace, bezpilotní koptéra, Gazebo, relativní vzájemná lokalizace, počítačové vidění, kalmánův filtr},
+	keywords-english = {UAV, UWB, ROS, simulation, Gazebo, Unmanned copter, data fusion, ultra-wide band, relative mutual localization, Kalman filter, unscented kalman filter},
+	day = 26,
 	month = 5,
 	year = 2023,
 	specification-file = {Thesis_Assignment.pdf},
@@ -70,30 +71,51 @@
 
 % Abstract in Czech
 \begin{abstract-czech}
-	TODO
+Pro provoz multirobotických systému je důležité, aby každý robot měl informaci o celém systému.
+Tato informace může být zprostředkovaná sdílením GNSS souřadnic mezi roboty.
+Bohužel tento přístup nelze aplikovat v prostředích bez příjmu GNSS nebo v aplikacích, kde je přesnost GNSS příliš nízká.
+Jedna z možností je takovéto prostředí vybavit systémem snímaní pohybu pomocí kamer, ale toto není vždy možné.
+Častným řešením pro tyto problémy je využití visuální relativní lokalizace.
+
+Tato bakalářská práce zkoumá jednu z možností, jak vylepšit přesnoti visuální relativní lokalizace.
+Navrhnuté řešení spočívá ve slučování dat ze systému visuální relativni lokalizce s ultraširokopásomovým rádiem pro měření vzdálenosti.
+Provedené experimenty ukazují, že navrhnuté řešení umožňuje přesnou relativní lokalizace několika robotů bez znatelného zpoždění.
 \end{abstract-czech}
 
 % Abstract in English
 \begin{abstract-english}
-	For the operation of multi-robot systems, it is crucial that each robot possesses information about the whole system. 
-	This information could be GNSS coordinates shared through multiple robots. 
-	This approach, however falls apart when the system needs to operate indoors.
-	A popular solution for such a problem is to employ visual relative localizations.
+For the operation of multi-robot systems, it is crucial that each robot possesses information about the whole system. 
+This information could be GNSS coordinates shared through multiple robots. 
+This approach, however, falls apart when the system needs to operate indoors or when the precision of GNSS is not sufficient.
+One solution is to equip the space with a motion capture system, but it is not always a viable solution.
+A popular solution for such a problem is to employ visual relative localizations.
 
-	This thesis discusses possible paths to improve measurements from relative visual localizations.
-	A proposed solution for this task is a sensor based on Ultra-wideband technology.
-	As our experiments show, the solution offers high precision and low latency localization of multiple robots.
+This thesis explores one of the possible paths to improve measurements from relative visual localizations.
+A proposed solution for this task is a sensor based on Ultra-wideband technology.
+As our experiments show, the solution offers high precision and low latency localization of multiple robots.
 \end{abstract-english}
 
 % Acknowledgements / Podekovani
 \begin{thanks}
-Děkuji ČVUT, že mi je tak dobrou \emph{alma mater}.
+It is a privilege for me to extend my heartfelt appreciation to my supervisor, Ing. Viktor Walter, whose unwavering support and guidance have been instrumental in assisting me throughout my work.
+I am profoundly grateful to the CTU MRS group for granting me the invaluable opportunity to collaborate with their cutting-edge UAV platform.
+
+Without the unwavering support of my family, who consistently provided me with a secure haven, I would have been unable to complete this thesis. I am deeply appreciative of the invaluable interactions I had with my fellow students and colleagues at Siemens Advanta, as they provided me with the opportunity to engage in insightful discussions pertaining to the technical aspects of my thesis.
 \end{thanks}
 
 % Declaration / Prohlaseni
 \begin{declaration}
-I declare that the presented work was developed independently and that I have listed all sources of information used within it in accordance with the methodical instructions for observing the ethical principles in the preparation of university theses.
-V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
+I declare that the presented work was developed independently and that I have listed all 
+sources of information used
+within it in accordance with the methodical instructions for observing the ethical 
+principles in the preparation of university theses.
+\\
+\\
+\\
+\\
+Prague, \ctufield{day}. \monthinlanguage{title} \ctufield{year} \: \: ..........................\\
+\hspace*{130pt} signature
+	
 \end{declaration}
 
 % Only for testing purposes
@@ -111,6 +133,7 @@ V Praze, \ctufield{day}.~\monthinlanguage{title}~\ctufield{year}
 \usepackage{array,calc}
 \usepackage{amsmath}
 \usepackage{cleveref}
+\usepackage{bytefield}
 \catcode`\-=12
 
 

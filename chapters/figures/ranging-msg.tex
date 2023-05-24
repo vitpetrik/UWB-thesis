@@ -1,0 +1,21 @@
+\documentclass[tikz,border=1cm]{standalone}
+\usepackage{amsmath}
+\usepackage{multirow, makecell}
+\usepackage[english,slovak]{babel}
+\usepackage{bytefield}
+
+\begin{document}
+
+ahoj
+
+ahoj
+
+
+ahoj
+
+ahoj
+\begin{bytefield}[bitwidth=1.7em, boxformatting={\centering\small}]{17}
+    \bitheader{0,1,4,5,8,9,12,13,16} \\
+    \bitbox{1}{\#} & \bitbox{4}{$Round_a$} & \bitbox{4}{$Delay_a$} & \bitbox{4}{$Round_b$} & \bitbox{4}{$Delay_b$}
+\end{bytefield}
+\end{document}

@@ -34,7 +34,8 @@ bibliography: citation.bib
 csl: ctustyle/style.csl
 date: last-modified
 tbl-cap-location: bottom
-code-line-numbers: true
+code-line-numbers: false
+code-overflow: wrap
 execute:
   echo: false
   output: false

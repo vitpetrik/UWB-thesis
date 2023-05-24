@@ -227,7 +227,7 @@ To estimate the position of the transmitter system of equations [@eq-tdoa] is so
 The TDoA system can be used in a variety of applications, such as indoor positioning, tracking of vehicles or people, and asset tracking. 
 The accuracy of the TDoA system depends on the number and placement of the UWB sensors and the timing resolution of the system.
 
-### Two way ranging {.unnumbered .unlisted}
+### Two-way ranging {.unnumbered .unlisted}
 
 Two-way ranging (TWR) is a technique used by UWB systems to estimate the distance between two devices. TWR requires two-way communication between two devices, where one device sends a signal to another device and waits for a response, as shown in figure @fig-ds-twr. The time difference between the transmission and reception of the signal is used to calculate the distance between the two devices.
 
