@@ -17,5 +17,7 @@ chapters/*/*.pdf
 !tools/*.tex
 !chapters/*/*.tex
 !chapters/figures/*.pdf
+!chapters/images/*.pdf
 /.luarc.json
 index_files/
+chapters/.jupyter_cache/*

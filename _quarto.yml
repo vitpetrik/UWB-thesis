@@ -1,6 +1,5 @@
 project:
   type: book
-
 book:
   title: "Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System"
   author: "Vit Petrik"
@@ -14,6 +13,7 @@ book:
     - chapters/6_experiments.qmd
     - chapters/7_conclusion.qmd
     - chapters/references.qmd
+    - chapters/appendix.qmd
 format:
   ctu-thesis-pdf:
     link-citations: true

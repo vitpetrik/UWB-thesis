@@ -1,0 +1,31 @@
+\appendix
+
+\printindex
+
+# Source code {.unnumbered .unlisted}
+
+The attached zip file contains all the source codes, which can also be found in a GitHub repository.
+
+List of source codes:
+
+-   [leader-follower](https://github.com/vitpetrik/leader_follower)
+
+    ROS node implementing leader-follower algorithm.
+
+-   [Object-tracker-ROS](https://github.com/vitpetrik/leader_follower)
+
+    ROS node for data fusion from UWB and UVDAR.
+
+-   [UWB_MRS_ranging_ros_node](https://github.com/vitpetrik/UWB_MRS_ranging_ros_node.git)
+
+    ROS node for communication with DWM1001-DEV.
+
+-   [UWB-MRS-ranging](https://github.com/vitpetrik/UWB-MRS-ranging.git)
+
+    Zephyr RTOS application for DWM1001. nRF Connect SDK is needed for compilation and flashing.
+
+-   [UWB-workspace](https://github.com/vitpetrik/UWB-workspace)
+
+    Complete ROS Noetic workspace for UWB. Includes all necessary packages with real-world tmux scripts and gazebo simulations.
+
+Source code for the thesis is at <https://github.com/vitpetrik/UWB-thesis> and could be viewed as a web page at <https://vitpetrik.github.io/UWB-thesis/>.

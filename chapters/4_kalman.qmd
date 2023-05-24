@@ -70,7 +70,7 @@ The UKF employs the unscented transform (UT), which generates a set of sample po
 
 The unscented transform is a technique for approximating the outcome of applying a nonlinear function to a probability distribution that is described by a mean and a covariance matrix. It does this by choosing a set of points, known as sigma points Figure @fig-sigma-points.
 
-![Comparsion between sampling, EKF and sigma points. [@merwe]](images/ukf.svg){#fig-sigma-points width="90%"}
+![Comparsion between sampling, EKF and sigma points. [@merwe]](images/ukf_compare.pdf){#fig-sigma-points width="90%"}
 
 Merwe describes generating the sigma points in paper \textit{The unscented Kalman filter for nonlinear estimation}[@882463]. These sigma points are chosen to capture the mean and covariance of the current estimated state, and they are transformed through the nonlinear model to predict the state at the next time step. The sigma points $\mathbfcal{X}_i$ as well as weights $\omega_i$ for each point are calculated using equation @eq-sigma-points. The weights $\omega_i$ must follow equation $\sum_{i=0}^{2L} \omega_i = 1$.
 \pagebreak
