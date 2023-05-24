@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-21">
+<meta name="dcterms.date" content="2023-05-22">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 4&nbsp; Kalman filters</title>
 <style>
@@ -179,7 +179,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/5_implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on MAV</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,7 +197,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Source code</span></a>
   </div>
 </li>
     </ul>
@@ -237,7 +243,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 21, 2023</p>
+      <p class="date">May 22, 2023</p>
     </div>
   </div>
   
@@ -247,59 +253,63 @@ div.csl-indent {
 
 </header>
 
-<p>Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it provides the best estimate of the system state given the available measurements and knowledge of the system dynamics. The filter uses a mathematical model of the system, known as a state-space model, to predict the evolution of the system over time and to correct for measurement errors. The Kalman filter is particularly useful in applications where measurements are noisy or incomplete, or where the system dynamics are complex or difficult to model. In this way, the Kalman filter is an essential tool for many real-world applications that require accurate state estimation and control.</p>
-<p>The algorithm involves two steps: prediction and update. The prediction step uses the previous state estimate and the motion model of the system to predict the current state estimate and its uncertainty. The update step uses the current measurement and the measurement model of the system to correct the predicted state estimate and its uncertainty using a weighted average. The weight is determined by the Kalman gain, which balances the trust between the prediction and the measurement. The Kalman gain is computed based on the covariance matrices of the prediction error and the measurement error. The prediction and update steps are performed recursively for each new measurement.</p>
+<p>Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it provides the best estimate of the system state given the available measurements and knowledge of the system dynamics. The filter uses a state-space model of the system to predict the evolution of the system over time and to address measurement errors. The Kalman filter is particularly useful in applications where measurements are noisy or incomplete, or where the system dynamics are complex or difficult to model. In this way, the Kalman filter is an essential tool for many real-world applications that require accurate state estimation and control.</p>
+<p>The algorithm involves two steps: prediction and update. The prediction step uses the previous state estimate and the dynamic model of the system to predict its current state and its uncertainty. The update step uses an obtained measurement and the measurement model of the system to correct the predicted state estimate and its uncertainty using a weighted average. The weight is determined by the Kalman gain, which balances the trust between the prediction and the measurement. The Kalman gain is computed based on the covariance matrices of the prediction error and the measurement error. The prediction and update steps are performed recursively for each new measurement.</p>
 <p>The linear kalman filter assumes that the system and the measurement models are linear and can be represented by matrices. The extended kalman filter extends the linear kalman filter to handle nonlinear systems by linearizing them around the current estimate using Taylor series expansion. The unscented kalman filter improves the extended kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices <span class="citation" data-cites="9117536">[<a href="references.html#ref-9117536" role="doc-biblioref">2</a>]</span> <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">4</a>]</span>. The unscented kalman filter is more accurate and robust than the extended kalman filter, especially for highly nonlinear systems <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">4</a>]</span> <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>.</p>
 <section id="linear-kalman-filter" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="linear-kalman-filter"><span class="header-section-number">4.1</span> Linear Kalman filter</h2>
-<p>A linear Kalman filter is a recursive algorithm that uses the Bode-Shannon representation of random processes and the state-transition method of analysis of dynamic systems to estimate the state of a system from noisy measurements. It assumes that the system and the measurements are linear and Gaussian, meaning that they can be expressed as matrix operations with additive noise. The algorithm consists of two steps: prediction and correction. In the prediction step <a href="#eq-lkf-predict"><span>4.1</span></a>, the algorithm uses a state transition matrix to project the current state and its covariance matrix to the next time step.</p>
+<p>A linear Kalman filter is a recursive algorithm that uses the Bode-Shannon representation of random processes and the state-transition method of analysis of dynamic systems to estimate the state of a system from noisy measurements. In the prediction step <a href="#eq-lkf-predict"><span>4.1</span></a>, the algorithm uses a state transition matrix to project the current state and its covariance matrix to the next time step.</p>
 <p><span id="eq-lkf-predict"><span class="math display">\[
 \begin{aligned}
+    \textit{Predict step} \\
+    \hline
     \mathbf{\hat{x}} &amp;= \mathbf{F x + Bu} \\
     \mathbf{\hat{P}} &amp;= \mathbf{F P F^{T} + Q}
 \end{aligned}
-\tag{4.1}\]</span></span> Where:</p>
-<p><span class="math display">\[\begin{aligned}
+\tag{4.1}\]</span></span> Where: <span class="math display">\[
+\begin{aligned}
     \mathbf{\hat{x}}, \mathbf{\hat{P}} &amp;= \text{State mean and covariance} \\
     \mathbf{F} &amp;= \text{Transition matrix} \\
     \mathbf{Q} &amp;= \text{Process matrix} \\
-    \mathbf{B, u} &amp;= \text{Input to the system} \\
-\end{aligned}\]</span></p>
+    \mathbf{B, u} &amp;= \text{Input to the system}
+\end{aligned}
+\]</span></p>
 <p>In the correction step <a href="#eq-lkf-update"><span>4.2</span></a>, the algorithm uses a measurement matrix to update the predicted state and its covariance matrix with the new measurement. The algorithm optimizes the estimation by minimizing the mean squared error between the true state and the estimated state <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>.</p>
 <p><span id="eq-lkf-update"><span class="math display">\[
 \begin{aligned}
+    \textit{Update step} \\
+    \hline
     \mathbf{y} &amp;= \mathbf{z - H x} \\
     \mathbf{K} &amp;= \mathbf{P H^T (H P H^T + R)^{-1}} \\
     \mathbf{\hat{x}} &amp;= \mathbf{x + K y} \\
     \mathbf{\hat{P}} &amp;= \mathbf{(I - K H)P} \\
 \end{aligned}
-\tag{4.2}\]</span></span> Where:</p>
-<p><span class="math display">\[\begin{aligned}
+\tag{4.2}\]</span></span> Where: <span class="math display">\[
+\begin{aligned}
     \mathbf{z}, \mathbf{R} &amp;= \text{Measurement and convariance} \\
     \mathbf{H} &amp;= \text{Measurement function} \\
-\end{aligned}\]</span></p>
+\end{aligned}
+\]</span></p>
 </section>
 <section id="unscented-kalman-filter" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="unscented-kalman-filter"><span class="header-section-number">4.2</span> Unscented Kalman filter</h2>
-<p>The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>. The UKF employs the unscented transformation (UT), which generates a set of sample points that capture the mean and covariance of the original distribution.</p>
+<p>The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>. The UKF employs the unscented transform (UT), which generates a set of sample points that capture the mean and covariance of the original distribution.</p>
 <p>The unscented transform is a technique for approximating the outcome of applying a nonlinear function to a probability distribution that is described by a mean and a covariance matrix. It does this by choosing a set of points, known as sigma points Figure <a href="#fig-sigma-points"><span>4.1</span></a>.</p>
 <div id="fig-sigma-points" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="images/ukf.svg" class="img-fluid figure-img" style="width:70.0%"></p>
+<p><img src="images/ukf.svg" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption class="figure-caption">Figure&nbsp;4.1: Comparsion between sampling, EKF and sigma points. <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
-<p>Merwe describes generating the sigma points in his dissertation thesis <span class="citation" data-cites="merwe">[<a href="references.html#ref-merwe" role="doc-biblioref">3</a>]</span>. These sigma points are chosen to capture the mean and covariance of the current estimated state, and they are transformed through the nonlinear model to predict the state at the next time step. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\sum_{i=0}^{2L} \omega_i = 1\)</span>.</p>
-<p><span class="math display">\[\begin{gathered}
+<p>Merwe describes generating the sigma points in paper <em>The unscented Kalman filter for nonlinear estimation</em><span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">5</a>]</span>. These sigma points are chosen to capture the mean and covariance of the current estimated state, and they are transformed through the nonlinear model to predict the state at the next time step. The sigma points <span class="math inline">\(\mathbfcal{X}_i\)</span> as well as weights <span class="math inline">\(\omega_i\)</span> for each point are calculated using equation <a href="#eq-sigma-points"><span>4.3</span></a>. The weights <span class="math inline">\(\omega_i\)</span> must follow equation <span class="math inline">\(\sum_{i=0}^{2L} \omega_i = 1\)</span>. <span class="math display">\[
 \lambda = \alpha^2 (L + \kappa) - L
-\end{gathered}\]</span> <span id="eq-sigma-points"><span class="math display">\[
+\]</span> <span id="eq-sigma-points"><span class="math display">\[
 \begin{aligned}
-    \mathbfcal{X_0} &amp;= \bar{x}   &amp;  \omega^{m}_0 &amp;= \frac{\lambda}{L + \lambda} &amp; i &amp;= 0  \\
-    \mathbfcal{X_i} &amp;= \bar{x} + \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i   &amp;  \omega^{c}_i &amp;= \frac{1}{2(L + \lambda)} + (1 − \alpha^2 + \beta) &amp; i &amp;= 1,..., L \\
-    \mathbfcal{X_i} &amp;= \bar{x} - \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i &amp; \omega^{m}_i &amp;= \omega^{c}_i = \frac{1}{2(L +\lambda)} &amp; i &amp;= L+1,...,2L
+    \mathbfcal{X_0} &amp;= \hat{x}   &amp;  \omega^{m}_0 &amp;= \frac{\lambda}{L + \lambda} &amp; i &amp;= 0  \\
+    \mathbfcal{X_i} &amp;= \hat{x} + \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i   &amp;  \omega^{c}_i &amp;= \frac{1}{2(L + \lambda)} + (1 − \alpha^2 + \beta) &amp; i &amp;= 1,..., L \\
+    \mathbfcal{X_i} &amp;= \hat{x} - \left( \sqrt{(L+\lambda) \mathbf{P_x}} \right)_i &amp; \omega^{m}_i &amp;= \omega^{c}_i = \frac{1}{2(L +\lambda)} &amp; i &amp;= L+1,...,2L
 \end{aligned}
-\tag{4.3}\]</span></span> Where:</p>
-<p><span class="math display">\[\begin{gathered}
+\tag{4.3}\]</span></span> Where: <span class="math display">\[\begin{gathered}
 \begin{align*}
     \mathbf{\hat{x}}, \mathbf{P_x} &amp;= \text{State vector and covariance} \\
     L &amp;= \text{Dimension of state vector}
@@ -357,35 +367,7 @@ div.csl-indent {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1683192823000" data-listing-file-modified-sort="1683192823416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="../chapters/references.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="../chapters/references.html">
-<h3 class="no-anchor listing-title">
-Bibliography
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
- <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="../chapters/references.html">
-<div class="listing-date">
-May 4, 2023
-</div>
-<div class="listing-author">
-Vit Petrik
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1683192413000" data-listing-file-modified-sort="1683192413844" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1683192413000" data-listing-file-modified-sort="1683192413844" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -398,7 +380,7 @@ Conclusion
 
 </div>
 <div class="listing-description">
- <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> 
+ <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> 
 </div>
 </a>
 </div>
@@ -413,14 +395,42 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1683124658000" data-listing-file-modified-sort="1683124658364" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1684959097000" data-listing-file-modified-sort="1684959097692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<p><a href="../chapters/5_implementation.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/5_implementation.html">
 <h3 class="no-anchor listing-title">
-Implementation on MAV
+Implementation on UAV
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+The proposed measurement system is designed to work with the…<sup></sup>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../chapters/5_implementation.html">
+<div class="listing-date">
+May 24, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1684792785000" data-listing-file-modified-sort="1684792785236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../chapters/references.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../chapters/references.html">
+<h3 class="no-anchor listing-title">
+References
 </h3>
 <div class="listing-subtitle">
 
@@ -431,9 +441,9 @@ Implementation on MAV
 </a>
 </div>
 <div class="metadata">
-<a href="../chapters/5_implementation.html">
+<a href="../chapters/references.html">
 <div class="listing-date">
-May 3, 2023
+May 22, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -469,7 +479,35 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1683466169000" data-listing-file-modified-sort="1683466169346" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1684963591000" data-listing-file-modified-sort="1684963591480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../chapters/appendix.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../chapters/appendix.html">
+<h3 class="no-anchor listing-title">
+Source code
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+The attached zip file contains all the source codes, which can also be found in a GitHub repository.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../chapters/appendix.html">
+<div class="listing-date">
+May 24, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1684769936000" data-listing-file-modified-sort="1684769936917" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="../chapters/2_uvdar.html"> <p class="card-img-top"><img src="images/uvdar.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -489,7 +527,7 @@ The Ultra-violet Direction and Ranging (UVDAR) is a system for relative localiza
 <div class="metadata">
 <a href="../chapters/2_uvdar.html">
 <div class="listing-date">
-May 7, 2023
+May 22, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -497,7 +535,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1684186826000" data-listing-file-modified-sort="1684186826342" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1684845015000" data-listing-file-modified-sort="1684845015713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
 <div class="thumbnail">
 <p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/OSI-ISO.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -510,14 +548,14 @@ Ultra-wide band
 
 </div>
 <div class="listing-description">
-<em>The following chapter will introduce ultra-wide band by means of IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. There is another…</em>
+<em>The following chapter will introduce ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definiton…</em>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/3_uwb.html">
 <div class="listing-date">
-May 15, 2023
+May 23, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -771,7 +809,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/5_implementation.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on MAV</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
