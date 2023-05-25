@@ -1,4 +1,4 @@
-# Implementation on UAV
+# UAV implementation
 
 
 The proposed measurement system is designed to work with the existing MRS UAV System that has been developed by the MRS group at CTU.
@@ -6,46 +6,46 @@ The MRS system relies on the use of the Robot Operating System (ROS) in version 
 
 [^rosnoetic]: ROS Noetic release info <http://wiki.ros.org/noetic>
 
-ROS is a robust framework used for developing and controlling robots. 
-It provides a variety of tools and libraries that make robot software development easier. 
+ROS is a robust framework that is used to develop and control robots. 
+It provides a variety of tools and libraries that make the development of robot software easier.
 ROS uses a distributed system, allowing different parts of a robot to communicate with each other using a messaging model. 
 It supports multiple programming languages, making it accessible to developers. 
-ROS has a large community and a wide range of pre-existing packages, making it a popular choice for research and industrial applications.
+ROS has a large community and a wide range of preexisting packages, making it a popular choice for research and industrial applications.
 
 ![System overview.](images/overview-schema.svg){#fig-system-overview width="60%"}
 
-An overview of the proposed system is shown in figure @fig-system-overview. This thesis implements the blue-colored blocks and these blocks will be further explained in this chapter.
+An overview of the proposed system is shown in figure @fig-system-overview. This thesis implements the blue-colored blocks, and these blocks will be explained in more detail in this chapter.
 
-## DW1000 UWB PHY radio 
+## Qorvo DW1000 UWB PHY radio 
 
-DW1000 is a UWB PHY radio developed and manufactured by Qorvo[^qorvo-dw1000].
-The proposed solution utilizes a development board Qorvo DWM1001-DEV  which consists of a DWM1001C transceiver module and J-Link debug probe.
+Qorvo DW1000 is a UWB PHY radio developed and manufactured by Qorvo[^qorvo-dw1000].
+The proposed solution utilizes a Qorvo DWM1001-DEV development board which consists of a DWM1001C transceiver module and a J-Link debug probe.
 Figure @fig-dwm1001 showcases the printed circuit board (PCB) of the Qorvo DWM1001-DEV.
-The DWM1001C houses the DW1000 radio chip, nRF52832 micro-controller, 3.0 V and 1.8 V power supplies.
-The DW1000 is connected to nRF52832 via SPI bus.
-The module also includes bluetooth connectivity and accelerometer, but it remained unutilized.
+The DWM1001C houses the DW1000 radio chip, nRF52832 microcontroller, 3.0 V, and 1.8 V power supplies.
+The DW1000 is connected to the nRF52832 via the SPI bus.
+The module also includes Bluetooth connectivity and an accelerometer, but it remained unutilized.
 
 ![Qorvo DWM1001 development board.](images/dwm1001-dev.jpg){#fig-dwm1001 width="50%"}
 
-The nRF52832 is the micro-controller that gets programmed. The programming language of choice is C++ with combination of Zephyr RTOS[^zephyr-rtos] which enables use of multi-tasking and concurrency.
+The nRF52832 is the microcontroller that gets programmed. The programming language of choice is C++ with combination of Zephyr RTOS[^zephyr-rtos] which enables use of multitasking and concurrency.
 Zephyr RTOS also contains a rich selection of peripheral drivers for faster development and higher abstraction.
 
-A ranging technique of choice is double-sided two-way ranging. It fulfills all the needs as it compensates for clock drift and does not require any infrastructure. 
+A ranging technique of choice is double-sided two-way ranging. It fulfills all the needs, as it compensates for clock drift and does not require any infrastructure. 
 Each of the two devices in the ranging instance fills out fields in the ranging message @fig-ranging-msg. 
 The values in the ranging message are referenced to DW1000 clock frequency.
-Therefore in order to get an actual time, the values need to be multiplied by $15.65 \textrm{ ps}$.
+Therefore, in order to get an actual time, the values need to be multiplied by $15.65 \textrm{ ps}$.
 
 ![Structure of ranging message. Numbers denote bytes.](images/ranging-msg.svg){#fig-ranging-msg width="80%"}
 
 Data from UWB are sent to ROS via UART connection at baud rate 115200.
 As a communication protocol, the Baca Protocol is used as recommended by the MRS group[^baca-protocol].
 
-UWB ranging on the ROS side handles `uwb_range_node`. The node decodes the messages and republishes them as a ROS topics.
+UWB ranging on the ROS side handles `uwb_range_node`. The node decodes the messages and republishes them as ROS topics.
 Every \textit{N} seconds, the node sends a beacon message through the UWB. 
 This message is then received and processed by other UAVs. 
-An essential function of the beacon message is synchronizing UWB measurements with UVDAR measurements, enabling fusing the measurements based on IDs.
-This is done via UAV identificator that is embedded into the beacon message.
-The ID from beacon message is assigned to the MAC addresses in address resolution Table.
+An essential function of the beacon message is to synchronize the UWB measurements with UVDAR measurements, enabling the fusion of the measurements based on IDs.
+This is done via the UAV identificator that is embedded in the beacon message.
+The retrieved ID fromthe  beacon message is assigned to the MAC addresses in the address resolution table.
 
 [^qorvo-dw1000]: Qorvo DW1000 <https://www.qorvo.com/products/p/DW1000>
 [^zephyr-rtos]: Zephyr RTOS <https://zephyrproject.org/>
@@ -53,13 +53,13 @@ The ID from beacon message is assigned to the MAC addresses in address resolutio
 
 ## Object tracker
 
-An object tracker is a ROS node where the measurements are fused.
+An object tracker is an ROS node where the measurements are fused.
 Both linear and unscented Kalman filters are utilized in this node, as can be seen in figure @fig-object-tracker. 
 The fuse proceeds in the world frame to negate the effects of ego-motion.
 
 ![Fuse of UVDAR and UWB measurements using Kalman filters.](images/object-tracker.svg){#fig-object-tracker}
 
-For predict step, an implementation from LKF is used with state vector and transition matrix described by equations @eq-fuse-predict. 
+For the predict step, an implementation from LKF is used with the state vector and transition matrix described by equations @eq-fuse-predict. 
 $$
 \begin{aligned}
     \mathbf{x} &= \begin{bmatrix} x & y & z & roll & pitch & yaw \end{bmatrix}^{T} \\ \\
@@ -77,25 +77,25 @@ Figure @fig-fusion depicts the challenge of integrating UWB and UVDAR.
 
 ![Situational schema of data fusion.](images/fusion-world.svg){#fig-fusion width="90%"}
 
-The UVDAR measurement consists of a position described by cartesian coordinates and orientation described by a quaternion as shown in @eq-uvdar-measurements with a corresponding covariance matrix. 
-The measurement is in frame of the camera, but with help of `mrs_tranformer` the coordinates are transformed to the world coordinates.
+The UVDAR measurement consists of a position described by Cartesian coordinates and orientation described by a quaternion as shown in @eq-uvdar-measurements with a corresponding covariance matrix. 
+The measurement is in the frame of the camera, but with help of `mrs_transformer` the coordinates are transformed to the world coordinates.
 $$
 \begin{aligned}
    \mathrm{position} = \begin{bmatrix} x & y & z \end{bmatrix}^T \qquad \mathrm{orientation} = \begin{bmatrix} x & y & z & w \end{bmatrix}^T
 \end{aligned}
 $$ {#eq-uvdar-measurements}
-For this kind of measurement the linear Kalman filter is the best choice, because there are no nonlinearity functions and the computation cost is low.
+For this kind of measurement, the linear Kalman filter is the best choice, because there are no nonlinearity functions and the computation cost is low.
 The rotation from UVDAR is transformed from quaternion to Euler angles.
-A measurement matrix $\mathbf{H}$ is a simple identity matrix with dimension six.
+A measurement matrix $\mathbf{H}$ is a simple identity matrix of dimension six.
 
 
-The UWB measurement acquires distance from UAV $\mathbf{x_1}$ to UAV $\mathbf{x_2}$ as noted in equation @eq-uwb-meas.
+The UWB measurement acquires the distance from UAV $\mathbf{x_1}$ to UAV $\mathbf{x_2}$ as noted in equation @eq-uwb-meas.
 $$
 \begin{aligned}
     UWB_{distance} &= \sqrt{(\mathbf{x_2 - x_1})^T (\mathbf{x_2 - x_1})}
 \end{aligned}
 $$ {#eq-uwb-meas}
-The problem is nonlinear and requires a more complex approach.
+The problem is non-linear and requires a more complex approach.
 For this reason, the unscented Kalman filter is employed for fusing distance. 
 The previous state needs to be transformed from world frame to UAV frame. The result needs to be transformed back to world frame back to world.
 The measurement function is described as a C++ function @fig-code-observe-function.

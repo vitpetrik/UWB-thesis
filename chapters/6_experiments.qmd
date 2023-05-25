@@ -32,9 +32,9 @@ A series of experiments have been conducted to evaluate the performance of the p
 
 ### Line segment test {.unnumbered .unlisted}
 
-This experiment aims to test maximum range and to obtain a transfer characteristic of the sensor. 
-The purpose of the first UAV was to act as an observer and for the entire duration of the test remained at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. 
-Second UAV was flying in a trajectory predefined by parametric equation @eq-line-test.
+This experiment aims to test the maximum range and obtain a transfer characteristic of the sensor. 
+The purpose of the first UAV was to act as an observer and, for the duration of the test remained at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. 
+The econd UAV was flying on a trajectory predefined by the parametric equation @eq-line-test.
 
 $$
     \mathbf{position}(t) = \begin{bmatrix} 0 \\ 65 + 55 \sin (2 \pi t) \\ 5 \end{bmatrix}, \quad t \in \left(0, 1\right)
@@ -42,9 +42,9 @@ $$ {#eq-line-test}
 
 ### Circular trajectory {.unnumbered .unlisted}
 
-As it was noted before, the results from UWB should be the same for all orientations.
+As noted above, the results from the UWB should be the same for all orientations.
 To test whether that is a correct assumption, 4 experiments have been conducted.
-In each test one UAV acted as an observer and stayed stayed at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. The second UAV followed a circle of radius 10 m around the first UAV in car-like motion. The difference between the 4 experiments was relative angle respective to the velocity vector.
+In each test, one UAV acted as an observer and stayed at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. The second UAV followed a circle of radius 10 m around the first UAV in a car-like motion. The difference between the 4 experiments was the relative angle to the velocity vector.
 
 ### Results {.unnumbered .unlisted}
 
@@ -100,12 +100,12 @@ plot!(twinx(),
 
 ```
 
-As figure @fig-angle shows, the measurement error is dependent on the angle. 
-In *A sources of error in DW1000* [@qorvo:aps011] manufacturer mentions that there are two sources of error - clock drift and received signal level.
-The implemented ranging technique (double-sided two-way ranging) compensates for the clock drift. Therefore only error source left is the received signal level. The more powerful the signal, the sooner it is timestamped, leading to a shorter distance reported. 
+As Figure @fig-angle shows, the measurement error is dependent on the angle. 
+In *A sources of error in DW1000* [@qorvo:aps011] the manufacturer mentions that there are two sources of error, clock drift and received signal level.
+The implemented ranging technique (double-sided two-way ranging) compensates for clock drift. Therefore, the only error source left is the received signal level. The more powerful the signal, the sooner it is timestamped, leading to a shorter distance reported. 
 This error could be easily corrected by constructing correction function $f(\mathrm{dB})$. 
 Unfortunately, the received signal level was not recorded.
-Further research should be made to correct errors dependent on the received signal level.
+Further research should be done to correct errors dependent on the level of the received signal.
 
 ```{julia}
 #| label: fig-angle
@@ -142,9 +142,9 @@ plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="π3/4"
 
 ### Leader follower algorithm {.unnumbered .unlisted}
 
-To test the fusion of UVDAR and UWB in-loop, a leader-follower algorithm has been used.
-In this test, a leader UAV flies a preplanned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion.
-The algorithm was inspired by *UVDAR System for Visual Relative Localization With Application to Leader–Follower Formations of Multirotor UAVs* @8651535 and is represented in figure @fig-leader-follower.
+To test the fusion of UVDAR and UWB in loop, a leader-follower algorithm was used.
+In this test, a leader UAV flies a pre-planned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion.
+The algorithm was inspired by the *UVDAR System for Visual Relative Localization With Application to Leader–Follower Formations of Multirotor UAVs* @8651535 and is represented in figure @fig-leader-follower.
 
 ![Visual representation of the leader-follower algorithm.](images/leader-follower.svg){#fig-leader-follower width="80%"}
 
@@ -152,10 +152,10 @@ The algorithm was inspired by *UVDAR System for Visual Relative Localization Wit
 
 Unfortunately, due to an incorrect configuration of the experiment, the test has not been successfully conducted in real-life.
 A simulated test using the Gazebo simulator[^gazebo] was conducted as an alternative approach.
-The test for repeated two times. First the UWB and UVDAR fusion was kept for the whole time providing accurate position of the leader UAV. During the second test, the fusion process was halted midway, and only UVDAR measurements were utilized. 
+The test was repeated two times. First, the UWB and UVDAR fusion was kept for the whole time, providing an accurate position of the leader UAV. During the second test, the fusion process was halted mid-way and only UVDAR measurements were utilized. 
 
-The results depicted in Figure @fig-leader-follower-result demonstrate the advantages of fusing UWB and UVDAR technologies.
-Due to the absence of precise distance measurements from UWB (Ultra-Wideband) technology, the follower UAV was unable to maintain track of the leader UAV.
+The results depicted in Figure @fig-leader-follower-result demonstrate the advantages of fusing the UWB and UVDAR technologies.
+Due to the absence of precise distance measurements from UWB (Ultra-Wideband) technology, the follower UAV could not maintain track of the leader UAV.
 
 ```{julia}
 

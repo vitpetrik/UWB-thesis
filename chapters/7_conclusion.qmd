@@ -1,12 +1,12 @@
 # Conclusion
 
-In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems, particularly in the context of UAV swarms. The primary focus was on improving accuracy and reliability by integrating Ultra-Wideband (UWB) technology for distance measurements.
+In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems, particularly in the context of UAV swarms. The primary focus was to improve accuracy and reliability by integrating Ultra-wide band (UWB) technology for distance measurements.
 
 The proposed solution utilized the Qorvo DWM1000 UWB radio as a means of acquiring distance measurements. By leveraging the mathematical framework of Kalman filters, the fusion of UVDAR and UWB data was achieved. This fusion approach has demonstrated its versatility, as it can be applied not only to mutual localization within UAV swarms but also to localize unmanned ground vehicles (UGVs) or serve as a navigation beacon for landing platforms.
 
-While the current implementation of UWB has shown reliable performance, there is room for further improvement. Future work should focus on refining the UWB implementation to correct errors caused by variations in received signal levels. Additionally, the utilization of advanced UWB radios with 3D localization capabilities, employing antenna arrays, could enable the deployment of redundant systems onboard UAVs, further enhancing accuracy and robustness.
+Although the current implementation of UWB has shown reliable performance, there is room for further improvement. Future work should focus on refining the UWB implementation to correct errors caused by variations in received signal levels. Additionally, the utilization of advanced UWB radios with 3D localization capabilities, employing antenna arrays, could enable the deployment of redundant systems onboard UAVs, further enhancing accuracy and robustness.
 
-The outcomes of this thesis have significantly contributed to the ecosystem of the MRS group, providing researchers with a high-precision relative mutual localization system. By extending the boundaries of what is possible, this system opens up new avenues for research and exploration in various domains.
+The results of this thesis have contributed significantly to the ecosystem of the MRS group, providing researchers with a high-precision relative mutual localization system. By extending the boundaries of what is possible, this system opens up new avenues for research and exploration in various domains.
 
 The developed system holds immense potential for a wide range of applications, from collaborative tasks and swarm coordination in UAV swarms to autonomous navigation and precise landing capabilities. The integration of UVDAR and UWB technology has paved the way for advancements in the field, enabling researchers to push the boundaries of what can be achieved with UAV swarms and other autonomous systems.
 

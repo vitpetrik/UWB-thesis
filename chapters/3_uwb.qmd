@@ -21,7 +21,7 @@ default_plots = (
 
 # Ultra-wide band
 
-*The following chapter will introduce ultra-wide band according to IEEE 802.15.4 [@6012487]. Another definiton exists by Federal Communications Commision (FCC), but it will not be discussed in this thesis.*
+*The following chapter will introduce the ultra-wide band according to IEEE 802.15.4 [@6012487]. Another definition exists by Federal Communications Commission (FCC), but it will not be discussed in this thesis.*
 
 To fully understand what ultra-wide band means it is necessary to define what bandwidth means by equation @eq-3db-bw and what center frequency means by equation @eq-3db-f-center.
 
@@ -33,9 +33,9 @@ $$
     f_{center} = \frac{f_{max} - f_{min}}{2} = f_{0 db}
 $$ {#eq-3db-f-center}
 
-The ultra-wide band radio use bandwidth of 500 Mhz and more. This fact provides UWB with its unique ranging capabilities. The *IEEE 802.15.4 Low-Rate Wireless Personal Area Networks* [@6012487] specifies physical and data link layers from the ISO-OSI network model [@fig-iso-osi].
+The ultra-wide band radio uses a bandwidth of 500 Mhz and more. This fact provides UWB with its unique ranging capabilities. The *IEEE 802.15.4 Low-Rate Wireless Personal Area Networks* [@6012487] specifies the physical and data link layers of the ISO-OSI network model [@fig-iso-osi].
 
-Today UWB is mainly used in consumer electronics [^3_uwb-1] or in a manufacturing plants to track assets, ground vehicles and people [^3_uwb-2][^3_uwb-3].
+Today, UWB is mainly used in consumer electronics [^3_uwb-1] or in manufacturing plants to track assets, ground vehicles and people [^3_uwb-2][^3_uwb-3].
 
 [^3_uwb-1]: Apple AirTag <https://www.apple.com/airtag/>
 
@@ -45,7 +45,15 @@ Today UWB is mainly used in consumer electronics [^3_uwb-1] or in a manufacturin
 
 ## MAC layer
 
-IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. The MAC layer is responsible for coordinating access to the shared wireless channel, managing network associations and disassociations, and providing security and reliability features. The MAC layer inserts a MAC header and a MAC footer before and after a network-layer frame, respectively. The MAC header contains information such as frame type, source and destination addresses, sequence number, and security parameters. The MAC footer contains a CRC check. The IEEE 802.15.4 MAC layer supports two modes of operation: beacon-enabled and non-beacon-enabled. In beacon-enabled mode, a coordinator device periodically broadcasts beacons to synchronize the devices in its network and allocate contention-free periods for data transmission. In non-beacon-enabled mode, devices use a slotted or unslotted carrier sense multiple access with collision avoidance (CSMA-CA) mechanism to access the channel. The exact layout of MAC frame format is described in Table \ref{tbl-mac-frame}.
+IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. 
+The MAC layer is responsible for coordinating access to the shared wireless channel, managing network associations and disassociations, and providing security and reliability features. 
+The MAC layer inserts an MAC header and an MAC footer before and after a network-layer frame, respectively. 
+The MAC header contains information such as frame type, source and destination addresses, sequence number, and security parameters. 
+The MAC footer contains a CRC check. 
+The IEEE 802.15.4 MAC layer supports two modes of operation: beacon-enabled and non-beacon-enabled. 
+In beacon-enabled mode, a coordinator device periodically broadcasts beacons to synchronize devices on its network and allocate contention-free periods for data transmission. 
+In non-beacon-enabled mode, devices use a slotted or unslotted carrier sense multiple access with collision avoidance (CSMA-CA) mechanism to access the channel. 
+The exact layout of the MAC frame format is described in Table \ref{tbl-mac-frame}.
 
 ```{=latex}
 \begin{table}[]
@@ -64,9 +72,9 @@ IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, i
 ```
 ## Physical Layer
 
-The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 [@6012487] as UWB PHY. Later in IEEE 802.15.4-2015 [@7460875] the PHY was named as High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:
+The physical layer (PHY) of the UWB was described in IEEE 802.15.4-2011 [@6012487] as the UWB PHY. Later in IEEE 802.15.4-2015 [@7460875] the PHY was named High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:
 
--   sub-gigahertz band consisting of single a channel spectrum from 249.6 MHz to 749.6 MHz.
+-   sub-gigahertz band consisting of a single channel spectrum from 249.6 MHz to 749.6 MHz.
 -   Low band with spectrum from 3.1 GHz to 4.8 GHz.
 -   High band with spectrum from 6 GHz to 10.6 GHz.
 
@@ -82,7 +90,7 @@ Reed-Solomon encoding is used to encode the physical service data unit (PSDU) of
 
 [^3_uwb-4]: Mathworks HRP UWB IEEE 802.15.4a/z Waveform Generation <https://www.mathworks.com/help/comm/ug/hrp-uwb-ieee-802.15.4az-waveform-generation.html>
 
-Convolutional encoding is used to encode the PSDU of the HRP UWB PHY after Reed-Solomon encoding. It uses a finite state machine with memory cells to generate output bits based on the current and previous input bits. It adds parity bits to the original information bits to form a codeword that can be decoded using Viterbi algorithm or other sequential decoding techniques. Convolutional encoding improves the error-correction performance of the HRP UWB PHY and enables it to handle noisy or fading channels.
+Convolutional encoding is used to encode the PSDU of the HRP UWB PHY after Reed-Solomon encoding. It uses a finite state machine with memory cells to generate output bits based on the current and previous input bits. It adds parity bits to the original information bits to form a codeword that can be decoded using the Viterbi algorithm or other sequential decoding techniques. Convolutional encoding improves the error correction performance of the HRP UWB PHY and enables it to handle noisy or fading channels.
 
 ![PPDU encoding process. [@6012487]](images/uwb_ppdu.svg){#fig-uwb-ppdu}
 
@@ -92,7 +100,7 @@ The SHR contains a preamble symbol (SYNC) and a start-of-frame delimiter (SFD). 
 
 ![SHR field structure. [@7460875]](images/shr_field.svg){#fig-shr-field width="80%"}
 
-The PHR contains information about the data to be received, including the length of the data and the data rate used to transmit the data. It also contains additional information elements to facilitate ranging information exchange
+The PHR contains information about the data to be received, including the length of the data and the data rate used to transmit the data. It also contains additional information elements to facilitate ranging information exchange.
 
 ![PHR field structure. [@7460875]](images/phr_field.svg){#fig-phr-field}
 
@@ -100,8 +108,8 @@ The PHR contains information about the data to be received, including the length
 
 ![Symbol stucture. [@7460875]](images/symbol_structure.svg){#fig-symbol-struct}
 
-A symbol is the basic unit of information in HWP UWB PHY. It consists of a short burst of UWB pulses that lasts for 2 ns and occupies a bandwidth of 0.5-1.3 GHz. The burst can be placed in one of the two possible burst intervals, and its phase can be inverted or not as can be seen in Figure @fig-symbol-struct.
-These two choices allow each symbol to carry two bits of information using burst position modulation (BPM) and binary phase-shift keying (BPSK), a example of the modulation can be found in figure @fig-bpm-bpsk. 
+A symbol is the basic unit of information in the HWP UWB PHY. It consists of a short burst of UWB pulses that lasts for $2 \; \mathrm{ns}$ and occupies a bandwidth of 0.5-1.3 GHz. The burst can be placed in one of the two possible burst intervals, and its phase can be inverted or not, as can be seen in Figure @fig-symbol-struct.
+These two choices allow each symbol to carry two bits of information using burst position modulation (BPM) and binary phase-shift keying (BPSK); an example of the modulation can be found in figure @fig-bpm-bpsk. 
 
 ```{julia}
 #| label: fig-bpm-bpsk
@@ -138,7 +146,7 @@ plot(pl_00, pl_01, pl_10, pl_11, layout = l)
 
 ```
 
-Burst hopping position is a parameter that determines the time position of the UWB pulses within a burst interval.
+The burst hopping position is a parameter that determines the time position of the UWB pulses within a burst interval.
 Scrambling code is a pseudo-random sequence that is applied to the data bits before modulation. 
 It is used to randomize the data bits and reduce the peak-to-average power ratio (PAPR) of the UWB pulses. 
 
@@ -148,7 +156,7 @@ $$
 r(t) = \frac{4 \beta}{\pi \sqrt{T_p}} \frac{\cos{[(1+ \beta) \pi t / T_p]} + \frac{\sin{[(1 - \beta) \pi t / T_p}]}{4 \beta(t / T_p)}}{1-(4 \beta t /  T_p)^2}
 $$ {#eq-reference-pulse}
 
-Parameter $T_p$ stands for duration of the pulse. The duration is defined for each channel by table @tbl-pulse-duration.
+The parameter $T_p$ stands for the duration of the pulse. The duration is defined for each channel by table @tbl-pulse-duration.
 
 |     Channel number      | Pulse duration $T_p$ (ns) | Main lobe width $T_w$ (ns) |
 |:---------------------:|:----------------------:|:-----------------------:|
@@ -157,17 +165,17 @@ Parameter $T_p$ stands for duration of the pulse. The duration is defined for ea
 |         {4, 11}         |           0.75            |            0.2             |
 |           15            |           0.74            |            0.2             |
 
-: Reference pulse duration for each channel. [@6012487] {#tbl-pulse-duration}
+: The duration of the reference pulse for each channel. [@6012487] {#tbl-pulse-duration}
 
 Figure @fig-uwb-reference-pulse further illustrates a waveform of the pulse. 
-However an actual hardware system cannot fully realize the shape of the reference pulse.
-Therefore IEEE 802.15.4 constrains transmitted pulse $p(t)$ by a cross-correlation function @eq-cross-correlation where $E_r$ is energy of r(t) and $E_p$ is energy of p(t).
+However, an actual hardware system cannot fully realize the shape of the reference pulse.
+Therefore IEEE 802.15.4 constrains the transmitted pulse $p(t)$ by a cross-correlation function @eq-cross-correlation where $E_r$ is the energy of r(t) and $E_p$ is the energy of p(t).
 
 $$
     \mathrm{\phi}(\tau) = \frac{1}{\sqrt{E_r E_p}} Re \int^{\infty}_{-\infty} \mathrm{r}(t) \mathrm{p}(t - \tau) \mathrm{dt}
 $$ {#eq-cross-correlation}
 
-For PHY to be IEEE compliant the main lobe of the transmitted pulse must have a magnitude of cross correlation $|\phi(\tau)|$ at least 0.8, and the magnitude of sidelobes must not be greater than 0.3.
+For PHY to be IEEE compliant, the main lobe of the transmitted pulse must have a magnitude of cross correlation $|\phi(\tau)|$ at least 0.8, and the magnitude of the sidelobes must not be greater than 0.3.
 
 \setkeys{Gin}{width=0.9\textwidth,height=\textheight,keepaspectratio}
 
@@ -220,9 +228,9 @@ $$
 \end{aligned}
 $$
 
-To estimate the position of the transmitter system of equations [@eq-tdoa] is solved [@MathWork-tdoa]. The main challenge for implementing TDoA is synchronizing the clock across all receivers [@7472406].
+To estimate the position of the transmitter system of equations [@eq-tdoa] is solved [@MathWork-tdoa]. The main challenge in implementing TDoA is synchronizing the clock in all receivers [@7472406].
 
-The TDoA system can be used in a variety of applications, such as indoor positioning, tracking of vehicles or people, and asset tracking. 
+The TDoA system can be used in a variety of applications, such as indoor positioning, vehicle or people tracking, and asset tracking. 
 The accuracy of the TDoA system depends on the number and placement of the UWB sensors and the timing resolution of the system.
 
 ### Two-way ranging {.unnumbered .unlisted}
@@ -251,4 +259,4 @@ $$
     \mathrm{TOF} = \frac{R_a R_b - D_a D_b}{R_a + D_a + R_b + D_b} 
 $$
 
-DS-TWR's main advantage is its ability to compensate for the effect of clock drift [@qorvo:aps011]. Clock drift refers to several related phenomena where a clock does not run at exactly the same rate as a reference clock. That is, after some time the clock “drifts apart” or gradually desynchronizes from the other clock. All clocks are subject to drift, causing eventual divergence unless resynchronized. Clock drift can be caused by many factors, such as temperature changes, aging of components, and power supply voltage changes [@qorvo:aps011].
+The main advantage of DS-TWR is its ability to compensate for the effect of clock drift [@qorvo:aps011]. Clock drift refers to several related phenomena where a clock does not run at exactly the same rate as a reference clock. That is, after some time, the clock drifts apart or gradually desynchronizes from the other clock. All clocks are subject to drift, causing eventual divergence unless the are resynchronized. The drift of the clock can be caused by many factors, such as changes in temperature, aging of components, and changes in power supply voltage [@qorvo:aps011].
