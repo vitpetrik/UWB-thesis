@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-22">
+<meta name="dcterms.date" content="2023-05-25">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 2&nbsp; Ultra-violet Detection and Ranging</title>
 <style>
@@ -155,7 +155,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -236,7 +236,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 22, 2023</p>
+      <p class="date">May 25, 2023</p>
     </div>
   </div>
   
@@ -246,34 +246,47 @@ div.csl-indent {
 
 </header>
 
-<p>The Ultra-violet Direction and Ranging (UVDAR) is a system for relative localization based on computer vision. The system was developed by the Multi-robot system group at CTU <span class="citation" data-cites="uvdd1">[<a href="references.html#ref-uvdd1" role="doc-biblioref">2</a>]</span>. It consists of two parts, active UV LED markers and industrial grade camera with UV bandpass filter and fisheye lens. This allows the system to exactly recognize active markers from the background and work even in a pitch-black environment. This effect can be seen in image <a href="#fig-uvdar-img"><span>2.1</span></a>.</p>
+<p>The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed Multi-robot system group at CTU <span class="citation" data-cites="uvdd1">[<a href="references.html#ref-uvdd1" role="doc-biblioref">3</a>]</span>, revolutionizes relative localization through the implementation of computer vision techniques. Comprised of active UV LED markers (395nm) and an industrial-grade camera (mvBlueFOX MLC200wG) equipped with a UV bandpass filter and fisheye lens, UVDAR excels at accurately distinguishing active markers from the background. This exceptional capability enables the system to operate effectively across diverse lighting conditions, ensuring reliable performance. For a visual representation of the UVDAR system, refer to Figure <a href="#fig-uvdar-img"><span>2.1</span></a>, which provides an example view captured by the camera with extracted bright spots.</p>
 <div id="fig-uvdar-img" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/uvdar.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.1: Image from UV camera.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2.1: Image from UV camera with extracted bright spots.</figcaption>
 </figure>
 </div>
+<p>Figure <a href="#fig-uvdar-dataflow"><span>2.2</span></a> presents a comprehensive overview of the UVDAR system, showcasing its data flow and functionality.</p>
 <div id="fig-uvdar-dataflow" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="images/uvdar_dataflow.svg" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.2: UVDAR processing data flow. <span class="citation" data-cites="uvdd2">[<a href="references.html#ref-uvdd2" role="doc-biblioref">1</a>]</span></figcaption>
+<p><img src="images/uvdar-pipeline.svg" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2.2: UVDAR processing data flow.</figcaption>
+</figure>
+</div>
+<p>The <em>bright points detector</em> step uses Features from accelerated segment test (FAST) algorithm to extract the UV markers. The FAST algorithm is a method for detecting corners in images, which are useful for tracking and mapping objects in 3D model-based tracking systems. It was introduced by Edward Rosten and Tom Drummond in 2005 <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. It uses a circle of 16 pixels around a candidate point and compares the intensity of the pixels with a threshold to determine if the point is a corner. It also uses a high-speed test and machine learning techniques to improve the performance and accuracy of the corner detection <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The FAST algorithm can perform full-frame real-time feature detection and can handle large prediction errors and rapid motions <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The FAST algorithm implementation can distinguish sun and UV markers, as the sun is a major UV light source. Recently great effort was made by MRS group to implement FAST using GPU resources to offload CPU.</p>
+<p>The <em>extract blinking signals</em> step uses 4D hough tranformation to evaluate the blinking frequency of the UV LED marker. The step involves buffering the extracted bright points as <em>t-points</em> <span class="math inline">\((x,y,t)\)</span> from multiple frames and processing them by Hough transformation <span class="citation" data-cites="uvdd2">[<a href="references.html#ref-uvdd2" role="doc-biblioref">2</a>]</span>. The Hough transformation is used to approximate motion of <em>t-points</em> with a <em>t-lines</em>. The presence of <em>t-points</em> within a <em>t-lines</em> is used to match blinking signal with predefined sequence ID.</p>
+<p>The <em>pose calculator</em> will perform the final result as it can assign the retrieved markers to a physical UAV model, estimate its position and orientation and covariance matrix. Figure <a href="#fig-pos-calculation"><span>2.3</span></a> provides a visual representation of the geometric interpretation involved in the pose calculation process.</p>
+<div id="fig-pos-calculation" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/uvdar-position-calculator.svg" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2.3: Geometry of UAV position calculation with 3 visible markers. <span class="citation" data-cites="uvdd1">[<a href="references.html#ref-uvdd1" role="doc-biblioref">3</a>]</span></figcaption>
 </figure>
 </div>
 
 
 
 <div id="refs" class="references csl-bib-body" role="list" style="display: none">
+<div id="ref-1544896" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">E. Rosten and T. Drummond. 2005. Fusing points and lines for high performance tracking. In <em>Tenth IEEE international conference on computer vision (ICCV’05) volume 1</em>, 1508–1515 Vol. 2. <a href="https://doi.org/10.1109/ICCV.2005.104">https://doi.org/10.1109/ICCV.2005.104</a></div>
+</div>
 <div id="ref-uvdd2" class="csl-entry" role="listitem">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">V. Walter, N.Staub, M. Saska, and A. Franchi. 2018. Mutual localization of UAVs based on blinking ultraviolet markers and 3D time-position hough transform. In <em>14th IEEE international conference on automation science and engineering (CASE 2018)</em>.</div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">V. Walter, N.Staub, M. Saska, and A. Franchi. 2018. Mutual localization of UAVs based on blinking ultraviolet markers and 3D time-position hough transform. In <em>14th IEEE international conference on automation science and engineering (CASE 2018)</em>.</div>
 </div>
 <div id="ref-uvdd1" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">V. Walter, M. Saska, and A. Franchi. 2018. Fast mutual relative localization of uavs using ultraviolet led markers. In <em>2018 international conference on unmanned aircraft system (ICUAS 2018)</em>.</div>
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">V. Walter, M. Saska, and A. Franchi. 2018. Fast mutual relative localization of uavs using ultraviolet led markers. In <em>2018 international conference on unmanned aircraft system (ICUAS 2018)</em>.</div>
 </div>
 </div>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1683192413000" data-listing-file-modified-sort="1683192413844" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="0">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685046432000" data-listing-file-modified-sort="1685046432916" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -286,14 +299,14 @@ Conclusion
 
 </div>
 <div class="listing-description">
- <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> 
+In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/7_conclusion.html">
 <div class="listing-date">
-May 4, 2023
+May 25, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -329,7 +342,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1684967456000" data-listing-file-modified-sort="1684967456055" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1685050224000" data-listing-file-modified-sort="1685050224645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
 <div class="thumbnail">
 <p><a href="../chapters/4_kalman.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -385,7 +398,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1683193558000" data-listing-file-modified-sort="1683193558466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685041963000" data-listing-file-modified-sort="1685041963830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
 <p><a href="../chapters/6_experiments.html"> <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -398,14 +411,14 @@ Simulations and real-world experiments
 
 </div>
 <div class="listing-description">
-A series of…<span></span>
+A series…<span></span>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/6_experiments.html">
 <div class="listing-date">
-May 4, 2023
+May 25, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -413,9 +426,9 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1684963591000" data-listing-file-modified-sort="1684963591480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685044491000" data-listing-file-modified-sort="1685044491070" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
-<p><a href="../chapters/appendix.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="../chapters/appendix.html"> <p class="card-img-top"><img src="images/OSI-ISO.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/appendix.html">
@@ -433,7 +446,7 @@ The attached zip file contains all the source codes, which can also be found in 
 <div class="metadata">
 <a href="../chapters/appendix.html">
 <div class="listing-date">
-May 24, 2023
+May 25, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -441,9 +454,9 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1684845015000" data-listing-file-modified-sort="1684845015713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685042673000" data-listing-file-modified-sort="1685042673253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
 <div class="thumbnail">
-<p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/OSI-ISO.svg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/uwb_phy_dataflow.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/3_uwb.html">
@@ -461,7 +474,7 @@ Ultra-wide band
 <div class="metadata">
 <a href="../chapters/3_uwb.html">
 <div class="listing-date">
-May 23, 2023
+May 25, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -710,7 +723,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
