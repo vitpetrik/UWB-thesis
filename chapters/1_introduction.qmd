@@ -1,5 +1,3 @@
-# Introduction
-
 In recent years, the use of unmanned aerial vehicles (UAVs) has been rapidly growing due to their versatility and wide range of applications, from aerial photography and surveillance to delivery services [^zipline] and search and rescue operations @petrlik2023uavs. 
 The problem of relative localization in UAV swarms is a critical challenge for enabling cooperative behavior and avoiding collisions.
 

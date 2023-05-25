@@ -43,15 +43,13 @@ Today UWB is mainly used in consumer electronics [^3_uwb-1] or in a manufacturin
 
 [^3_uwb-3]: Sewio real-time location system <https://www.sewio.net/>
 
-![OSI-ISO network model.](images/OSI-ISO.svg){#fig-iso-osi width="80%"}
-
 ## MAC layer
 
 IEEE 802.15.4 describes the MAC layer for low-rate wireless personal networks, including UWB. The MAC layer is responsible for coordinating access to the shared wireless channel, managing network associations and disassociations, and providing security and reliability features. The MAC layer inserts a MAC header and a MAC footer before and after a network-layer frame, respectively. The MAC header contains information such as frame type, source and destination addresses, sequence number, and security parameters. The MAC footer contains a CRC check. The IEEE 802.15.4 MAC layer supports two modes of operation: beacon-enabled and non-beacon-enabled. In beacon-enabled mode, a coordinator device periodically broadcasts beacons to synchronize the devices in its network and allocate contention-free periods for data transmission. In non-beacon-enabled mode, devices use a slotted or unslotted carrier sense multiple access with collision avoidance (CSMA-CA) mechanism to access the channel. The exact layout of MAC frame format is described in Table \ref{tbl-mac-frame}.
 
 ```{=latex}
 \begin{table}[]
-\caption{\label{tbl-mac-frame}MAC frame format.}
+\caption{\label{tbl-mac-frame}MAC frame format. {[}\protect\hyperlink{ref-7460875}{3}{]}}
 \catcode`\-=12
 \begin{adjustbox}{width=\textwidth}
 \begin{tabular}{|ccccccc|c|c|}
@@ -72,7 +70,7 @@ The physical (PHY) layer of UWB was described in IEEE 802.15.4-2011 [@6012487] a
 -   Low band with spectrum from 3.1 GHz to 4.8 GHz.
 -   High band with spectrum from 6 GHz to 10.6 GHz.
 
-![Data flow according to [@6012487].](images/uwb_phy_dataflow.svg){#fig-uwb-dataflow}
+![Data flow according to. [@6012487]](images/uwb_phy_dataflow.svg){#fig-uwb-dataflow}
 
 The PHY uses an impulse radio signaling scheme with band-limited pulses and supports high data rates and precise ranging applications. It also uses a combination of burst position modulation (BPM) and binary phase-shift keying (BPSK) to modulate symbols. The overview of the physical layer is shown in figure @fig-uwb-dataflow.
 
@@ -86,7 +84,7 @@ Reed-Solomon encoding is used to encode the physical service data unit (PSDU) of
 
 Convolutional encoding is used to encode the PSDU of the HRP UWB PHY after Reed-Solomon encoding. It uses a finite state machine with memory cells to generate output bits based on the current and previous input bits. It adds parity bits to the original information bits to form a codeword that can be decoded using Viterbi algorithm or other sequential decoding techniques. Convolutional encoding improves the error-correction performance of the HRP UWB PHY and enables it to handle noisy or fading channels.
 
-![PPDU encoding process [@6012487].](images/uwb_ppdu.svg){#fig-uwb-ppdu}
+![PPDU encoding process. [@6012487]](images/uwb_ppdu.svg){#fig-uwb-ppdu}
 
 A preamble in HRP UWB PHY is a sequence of known bits sent at the beginning of each frame. It is used for frame synchronization, channel estimation, and ranging measurements. It consists of two parts: a synchronization header (SHR) [@fig-shr-field] and a physical layer header (PHR) [@fig-phr-field].
 
@@ -98,7 +96,7 @@ The PHR contains information about the data to be received, including the length
 
 ![PHR field structure. [@7460875]](images/phr_field.svg){#fig-phr-field}
 
-### Symbol structure
+### Symbol structure {.unnumbered .unlisted}
 
 ![Symbol stucture. [@7460875]](images/symbol_structure.svg){#fig-symbol-struct}
 

@@ -28,4 +28,14 @@ List of source codes:
 
     Complete ROS Noetic workspace for UWB. Includes all necessary packages with real-world tmux scripts and gazebo simulations.
 
-Source code for the thesis is at <https://github.com/vitpetrik/UWB-thesis> and could be viewed as a web page at <https://vitpetrik.github.io/UWB-thesis/>.
+Source code for the thesis is at <https://github.com/vitpetrik/UWB-thesis> and can be viewed as a web page at <https://vitpetrik.github.io/UWB-thesis/>.
+
+All the source codes are tested on Ubuntu 20.04 and should compile right away. In case of any trouble, feel free to contact the author of this thesis at <petrivi2@fel.cvut.cz>, <vit.petrik@gmail.com>, or GitHub.
+
+\appendix
+
+\printindex
+
+# ISO-OSI network model {.unnumbered .unlisted}
+
+![OSI-ISO network model.](images/OSI-ISO.svg){#fig-iso-osi width="80%" fig-pos="H"}

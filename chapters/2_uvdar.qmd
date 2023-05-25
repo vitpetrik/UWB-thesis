@@ -1,7 +1,25 @@
 # Ultra-violet Detection and Ranging
 
-The Ultra-violet Direction and Ranging (UVDAR) is a system for relative localization based on computer vision. The system was developed by the Multi-robot system group at CTU [@uvdd1]. It consists of two parts, active UV LED markers and industrial grade camera with UV bandpass filter and fisheye lens. This allows the system to exactly recognize active markers from the background and work even in a pitch-black environment. This effect can be seen in image @fig-uvdar-img.
+The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed Multi-robot system group at CTU  [@uvdd1], revolutionizes relative localization through the implementation of computer vision techniques. 
+Comprised of active UV LED markers (395nm) and an industrial-grade camera (mvBlueFOX MLC200wG) equipped with a UV bandpass filter and fisheye lens, UVDAR excels at accurately distinguishing active markers from the background. 
+This exceptional capability enables the system to operate effectively across diverse lighting conditions, ensuring reliable performance. 
+For a visual representation of the UVDAR system, refer to Figure @fig-uvdar-img, which provides an example view captured by the camera with extracted bright spots.
 
-![Image from UV camera.](images/uvdar.jpg){#fig-uvdar-img width="100%"}
+![Image from UV camera with extracted bright spots.](images/uvdar.jpg){#fig-uvdar-img width="100%"}
 
-![UVDAR processing data flow. [@uvdd2]](images/uvdar_dataflow.svg){#fig-uvdar-dataflow width="70%"}
+Figure @fig-uvdar-dataflow presents a comprehensive overview of the UVDAR system, showcasing its data flow and functionality. 
+
+![UVDAR processing data flow.](images/uvdar-pipeline.svg){#fig-uvdar-dataflow width="90%" fig-pos="H"}
+
+The *bright points detector* step uses Features from accelerated segment test (FAST) algorithm to extract the UV markers. 
+The FAST algorithm is a method for detecting corners in images, which are useful for tracking and mapping objects in 3D model-based tracking systems. 
+It was introduced by Edward Rosten and Tom Drummond in 2005 [@1544896]. It uses a circle of 16 pixels around a candidate point and compares the intensity of the pixels with a threshold to determine if the point is a corner. It also uses a high-speed test and machine learning techniques to improve the performance and accuracy of the corner detection [@1544896]. The FAST algorithm can perform full-frame real-time feature detection and can handle large prediction errors and rapid motions [@1544896]. The FAST algorithm implementation can distinguish sun and UV markers, as the sun is a major UV light source. Recently great effort was made by MRS group to implement FAST using GPU resources to offload CPU.
+
+The *extract blinking signals* step uses 4D hough tranformation to evaluate the blinking frequency of the UV LED marker. 
+The step involves buffering the extracted bright points as *t-points* $(x,y,t)$ from multiple frames and processing them by Hough transformation [@uvdd2]. 
+The Hough transformation is used to approximate motion of *t-points* with a *t-lines*. 
+The presence of *t-points* within a *t-lines* is used to match blinking signal with predefined sequence ID.
+
+The *pose calculator* will perform the final result as it can assign the retrieved markers to a physical UAV model, estimate its position and orientation and covariance matrix. Figure @fig-pos-calculation provides a visual representation of the geometric interpretation involved in the pose calculation process. 
+
+![Geometry of UAV position calculation with 3 visible markers. [@uvdd1]](images/uvdar-position-calculator.svg){#fig-pos-calculation width="60%"}
