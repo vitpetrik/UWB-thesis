@@ -63,6 +63,36 @@ $$
 \end{aligned}
 $$
 
+## Extended Kalman filter
+
+The Kalman filter is an optimal estimation algorithm that combines measurements from sensors with predictions from a mathematical model to estimate the true state of a system. However, the Kalman filter assumes that both the system dynamics and the measurement model are linear. In real-world applications, many systems exhibit non-linear behavior, and the extended Kalman filter is used to handle such cases.
+
+$$
+\begin{aligned}
+    \textit{Predict step} \\
+    \hline
+    \mathbf{F} &= \frac{\partial \mathbfcal{f}(\mathbf{x_t}, \mathbf{u_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}, \mathbf{u_t}} \\
+    \mathbf{\hat{x}} &= \mathbfcal{f}(\mathbf{x}, \mathbf{u}) \\
+    \mathbf{\hat{P}} &= \mathbf{F P F^{T} + Q}
+\end{aligned}
+$$ {#eq-ekf-predict}
+
+The extended Kalman filter linearizes the system and measurement models using Taylor series expansions. It uses the first-order derivatives (Jacobian matrices) to linearize the equations $f(x)$ at each time step. The filter then performs the standard Kalman filter prediction and update steps using these linearized models.
+
+$$
+\begin{aligned}
+    \textit{Update step} \\
+    \hline
+    \mathbf{H} &= \frac{\partial \mathbfcal{h}(\mathbf{x_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}} \\
+    \mathbf{y} &= \mathbf{z} - \mathbfcal{h}(\mathbf{x}) \\
+    \mathbf{K} &= \mathbf{P H^T (H P H^T + R)^{-1}} \\
+    \mathbf{\hat{x}} &= \mathbf{x + K y} \\
+    \mathbf{\hat{P}} &= \mathbf{(I - K H)P} \\
+\end{aligned}
+$$ {#eq-lkf-update}
+
+It's worth noting that the extended Kalman filter has some limitations. Since it uses linear approximations, it may not perform well for highly non-linear systems or when the linearization is inaccurate [@labbe2014]. In such cases, other techniques like the unscented Kalman filter or particle filters may be more appropriate.
+
 ## Unscented Kalman filter
 
 The unscented Kalman filter (UKF) is a technique for nonlinear estimation that uses a deterministic sampling approach to propagate a Gaussian random variable through the system dynamics [@882463]. 
@@ -102,7 +132,7 @@ $$
 \begin{gathered}
     \textit{Predict step} \\
     \hline
-    \mathbfcal{Y} = \mathbf{f(} \mathbfcal{X} \mathbf{)} \\
+    \mathbfcal{Y} = \mathbfcal{f}( \mathbfcal{X} \mathbf{)} \\
     \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
     \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
 \end{gathered}
