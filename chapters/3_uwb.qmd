@@ -53,23 +53,10 @@ The MAC footer contains a CRC check.
 The IEEE 802.15.4 MAC layer supports two modes of operation: beacon-enabled and non-beacon-enabled. 
 In beacon-enabled mode, a coordinator device periodically broadcasts beacons to synchronize devices on its network and allocate contention-free periods for data transmission. 
 In non-beacon-enabled mode, devices use a slotted or unslotted carrier sense multiple access with collision avoidance (CSMA-CA) mechanism to access the channel. 
-The exact layout of the MAC frame format is described in Table \ref{tbl-mac-frame}.
+The exact layout of the MAC frame format is described in figure @fig-mac-frame.
 
-```{=latex}
-\begin{table}[]
-\caption{\label{tbl-mac-frame}MAC frame format. {[}\protect\hyperlink{ref-7460875}{3}{]}}
-\catcode`\-=12
-\begin{adjustbox}{width=\textwidth}
-\begin{tabular}{|ccccccc|c|c|}
-\hline
-\multicolumn{1}{|c|}{Bytes: 2}                                                                & \multicolumn{1}{c|}{1}                                                                          & \multicolumn{1}{c|}{0/2}                                                                     & \multicolumn{1}{c|}{0/2/8}                                                          & \multicolumn{1}{c|}{0/2}                                                               & \multicolumn{1}{c|}{0/2/8}                                                    & 0/5/6/10/14                                                                              & variable                                                                  & 2                    \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frame\\ Control\end{tabular}}} & \multicolumn{1}{c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sequence\\ Number\end{tabular}}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Destination\\ PAN \\ Identifier\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Destination \\ Address\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Source\\ PAN\\ Identifier\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Source\\ Address\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Auxiliary \\ Security \\ Header\end{tabular}} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frame \\ Payload\end{tabular}} & \multirow{2}{*}{FCS} \\ \cline{3-6}
-\multicolumn{1}{|c|}{}                                                                         & \multicolumn{1}{c|}{}                                                                           & \multicolumn{4}{c|}{Addressing fields}                                                                                                                                                                                                                                                                                                                      &                                                                                          &                                                                           &                      \\ \hline
-\multicolumn{7}{|c|}{MHR}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 & \begin{tabular}[c]{@{}c@{}}MAC \\ Payload\end{tabular}                    & MFR                  \\ \hline
-\end{tabular}
-\end{adjustbox}
-\end{table}
-```
+![MAC frame format. [@7460875]](images/mac-header.svg){#fig-mac-frame}
+
 ## Physical Layer
 
 The physical layer (PHY) of the UWB was described in IEEE 802.15.4-2011 [@6012487] as the UWB PHY. Later in IEEE 802.15.4-2015 [@7460875] the PHY was named High repetition pulse (HRP) UWB PHY. This decision was made due to the introduction of Low repetition pulse (LRP) UWB PHY. Only the HRP UWB PHY will be discussed. The standard defines three operation bands:
