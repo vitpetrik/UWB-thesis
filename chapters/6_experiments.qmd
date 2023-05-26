@@ -24,7 +24,7 @@ default_plots = (
 
 A series of experiments have been conducted to evaluate the performance of the proposed measurement system. Experiments took place at Temešvár (N49.36225 E14.26143). A two Holybro X500 [@fig-holybrox500] equipped with Qorvo DWM1000 has been chosen as a UAV platform. These drones were mainly chosen due to the RTK GNSS system onboard, which is crucial for evaluating accuracy by using them as a source of ground truth.
 
-![Holybro X500 [^1].](images/holybrox500.jpg){#fig-holybrox500 width="70%"}
+![Holybro X500 with UVDAR cameras and UWB radio.](images/holybrox500.jpg){#fig-holybrox500 width="70%"}
 
 [^1]: <http://mrs.felk.cvut.cz/research/micro-aerial-vehicles>
 
