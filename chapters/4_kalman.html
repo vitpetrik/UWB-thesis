@@ -256,7 +256,7 @@ div.csl-indent {
 
 <p>Kalman filters are a powerful mathematical technique that is used to estimate the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[<a href="references.html#ref-10.1115/1.3662552" role="doc-biblioref">1</a>]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, which means it provides the best estimate of the system state given the available measurements and knowledge of the synamics of the system. The filter uses a state-space model of the system to predict the evolution of the system over time and to address measurement errors. The Kalman filter is particularly useful in applications where measurements are noisy or incomplete, or where the system dynamics are complex or difficult to model. In this way, the Kalman filter is an essential tool for many real-world applications that require accurate state estimation and control.</p>
 <p>The algorithm involves two steps: prediction and update. The prediction step uses the previous state estimate and the dynamic model of the system to predict its current state and its uncertainty. The update step uses an obtained measurement and the measurement model of the system to correct the predicted state estimate and its uncertainty using a weighted average. The weight is determined by the Kalman gain, which balances the trust between the prediction and the measurement. The Kalman gain is computed on the basis of the covariance matrices of the prediction error and the measurement error. Prediction and update steps are performed recursively for each new measurement.</p>
-<p>The linear Kalman filter assumes that the system and the measurement models are linear and can be represented by matrices. The extended Kalman filter extends the linear Kalman filter to handle non-linear systems by linearizing them around the current estimate using Taylor series expansion. The unscented Kalman filter improves the extended Kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices <span class="citation" data-cites="9117536">[<a href="references.html#ref-9117536" role="doc-biblioref">3</a>]</span> <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">5</a>]</span>. The unscented Kalman filter is more accurate and robust than the extended Kalman filter, especially for highly nonlinear systems <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">5</a>]</span> <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">6</a>]</span>.</p>
+<p>The linear Kalman filter assumes that the system and the measurement models are linear and can be represented by matrices. The extended Kalman filter extends the linear Kalman filter to handle non-linear systems by linearizing them around the current estimate using Taylor series expansion. The unscented Kalman filter improves the extended Kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices <span class="citation" data-cites="9117536 1336492">[<a href="references.html#ref-9117536" role="doc-biblioref">3</a>,<a href="references.html#ref-1336492" role="doc-biblioref">5</a>]</span>. The unscented Kalman filter is more accurate and robust than the extended Kalman filter, especially for highly nonlinear systems <span class="citation" data-cites="1336492">[<a href="references.html#ref-1336492" role="doc-biblioref">5</a>]</span> <span class="citation" data-cites="882463">[<a href="references.html#ref-882463" role="doc-biblioref">6</a>]</span>.</p>
 <section id="linear-kalman-filter" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="linear-kalman-filter"><span class="header-section-number">4.1</span> Linear Kalman filter</h2>
 <p>A linear Kalman filter is a recursive algorithm that uses the Bode-Shannon representation of random processes and the state-transition method of analysis of dynamic systems to estimate the state of a system from noisy measurements. In the prediction step <a href="#eq-lkf-predict"><span>4.1</span></a>, the algorithm uses a state transition matrix to project the current state and its covariance matrix to the next time step.</p>
@@ -299,8 +299,8 @@ div.csl-indent {
 \begin{aligned}
     \textit{Predict step} \\
     \hline
-    \mathbf{F} &amp;= \frac{\partial \mathbfcal{f}(\mathbf{x_t}, \mathbf{u_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}, \mathbf{u_t}} \\
-    \mathbf{\hat{x}} &amp;= \mathbfcal{f}(\mathbf{x}, \mathbf{u}) \\
+    \mathbf{F} &amp;= \frac{\partial f(\mathbf{x_t}, \mathbf{u_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}, \mathbf{u_t}} \\
+    \mathbf{\hat{x}} &amp;= f(\mathbf{x}, \mathbf{u}) \\
     \mathbf{\hat{P}} &amp;= \mathbf{F P F^{T} + Q}
 \end{aligned}
 \tag{4.3}\]</span></span></p>
@@ -309,8 +309,8 @@ div.csl-indent {
 \begin{aligned}
     \textit{Update step} \\
     \hline
-    \mathbf{H} &amp;= \frac{\partial \mathbfcal{h}(\mathbf{x_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}} \\
-    \mathbf{y} &amp;= \mathbf{z} - \mathbfcal{h}(\mathbf{x}) \\
+    \mathbf{H} &amp;= \frac{\partial h(\mathbf{x_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}} \\
+    \mathbf{y} &amp;= \mathbf{z} - h(\mathbf{x}) \\
     \mathbf{K} &amp;= \mathbf{P H^T (H P H^T + R)^{-1}} \\
     \mathbf{\hat{x}} &amp;= \mathbf{x + K y} \\
     \mathbf{\hat{P}} &amp;= \mathbf{(I - K H)P} \\
@@ -351,7 +351,7 @@ div.csl-indent {
 \begin{gathered}
     \textit{Predict step} \\
     \hline
-    \mathbfcal{Y} = \mathbfcal{f}( \mathbfcal{X} \mathbf{)} \\
+    \mathbfcal{Y} = f( \mathbfcal{X} \mathbf{)} \\
     \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
     \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
 \end{gathered}
@@ -397,7 +397,7 @@ div.csl-indent {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685057441000" data-listing-file-modified-sort="1685057441791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685116535000" data-listing-file-modified-sort="1685116535100" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -453,7 +453,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1685108301000" data-listing-file-modified-sort="1685108301718" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1685124356000" data-listing-file-modified-sort="1685124356746" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
 <div class="thumbnail">
 <p><a href="../chapters/6_experiments.html"> <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -509,7 +509,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685095920000" data-listing-file-modified-sort="1685095920390" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685117857000" data-listing-file-modified-sort="1685117857746" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
 <p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -565,9 +565,9 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685055417000" data-listing-file-modified-sort="1685055417490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685125885000" data-listing-file-modified-sort="1685125885628" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
 <div class="thumbnail">
-<p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/uwb_phy_dataflow.svg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/mac-header.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/3_uwb.html">
