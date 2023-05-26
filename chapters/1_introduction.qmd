@@ -39,7 +39,5 @@ The aviation in general prides itself on a reputation of safe and well managed m
 
 Development and incorporation of the Traffic Alert and Collision Avoidance System (TCAS) in the late 1980s into the aircraft systems serves as an effective solution to mitigate the risk of midair collisions between individual aircraft [@faa].
 
-TCAS is a current implementation of the ICAO Airborne Collision Avoidance System (ACAS) technical standard and is a family of airborne devices that operate autonomously, independently from the ground-based air traffic control (ATC) and are designed to offer collision avoidance protection [@eurocontrol; @faa]. The concept of TCAS comprises of specialized TCAS computer unit and simultaneously takes advantage of already existing 
-on-board equipment, the transponder of secondary surveillance radar.
-
-The use of radar beacon transponders installed on aircraft for ground ATC purposes and provides no protection against an aircraft, that do not possess an operating transponder [@henely].
+TCAS is a current implementation of the ICAO Airborne Collision Avoidance System (ACAS) technical standard and is a family of airborne devices that operate autonomously, independently from the ground-based air traffic control (ATC) and are designed to offer collision avoidance protection [@eurocontrol; @faa]. 
+The concept of TCAS comprises of specialized TCAS computer unit and simultaneously takes advantage of already existing on-board equipment, the transponder of secondary surveillance radar installed on aircraft for ground ATC purposes and provides no protection against an aircraft, that does not possess an operating transponder [@henely].
