@@ -16,7 +16,7 @@ Prediction and update steps are performed recursively for each new measurement.
 
 The linear Kalman filter assumes that the system and the measurement models are linear and can be represented by matrices.
 The extended Kalman filter extends the linear Kalman filter to handle non-linear systems by linearizing them around the current estimate using Taylor series expansion.
-The unscented Kalman filter improves the extended Kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices [@9117536] [@1336492].
+The unscented Kalman filter improves the extended Kalman filter by using a set of sigma points to capture the mean and covariance of the nonlinear system without requiring linearization or Jacobian matrices [@9117536; @1336492].
 The unscented Kalman filter is more accurate and robust than the extended Kalman filter, especially for highly nonlinear systems [@1336492] [@882463].
 
 ## Linear Kalman filter
@@ -71,8 +71,8 @@ $$
 \begin{aligned}
     \textit{Predict step} \\
     \hline
-    \mathbf{F} &= \frac{\partial \mathbfcal{f}(\mathbf{x_t}, \mathbf{u_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}, \mathbf{u_t}} \\
-    \mathbf{\hat{x}} &= \mathbfcal{f}(\mathbf{x}, \mathbf{u}) \\
+    \mathbf{F} &= \frac{\partial f(\mathbf{x_t}, \mathbf{u_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}, \mathbf{u_t}} \\
+    \mathbf{\hat{x}} &= f(\mathbf{x}, \mathbf{u}) \\
     \mathbf{\hat{P}} &= \mathbf{F P F^{T} + Q}
 \end{aligned}
 $$ {#eq-ekf-predict}
@@ -83,8 +83,8 @@ $$
 \begin{aligned}
     \textit{Update step} \\
     \hline
-    \mathbf{H} &= \frac{\partial \mathbfcal{h}(\mathbf{x_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}} \\
-    \mathbf{y} &= \mathbf{z} - \mathbfcal{h}(\mathbf{x}) \\
+    \mathbf{H} &= \frac{\partial h(\mathbf{x_t})}{\partial \mathbf{x}}\bigg\vert_{\mathbf{x_t}} \\
+    \mathbf{y} &= \mathbf{z} - h(\mathbf{x}) \\
     \mathbf{K} &= \mathbf{P H^T (H P H^T + R)^{-1}} \\
     \mathbf{\hat{x}} &= \mathbf{x + K y} \\
     \mathbf{\hat{P}} &= \mathbf{(I - K H)P} \\
@@ -132,7 +132,7 @@ $$
 \begin{gathered}
     \textit{Predict step} \\
     \hline
-    \mathbfcal{Y} = \mathbfcal{f}( \mathbfcal{X} \mathbf{)} \\
+    \mathbfcal{Y} = f( \mathbfcal{X} \mathbf{)} \\
     \mathbf{\hat{x}} = \sum_{i=0}^{2L} \omega^m_i \mathbfcal{Y}_i \quad\quad
     \mathbf{\hat{P}} = \sum_{i=0}^{2L} \omega^c_i (\mathbfcal{Y}_i - \mathbf{x})(\mathbfcal{Y}_i - \mathbf{x})^T + \mathbf{Q}
 \end{gathered}

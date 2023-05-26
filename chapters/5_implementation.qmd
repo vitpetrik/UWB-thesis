@@ -34,6 +34,7 @@ A ranging technique of choice is double-sided two-way ranging. It fulfills all t
 Each of the two devices in the ranging instance fills out fields in the ranging message @fig-ranging-msg. 
 The values in the ranging message are referenced to DW1000 clock frequency.
 Therefore, in order to get an actual time, the values need to be multiplied by $15.65 \textrm{ ps}$.
+The solution has the ability to measure in *many-to-many* forming a complete graph.
 
 ![Structure of ranging message. Numbers denote bytes.](images/ranging-msg.svg){#fig-ranging-msg width="80%"}
 

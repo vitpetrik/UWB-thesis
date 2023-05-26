@@ -5,6 +5,7 @@ using DataFrames
 using Plots
 using CSV
 using Printf
+using LaTeXStrings
 
 gr()
 
@@ -44,7 +45,9 @@ $$ {#eq-line-test}
 
 As noted above, the results from the UWB should be the same for all orientations.
 To test whether that is a correct assumption, 4 experiments have been conducted.
-In each test, one UAV acted as an observer and stayed at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. The second UAV followed a circle of radius 10 m around the first UAV in a car-like motion. The difference between the 4 experiments was the relative angle to the velocity vector.
+In each test, one UAV acted as an observer and stayed at position $\begin{bmatrix}0 & 0 & 5\end{bmatrix}^T$. The second UAV followed a circle of radius 10 m around the first UAV in a car-like motion. The difference between the 4 experiments was the relative angle $\theta$ as shown in figure @fig-circular-experiment.
+
+![Circular trajectory experiment.](images/circular-test.svg){#fig-circular-experiment width="80%"}
 
 ### Results {.unnumbered .unlisted}
 
@@ -114,28 +117,27 @@ Results and ranging multiple static responders with UWB is demonstrated in Appen
 #| fig-cap: "Comparison between different radiation angles."
 #| output: true
 
-
 plot(;default_plots..., 
-        xlabel="Angle [rad]", 
+        xlabel=L"\varphi \;\; \mathrm{[rad]}", 
         ylabel="Error [m]",
     )
 
 data = DataFrame(CSV.File("data/data_0.csv"))
 sort!(data, [:angle])
 @. data.range_uwb += offset
-plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="0")
+plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label=L"\theta = 0")
 data = DataFrame(CSV.File("data/data_90.csv"))
 sort!(data, [:angle])
 @. data.range_uwb += offset
-plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="π/2")
+plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label=L"\theta = \frac{1}{2} \pi")
 data = DataFrame(CSV.File("data/data_180.csv"))
 sort!(data, [:angle])
 @. data.range_uwb += offset
-plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="π")
+plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label=L"\theta = \pi")
 data = DataFrame(CSV.File("data/data_270.csv"))
 sort!(data, [:angle])
 @. data.range_uwb += offset
-plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="π3/4")
+plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label=L"\theta = \frac{3}{4} \pi")
 
 
 ```
@@ -146,7 +148,7 @@ plot!(data.angle, data.range_uwb - data.rtk_distance, legend=true, label="π3/4"
 
 To test the fusion of UVDAR and UWB in loop, a leader-follower algorithm was used.
 In this test, a leader UAV flies a pre-planned trajectory. A follower UAV tries to follow the leader based only on UVDAR and UWB sensor fusion.
-The algorithm was inspired by the *UVDAR System for Visual Relative Localization With Application to Leader–Follower Formations of Multirotor UAVs* @8651535 and is represented in figure @fig-leader-follower.
+The algorithm was inspired by the *UVDAR System for Visual Relative Localization With Application to Leader–Follower Formations of Multirotor UAVs* [@8651535] and is represented in figure @fig-leader-follower. The follower was set to follow the leader with $r = 6 \; \mathrm{m}$ and $\varphi =$ 180°.
 
 ![Visual representation of the leader-follower algorithm.](images/leader-follower.svg){#fig-leader-follower width="80%"}
 
