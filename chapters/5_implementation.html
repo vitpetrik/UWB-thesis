@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-24">
+<meta name="dcterms.date" content="2023-05-26">
 
-<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 5&nbsp; Implementation on UAV</title>
+<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 5&nbsp; UAV implementation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/5_implementation.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/5_implementation.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">UAV implementation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/2_uvdar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Direction and Ranging</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/5_implementation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">UAV implementation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dw1000-uwb-phy-radio" id="toc-dw1000-uwb-phy-radio" class="nav-link active" data-scroll-target="#dw1000-uwb-phy-radio"><span class="header-section-number">5.1</span> DW1000 UWB PHY radio</a></li>
+  <li><a href="#qorvo-dw1000-uwb-phy-radio" id="toc-qorvo-dw1000-uwb-phy-radio" class="nav-link active" data-scroll-target="#qorvo-dw1000-uwb-phy-radio"><span class="header-section-number">5.1</span> Qorvo DW1000 UWB PHY radio</a></li>
   <li><a href="#object-tracker" id="toc-object-tracker" class="nav-link" data-scroll-target="#object-tracker"><span class="header-section-number">5.2</span> Object tracker</a></li>
   </ul>
 </nav>
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">UAV implementation</span></h1>
 </div>
 
 
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 24, 2023</p>
+      <p class="date">May 26, 2023</p>
     </div>
   </div>
   
@@ -269,25 +269,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>The proposed measurement system is designed to work with the existing MRS UAV System that has been developed by the MRS group at CTU. The MRS system relies on the use of the Robot Operating System (ROS) in version ROS Noetic released in 2020<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>ROS is a robust framework used for developing and controlling robots. It provides a variety of tools and libraries that make robot software development easier. ROS uses a distributed system, allowing different parts of a robot to communicate with each other using a messaging model. It supports multiple programming languages, making it accessible to developers. ROS has a large community and a wide range of pre-existing packages, making it a popular choice for research and industrial applications.</p>
+<p>ROS is a robust framework that is used to develop and control robots. It provides a variety of tools and libraries that make the development of robot software easier. ROS uses a distributed system, allowing different parts of a robot to communicate with each other using a messaging model. It supports multiple programming languages, making it accessible to developers. ROS has a large community and a wide range of preexisting packages, making it a popular choice for research and industrial applications.</p>
 <div id="fig-system-overview" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/overview-schema.svg" class="img-fluid figure-img" style="width:60.0%"></p>
 <figcaption class="figure-caption">Figure&nbsp;5.1: System overview.</figcaption>
 </figure>
 </div>
-<p>An overview of the proposed system is shown in figure <a href="#fig-system-overview"><span>5.1</span></a>. This thesis implements the blue-colored blocks and these blocks will be further explained in this chapter.</p>
-<section id="dw1000-uwb-phy-radio" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="dw1000-uwb-phy-radio"><span class="header-section-number">5.1</span> DW1000 UWB PHY radio</h2>
-<p>DW1000 is a UWB PHY radio developed and manufactured by Qorvo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The proposed solution utilizes a development board Qorvo DWM1001-DEV which consists of a DWM1001C transceiver module and J-Link debug probe. Figure <a href="#fig-dwm1001"><span>5.2</span></a> showcases the printed circuit board (PCB) of the Qorvo DWM1001-DEV. The DWM1001C houses the DW1000 radio chip, nRF52832 micro-controller, 3.0 V and 1.8 V power supplies. The DW1000 is connected to nRF52832 via SPI bus. The module also includes bluetooth connectivity and accelerometer, but it remained unutilized.</p>
+<p>An overview of the proposed system is shown in figure <a href="#fig-system-overview"><span>5.1</span></a>. This thesis implements the blue-colored blocks, and these blocks will be explained in more detail in this chapter.</p>
+<section id="qorvo-dw1000-uwb-phy-radio" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="qorvo-dw1000-uwb-phy-radio"><span class="header-section-number">5.1</span> Qorvo DW1000 UWB PHY radio</h2>
+<p>Qorvo DW1000 is a UWB PHY radio developed and manufactured by Qorvo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The proposed solution utilizes a Qorvo DWM1001-DEV development board which consists of a DWM1001C transceiver module and a J-Link debug probe. Figure <a href="#fig-dwm1001"><span>5.2</span></a> showcases the printed circuit board (PCB) of the Qorvo DWM1001-DEV. The DWM1001C houses the DW1000 radio chip, nRF52832 microcontroller, 3.0 V, and 1.8 V power supplies. The DW1000 is connected to the nRF52832 via the SPI bus. The module also includes Bluetooth connectivity and an accelerometer, but it remained unutilized.</p>
 <div id="fig-dwm1001" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/dwm1001-dev.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
 <figcaption class="figure-caption">Figure&nbsp;5.2: Qorvo DWM1001 development board.</figcaption>
 </figure>
 </div>
-<p>The nRF52832 is the micro-controller that gets programmed. The programming language of choice is C++ with combination of Zephyr RTOS<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> which enables use of multi-tasking and concurrency. Zephyr RTOS also contains a rich selection of peripheral drivers for faster development and higher abstraction.</p>
-<p>A ranging technique of choice is double-sided two-way ranging. It fulfills all the needs as it compensates for clock drift and does not require any infrastructure. Each of the two devices in the ranging instance fills out fields in the ranging message <a href="#fig-ranging-msg"><span>5.3</span></a>. The values in the ranging message are referenced to DW1000 clock frequency. Therefore in order to get an actual time, the values need to be multiplied by <span class="math inline">\(15.65 \textrm{ ps}\)</span>.</p>
+<p>The nRF52832 is the microcontroller that gets programmed. The programming language of choice is C++ with combination of Zephyr RTOS<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> which enables use of multitasking and concurrency. Zephyr RTOS also contains a rich selection of peripheral drivers for faster development and higher abstraction.</p>
+<p>A ranging technique of choice is double-sided two-way ranging. It fulfills all the needs, as it compensates for clock drift and does not require any infrastructure. Each of the two devices in the ranging instance fills out fields in the ranging message <a href="#fig-ranging-msg"><span>5.3</span></a>. The values in the ranging message are referenced to DW1000 clock frequency. Therefore, in order to get an actual time, the values need to be multiplied by <span class="math inline">\(15.65 \textrm{ ps}\)</span>.</p>
 <div id="fig-ranging-msg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/ranging-msg.svg" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -295,18 +295,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>Data from UWB are sent to ROS via UART connection at baud rate 115200. As a communication protocol, the Baca Protocol is used as recommended by the MRS group<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
-<p>UWB ranging on the ROS side handles <code>uwb_range_node</code>. The node decodes the messages and republishes them as a ROS topics. Every <em>N</em> seconds, the node sends a beacon message through the UWB. This message is then received and processed by other UAVs. An essential function of the beacon message is synchronizing UWB measurements with UVDAR measurements, enabling fusing the measurements based on IDs. This is done via UAV identificator that is embedded into the beacon message. The ID from beacon message is assigned to the MAC addresses in address resolution Table.</p>
+<p>UWB ranging on the ROS side handles <code>uwb_range_node</code>. The node decodes the messages and republishes them as ROS topics. Every <em>N</em> seconds, the node sends a beacon message through the UWB. This message is then received and processed by other UAVs. An essential function of the beacon message is to synchronize the UWB measurements with UVDAR measurements, enabling the fusion of the measurements based on IDs. This is done via the UAV identificator that is embedded in the beacon message. The retrieved ID fromthe beacon message is assigned to the MAC addresses in the address resolution table.</p>
 </section>
 <section id="object-tracker" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="object-tracker"><span class="header-section-number">5.2</span> Object tracker</h2>
-<p>An object tracker is a ROS node where the measurements are fused. Both linear and unscented Kalman filters are utilized in this node, as can be seen in figure <a href="#fig-object-tracker"><span>5.4</span></a>. The fuse proceeds in the world frame to negate the effects of ego-motion.</p>
+<p>An object tracker is an ROS node where the measurements are fused. Both linear and unscented Kalman filters are utilized in this node, as can be seen in figure <a href="#fig-object-tracker"><span>5.4</span></a>. The fuse proceeds in the world frame to negate the effects of ego-motion.</p>
 <div id="fig-object-tracker" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/object-tracker.svg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;5.4: Fuse of UVDAR and UWB measurements using Kalman filters.</figcaption>
 </figure>
 </div>
-<p>For predict step, an implementation from LKF is used with state vector and transition matrix described by equations <a href="#eq-fuse-predict"><span>5.1</span></a>. <span id="eq-fuse-predict"><span class="math display">\[
+<p>For the predict step, an implementation from LKF is used with the state vector and transition matrix described by equations <a href="#eq-fuse-predict"><span>5.1</span></a>. <span id="eq-fuse-predict"><span class="math display">\[
 \begin{aligned}
     \mathbf{x} &amp;= \begin{bmatrix} x &amp; y &amp; z &amp; roll &amp; pitch &amp; yaw \end{bmatrix}^{T} \\ \\
     \mathbf{F} &amp;= \begin{bmatrix}
@@ -325,16 +325,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Figure&nbsp;5.5: Situational schema of data fusion.</figcaption>
 </figure>
 </div>
-<p>The UVDAR measurement consists of a position described by cartesian coordinates and orientation described by a quaternion as shown in <a href="#eq-uvdar-measurements"><span>5.2</span></a> with a corresponding covariance matrix. The measurement is in frame of the camera, but with help of <code>mrs_tranformer</code> the coordinates are transformed to the world coordinates. <span id="eq-uvdar-measurements"><span class="math display">\[
+<p>The UVDAR measurement consists of a position described by Cartesian coordinates and orientation described by a quaternion as shown in <a href="#eq-uvdar-measurements"><span>5.2</span></a> with a corresponding covariance matrix. The measurement is in the frame of the camera, but with help of <code>mrs_transformer</code> the coordinates are transformed to the world coordinates. <span id="eq-uvdar-measurements"><span class="math display">\[
 \begin{aligned}
    \mathrm{position} = \begin{bmatrix} x &amp; y &amp; z \end{bmatrix}^T \qquad \mathrm{orientation} = \begin{bmatrix} x &amp; y &amp; z &amp; w \end{bmatrix}^T
 \end{aligned}
-\tag{5.2}\]</span></span> For this kind of measurement the linear Kalman filter is the best choice, because there are no nonlinearity functions and the computation cost is low. The rotation from UVDAR is transformed from quaternion to Euler angles. A measurement matrix <span class="math inline">\(\mathbf{H}\)</span> is a simple identity matrix with dimension six.</p>
-<p>The UWB measurement acquires distance from UAV <span class="math inline">\(\mathbf{x_1}\)</span> to UAV <span class="math inline">\(\mathbf{x_2}\)</span> as noted in equation <a href="#eq-uwb-meas"><span>5.3</span></a>. <span id="eq-uwb-meas"><span class="math display">\[
+\tag{5.2}\]</span></span> For this kind of measurement, the linear Kalman filter is the best choice, because there are no nonlinearity functions and the computation cost is low. The rotation from UVDAR is transformed from quaternion to Euler angles. A measurement matrix <span class="math inline">\(\mathbf{H}\)</span> is a simple identity matrix of dimension six.</p>
+<p>The UWB measurement acquires the distance from UAV <span class="math inline">\(\mathbf{x_1}\)</span> to UAV <span class="math inline">\(\mathbf{x_2}\)</span> as noted in equation <a href="#eq-uwb-meas"><span>5.3</span></a>. <span id="eq-uwb-meas"><span class="math display">\[
 \begin{aligned}
     UWB_{distance} &amp;= \sqrt{(\mathbf{x_2 - x_1})^T (\mathbf{x_2 - x_1})}
 \end{aligned}
-\tag{5.3}\]</span></span> The problem is nonlinear and requires a more complex approach. For this reason, the unscented Kalman filter is employed for fusing distance. The previous state needs to be transformed from world frame to UAV frame. The result needs to be transformed back to world frame back to world. The measurement function is described as a C++ function <a href="#fig-code-observe-function"><span>5.6</span></a>.</p>
+\tag{5.3}\]</span></span> The problem is non-linear and requires a more complex approach. For this reason, the unscented Kalman filter is employed for fusing distance. The previous state needs to be transformed from world frame to UAV frame. The result needs to be transformed back to world frame back to world. The measurement function is described as a C++ function <a href="#fig-code-observe-function"><span>5.6</span></a>.</p>
 <div id="fig-code-observe-function" class="quarto-layout-panel" data-fig-pos="H">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685046432000" data-listing-file-modified-sort="1685046432916" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685057441000" data-listing-file-modified-sort="1685057441791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -386,14 +386,14 @@ Conclusion
 
 </div>
 <div class="listing-description">
-In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems…
+In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/7_conclusion.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -401,7 +401,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1685050224000" data-listing-file-modified-sort="1685050224645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1685055881000" data-listing-file-modified-sort="1685055881354" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
 <div class="thumbnail">
 <p><a href="../chapters/4_kalman.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -414,14 +414,14 @@ Kalman filters
 
 </div>
 <div class="listing-description">
-Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it…
+Kalman filters are a powerful mathematical technique that is used to estimate the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, which means it…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/4_kalman.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -457,7 +457,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1685041963000" data-listing-file-modified-sort="1685041963830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1685108301000" data-listing-file-modified-sort="1685108301718" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
 <p><a href="../chapters/6_experiments.html"> <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -477,7 +477,7 @@ A series…<span></span>
 <div class="metadata">
 <a href="../chapters/6_experiments.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -485,7 +485,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685044491000" data-listing-file-modified-sort="1685044491070" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685095904000" data-listing-file-modified-sort="1685095904045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/appendix.html"> <p class="card-img-top"><img src="images/OSI-ISO.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -505,7 +505,7 @@ The attached zip file contains all the source codes, which can also be found in 
 <div class="metadata">
 <a href="../chapters/appendix.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -513,14 +513,14 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685042583000" data-listing-file-modified-sort="1685042583189" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685054282000" data-listing-file-modified-sort="1685054282906" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
 <p><a href="../chapters/2_uvdar.html"> <p class="card-img-top"><img src="images/uvdar.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/2_uvdar.html">
 <h3 class="no-anchor listing-title">
-Ultra-violet Detection and Ranging
+Ultra-violet Direction and Ranging
 </h3>
 <div class="listing-subtitle">
 
@@ -533,7 +533,7 @@ The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed
 <div class="metadata">
 <a href="../chapters/2_uvdar.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -541,7 +541,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685042673000" data-listing-file-modified-sort="1685042673253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685055417000" data-listing-file-modified-sort="1685055417490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
 <div class="thumbnail">
 <p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/uwb_phy_dataflow.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -554,14 +554,14 @@ Ultra-wide band
 
 </div>
 <div class="listing-description">
-<em>The following chapter will introduce ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definiton…</em>
+<em>The following chapter will introduce the ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definition…</em>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/3_uwb.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik

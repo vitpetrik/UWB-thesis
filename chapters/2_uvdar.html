@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-25">
+<meta name="dcterms.date" content="2023-05-26">
 
-<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 2&nbsp; Ultra-violet Detection and Ranging</title>
+<title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - 2&nbsp; Ultra-violet Direction and Ranging</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,7 +127,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/2_uvdar.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/2_uvdar.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Direction and Ranging</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -161,7 +161,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/2_uvdar.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Direction and Ranging</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -179,7 +179,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/5_implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">UAV implementation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -219,7 +219,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Direction and Ranging</span></h1>
 </div>
 
 
@@ -236,7 +236,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 25, 2023</p>
+      <p class="date">May 26, 2023</p>
     </div>
   </div>
   
@@ -246,7 +246,7 @@ div.csl-indent {
 
 </header>
 
-<p>The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed Multi-robot system group at CTU <span class="citation" data-cites="uvdd1">[<a href="references.html#ref-uvdd1" role="doc-biblioref">3</a>]</span>, revolutionizes relative localization through the implementation of computer vision techniques. Comprised of active UV LED markers (395nm) and an industrial-grade camera (mvBlueFOX MLC200wG) equipped with a UV bandpass filter and fisheye lens, UVDAR excels at accurately distinguishing active markers from the background. This exceptional capability enables the system to operate effectively across diverse lighting conditions, ensuring reliable performance. For a visual representation of the UVDAR system, refer to Figure <a href="#fig-uvdar-img"><span>2.1</span></a>, which provides an example view captured by the camera with extracted bright spots.</p>
+<p>The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed Multi-robot system group at CTU <span class="citation" data-cites="uvdd1">[<a href="references.html#ref-uvdd1" role="doc-biblioref">3</a>]</span>, revolutionizes relative localization through the implementation of computer vision techniques. Comprised of active UV LED markers (395nm) and an industrial-grade camera (mvBlueFOX MLC200wG) equipped with a UV bandpass filter and fisheye lens, UVDAR excels at accurately distinguishing active markers from the background. This exceptional capability enables the system to operate effectively under diverse lighting conditions, ensuring reliable performance. For a visual representation of the UVDAR system, refer to Figure <a href="#fig-uvdar-img"><span>2.1</span></a>, which provides an example view captured by the camera with extracted bright spots.</p>
 <div id="fig-uvdar-img" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/uvdar.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -260,9 +260,9 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;2.2: UVDAR processing data flow.</figcaption>
 </figure>
 </div>
-<p>The <em>bright points detector</em> step uses Features from accelerated segment test (FAST) algorithm to extract the UV markers. The FAST algorithm is a method for detecting corners in images, which are useful for tracking and mapping objects in 3D model-based tracking systems. It was introduced by Edward Rosten and Tom Drummond in 2005 <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. It uses a circle of 16 pixels around a candidate point and compares the intensity of the pixels with a threshold to determine if the point is a corner. It also uses a high-speed test and machine learning techniques to improve the performance and accuracy of the corner detection <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The FAST algorithm can perform full-frame real-time feature detection and can handle large prediction errors and rapid motions <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The FAST algorithm implementation can distinguish sun and UV markers, as the sun is a major UV light source. Recently great effort was made by MRS group to implement FAST using GPU resources to offload CPU.</p>
-<p>The <em>extract blinking signals</em> step uses 4D hough tranformation to evaluate the blinking frequency of the UV LED marker. The step involves buffering the extracted bright points as <em>t-points</em> <span class="math inline">\((x,y,t)\)</span> from multiple frames and processing them by Hough transformation <span class="citation" data-cites="uvdd2">[<a href="references.html#ref-uvdd2" role="doc-biblioref">2</a>]</span>. The Hough transformation is used to approximate motion of <em>t-points</em> with a <em>t-lines</em>. The presence of <em>t-points</em> within a <em>t-lines</em> is used to match blinking signal with predefined sequence ID.</p>
-<p>The <em>pose calculator</em> will perform the final result as it can assign the retrieved markers to a physical UAV model, estimate its position and orientation and covariance matrix. Figure <a href="#fig-pos-calculation"><span>2.3</span></a> provides a visual representation of the geometric interpretation involved in the pose calculation process.</p>
+<p>The <em>bright points detector</em> step uses Features from accelerated segment test (FAST) algorithm to extract the UV markers. The FAST algorithm is a method for detecting corners in images, which are useful for tracking and mapping objects in 3D model-based tracking systems. It was introduced by Edward Rosten and Tom Drummond in 2005 <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. It uses a 16-pixel circle around a candidate point and compares the intensity of the pixels with a threshold to determine if the point is a corner. It also uses a high-speed test and machine learning techniques to improve the performance and accuracy of the corner detection <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The FAST algorithm can perform full-frame real-time feature detection and can handle large prediction errors and rapid movements <span class="citation" data-cites="1544896">[<a href="references.html#ref-1544896" role="doc-biblioref">1</a>]</span>. The implementation of the FAST algorithm can distinguish sun and UV markers, as the sun is a major UV light source. Recently great effort was made by MRS group to implement FAST using GPU resources to offload CPU.</p>
+<p>The <em>extract blinking signals</em> step uses 4D hough tranformation to evaluate the blinking frequency of the UV LED marker. The step involves buffering the extracted bright points as <em>t-points</em> <span class="math inline">\(\begin{bmatrix} x &amp; y &amp; t \end{bmatrix}\)</span> from multiple frames and processing them by the Hough transformation <span class="citation" data-cites="uvdd2">[<a href="references.html#ref-uvdd2" role="doc-biblioref">2</a>]</span>. The Hough transformation is used to approximate the motion of <em>t-points</em> with <em>t-lines</em>. The presence of <em>t-points</em> within <em>t-lines</em> is used to match a blinking signal with a predefined sequence ID.</p>
+<p>The <em>pose calculator</em> will perform the final result, as it can assign the retrieved markers to a physical UAV model, estimate its position, orientation and covariance matrix. Figure <a href="#fig-pos-calculation"><span>2.3</span></a> provides a visual representation of the geometric interpretation involved in the pose calculation process.</p>
 <div id="fig-pos-calculation" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/uvdar-position-calculator.svg" class="img-fluid figure-img" style="width:60.0%"></p>
@@ -286,7 +286,7 @@ div.csl-indent {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685046432000" data-listing-file-modified-sort="1685046432916" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685057441000" data-listing-file-modified-sort="1685057441791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -299,14 +299,14 @@ Conclusion
 
 </div>
 <div class="listing-description">
-In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems…
+In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/7_conclusion.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -314,35 +314,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1684959097000" data-listing-file-modified-sort="1684959097692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="thumbnail">
-<p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="../chapters/5_implementation.html">
-<h3 class="no-anchor listing-title">
-Implementation on UAV
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The proposed measurement system is designed to work with the…<sup></sup>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="../chapters/5_implementation.html">
-<div class="listing-date">
-May 24, 2023
-</div>
-<div class="listing-author">
-Vit Petrik
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1685050224000" data-listing-file-modified-sort="1685050224645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1685055881000" data-listing-file-modified-sort="1685055881354" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
 <div class="thumbnail">
 <p><a href="../chapters/4_kalman.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -355,14 +327,14 @@ Kalman filters
 
 </div>
 <div class="listing-description">
-Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it…
+Kalman filters are a powerful mathematical technique that is used to estimate the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, which means it…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/4_kalman.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -370,7 +342,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1684792785000" data-listing-file-modified-sort="1684792785236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1684792785000" data-listing-file-modified-sort="1684792785236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="../chapters/references.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -398,7 +370,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685041963000" data-listing-file-modified-sort="1685041963830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1685108301000" data-listing-file-modified-sort="1685108301718" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
 <p><a href="../chapters/6_experiments.html"> <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -418,7 +390,7 @@ A series…<span></span>
 <div class="metadata">
 <a href="../chapters/6_experiments.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -426,7 +398,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685044491000" data-listing-file-modified-sort="1685044491070" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685095904000" data-listing-file-modified-sort="1685095904045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/appendix.html"> <p class="card-img-top"><img src="images/OSI-ISO.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -446,7 +418,7 @@ The attached zip file contains all the source codes, which can also be found in 
 <div class="metadata">
 <a href="../chapters/appendix.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -454,7 +426,35 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685042673000" data-listing-file-modified-sort="1685042673253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685095920000" data-listing-file-modified-sort="1685095920390" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="../chapters/5_implementation.html">
+<h3 class="no-anchor listing-title">
+UAV implementation
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+The proposed measurement system is designed to work with the…<sup></sup>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../chapters/5_implementation.html">
+<div class="listing-date">
+May 26, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685055417000" data-listing-file-modified-sort="1685055417490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
 <div class="thumbnail">
 <p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/uwb_phy_dataflow.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -467,14 +467,14 @@ Ultra-wide band
 
 </div>
 <div class="listing-description">
-<em>The following chapter will introduce ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definiton…</em>
+<em>The following chapter will introduce the ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definition…</em>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/3_uwb.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik

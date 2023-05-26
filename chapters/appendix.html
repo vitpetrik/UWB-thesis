@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vit Petrik">
-<meta name="dcterms.date" content="2023-05-25">
+<meta name="dcterms.date" content="2023-05-26">
 
 <title>Fusion of UWB-Based Distance Sensors with a Visual Relative Localization System - Source code</title>
 <style>
@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/2_uvdar.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Detection and Ranging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ultra-violet Direction and Ranging</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -159,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/5_implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation on UAV</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">UAV implementation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -214,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 25, 2023</p>
+      <p class="date">May 26, 2023</p>
     </div>
   </div>
   
@@ -228,17 +228,17 @@ ul.task-list li input[type="checkbox"] {
 <p>List of source codes:</p>
 <ul>
 <li><p><a href="https://github.com/vitpetrik/leader_follower">leader-follower</a></p>
-<p>ROS node implementing leader-follower algorithm.</p></li>
+<p>ROS node that implements the leader-follower algorithm.</p></li>
 <li><p><a href="https://github.com/vitpetrik/leader_follower">Object-tracker-ROS</a></p>
-<p>ROS node for data fusion from UWB and UVDAR.</p></li>
+<p>ROS node for UWB and UVDAR data fusion. Could be used for other types of position/distance sensors as well.</p></li>
 <li><p><a href="https://github.com/vitpetrik/UWB_MRS_ranging_ros_node.git">UWB_MRS_ranging_ros_node</a></p>
 <p>ROS node for communication with DWM1001-DEV.</p></li>
 <li><p><a href="https://github.com/vitpetrik/UWB-MRS-ranging.git">UWB-MRS-ranging</a></p>
-<p>Zephyr RTOS application for DWM1001. nRF Connect SDK is needed for compilation and flashing.</p></li>
+<p>Zephyr RTOS application for DWM1001. The nRF Connect SDK is needed for compilation and flashing.</p></li>
 <li><p><a href="https://github.com/vitpetrik/UWB-workspace">UWB-workspace</a></p>
 <p>Complete ROS Noetic workspace for UWB. Includes all necessary packages with real-world tmux scripts and gazebo simulations.</p></li>
 </ul>
-<p>Source code for the thesis is at <a href="https://github.com/vitpetrik/UWB-thesis" class="uri">https://github.com/vitpetrik/UWB-thesis</a> and can be viewed as a web page at <a href="https://vitpetrik.github.io/UWB-thesis/" class="uri">https://vitpetrik.github.io/UWB-thesis/</a>.</p>
+<p>The source code for the thesis is at <a href="https://github.com/vitpetrik/UWB-thesis" class="uri">https://github.com/vitpetrik/UWB-thesis</a> and can be viewed as a web page at <a href="https://vitpetrik.github.io/UWB-thesis/" class="uri">https://vitpetrik.github.io/UWB-thesis/</a>.</p>
 <p>All the source codes are tested on Ubuntu 20.04 and should compile right away. In case of any trouble, feel free to contact the author of this thesis at <a href="mailto:petrivi2@fel.cvut.cz" class="email">petrivi2@fel.cvut.cz</a>, <a href="mailto:vit.petrik@gmail.com" class="email">vit.petrik@gmail.com</a>, or GitHub.</p>
 <section id="iso-osi-network-model" class="level1 unnumbered unlisted">
 <h1 class="unnumbered unlisted">ISO-OSI network model</h1>
@@ -248,6 +248,59 @@ ul.task-list li input[type="checkbox"] {
 <figcaption class="figure-caption">Figure&nbsp;1: OSI-ISO network model.</figcaption>
 </figure>
 </div>
+</section>
+<section id="sec-appendix-ot" class="level1 unnumbered unlisted">
+<h1 class="unnumbered unlisted">Object tracker and UWB evaluation tests</h1>
+<p>Multiple tests were run to evaluate the function of the Object tracker. As a test environment, the Gazebo simulator was used. The first UAV, an observer, remained at the coordinates <span class="math inline">\(\begin{bmatrix} 0 &amp; 0 &amp; 5 \end{bmatrix}^T\)</span> for the entire duration of the tests. The second UAV, a performer, followed a pre-planned trajectory.</p>
+<p>Range error is the difference between the ground truth distance between the UAVs and the distance calculated via unscented transform from Object tracker pose estimation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/default_gzclient_camera(1)-2023-05-26T09_31_33.020189.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Screenshot from Gazebo simulator showing the two UAVs.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/circle-uwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Circle path with UWB fusion.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/circle-nouwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Circle path with standalone UVDAR.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/square-uwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Square path with UWB fusion.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/square-nouwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Square path with UWB fusion.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/flower-uwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Flower path with UWB fusion.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="appendix/flower-nouwb.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Flower path with standalone UVDAR.</figcaption>
+</figure>
+</div>
+<div id="fig-uwb-static-test" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="appendix/plot_35.svg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Test of not moving UWBs.</figcaption>
+</figure>
+</div>
 
 
 
@@ -255,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685046432000" data-listing-file-modified-sort="1685046432916" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1685057441000" data-listing-file-modified-sort="1685057441791" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
 <p><a href="../chapters/7_conclusion.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -268,14 +321,14 @@ Conclusion
 
 </div>
 <div class="listing-description">
-In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization systems…
+In conclusion, this thesis has made significant contributions to the enhancement of visual relative mutual localization…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/7_conclusion.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -283,35 +336,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1684959097000" data-listing-file-modified-sort="1684959097692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="thumbnail">
-<p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="../chapters/5_implementation.html">
-<h3 class="no-anchor listing-title">
-Implementation on UAV
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The proposed measurement system is designed to work with the…<sup></sup>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="../chapters/5_implementation.html">
-<div class="listing-date">
-May 24, 2023
-</div>
-<div class="listing-author">
-Vit Petrik
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1685050224000" data-listing-file-modified-sort="1685050224645" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1685055881000" data-listing-file-modified-sort="1685055881354" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
 <div class="thumbnail">
 <p><a href="../chapters/4_kalman.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -324,14 +349,14 @@ Kalman filters
 
 </div>
 <div class="listing-description">
-Kalman filters are a powerful mathematical technique used for estimating the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, meaning that it…
+Kalman filters are a powerful mathematical technique that is used to estimate the state of a system from noisy measurements. Originally developed by Rudolf Kalman in 1960 <span class="citation" data-cites="10.1115/1.3662552">[1]</span>, Kalman filters have become widely used in a variety of fields, including engineering, finance, and robotics. The Kalman filter is an optimal estimator, which means it…
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/4_kalman.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -339,7 +364,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1684792785000" data-listing-file-modified-sort="1684792785236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1684792785000" data-listing-file-modified-sort="1684792785236" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
 <div class="thumbnail">
 <p><a href="../chapters/references.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
@@ -367,7 +392,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685041963000" data-listing-file-modified-sort="1685041963830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1685108301000" data-listing-file-modified-sort="1685108301718" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
 <p><a href="../chapters/6_experiments.html"> <p class="card-img-top"><img src="images/holybrox500.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -387,7 +412,7 @@ A series…<span></span>
 <div class="metadata">
 <a href="../chapters/6_experiments.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -395,14 +420,42 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685042583000" data-listing-file-modified-sort="1685042583189" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1685095920000" data-listing-file-modified-sort="1685095920390" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="../chapters/5_implementation.html"> <p class="card-img-top"><img src="images/overview-schema.svg"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="../chapters/5_implementation.html">
+<h3 class="no-anchor listing-title">
+UAV implementation
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+The proposed measurement system is designed to work with the…<sup></sup>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../chapters/5_implementation.html">
+<div class="listing-date">
+May 26, 2023
+</div>
+<div class="listing-author">
+Vit Petrik
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1685054282000" data-listing-file-modified-sort="1685054282906" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
 <p><a href="../chapters/2_uvdar.html"> <p class="card-img-top"><img src="images/uvdar.jpg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
 <div class="body">
 <a href="../chapters/2_uvdar.html">
 <h3 class="no-anchor listing-title">
-Ultra-violet Detection and Ranging
+Ultra-violet Direction and Ranging
 </h3>
 <div class="listing-subtitle">
 
@@ -415,7 +468,7 @@ The Ultra-violet Direction and Ranging (UVDAR) system, developed by the esteemed
 <div class="metadata">
 <a href="../chapters/2_uvdar.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
@@ -423,7 +476,7 @@ Vit Petrik
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685042673000" data-listing-file-modified-sort="1685042673253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1685055417000" data-listing-file-modified-sort="1685055417490" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21">
 <div class="thumbnail">
 <p><a href="../chapters/3_uwb.html"> <p class="card-img-top"><img src="images/uwb_phy_dataflow.svg"  class="thumbnail-image card-img"/></p> </a></p>
 </div>
@@ -436,14 +489,14 @@ Ultra-wide band
 
 </div>
 <div class="listing-description">
-<em>The following chapter will introduce ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definiton…</em>
+<em>The following chapter will introduce the ultra-wide band according to IEEE 802.15.4&nbsp;<span class="citation" data-cites="6012487">[1]</span>. Another definition…</em>
 </div>
 </a>
 </div>
 <div class="metadata">
 <a href="../chapters/3_uwb.html">
 <div class="listing-date">
-May 25, 2023
+May 26, 2023
 </div>
 <div class="listing-author">
 Vit Petrik
