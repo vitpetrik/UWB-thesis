@@ -19,4 +19,6 @@ By developing and testing this system, a contribution will be made to the growin
 Extensive research has already been conducted on the utilization of Ultra-Wideband (UWB) technology in Unmanned Aerial Vehicle (UAV) applications.
 Majority of published articles primarily concentrate on the implementation of UWB technology using an architecture based on UWB anchors [@7743707, @Cao2018/03].
 Nevertheless, this particular implementation is unsuitable for deployment in potentially hazardous environments, particularly for search and rescue applications.
-Article *Decentralized Visual-Inertial-UWB Fusion for Relative State Estimation of Aerial Swarm* [@9196944] proposes system architecture and the fusion algorithm, which combines visual-inertial odometry (VIO) and UWB ranging measurements in a tightly-coupled manner.
+Article *Decentralized Visual-Inertial-UWB Fusion for Relative State Estimation of Aerial Swarm* [@9196944] proposes system architecture and the fusion algorithm, which combines visual-inertial odometry (VIO) and UWB ranging measurements in a tightly-coupled manner. However, this approach would be ineffective in environments lacking distinct features.
+
+Hence, the subsequently proposed system stands out for its exceptional ease of deployment, accuracy of measurements and the robustness it offers.
