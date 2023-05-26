@@ -39,3 +39,32 @@ All the source codes are tested on Ubuntu 20.04 and should compile right away. I
 # ISO-OSI network model {.unnumbered .unlisted}
 
 ![OSI-ISO network model.](images/OSI-ISO.svg){#fig-iso-osi width="80%" fig-pos="H"}
+
+\appendix
+
+\printindex
+
+# Object tracker and UWB evaluation tests {#sec-appendix-ot .unnumbered .unlisted}
+
+Multiple tests were run to evaluate the function of the Object tracker.
+As a test environment, the Gazebo simulator was used.
+The first UAV, an observer, remained at the coordinates $\begin{bmatrix} 0 & 0 & 5 \end{bmatrix}^T$ for the entire duration of the tests.
+The second UAV, a performer, followed a pre-planned trajectory.
+
+Range error is the difference between the ground truth distance between the UAVs and the distance calculated via unscented transform from Object tracker pose estimation.
+
+![Screenshot from Gazebo simulator showing the two UAVs.](appendix/default_gzclient_camera(1)-2023-05-26T09_31_33.020189.jpg){fig-pos="H" width="70%"}
+
+![Circle path with UWB fusion.](appendix/circle-uwb.svg)
+
+![Circle path with standalone UVDAR.](appendix/circle-nouwb.svg)
+
+![Square path with UWB fusion.](appendix/square-uwb.svg)
+
+![Square path with UWB fusion.](appendix/square-nouwb.svg)
+
+![Flower path with UWB fusion.](appendix/flower-uwb.svg)
+
+![Flower path with standalone UVDAR.](appendix/flower-nouwb.svg)
+
+![Test of not moving UWBs.](appendix/plot_35.svg){#fig-uwb-static-test}

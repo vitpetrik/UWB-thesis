@@ -107,6 +107,8 @@ This error could be easily corrected by constructing correction function $f(\mat
 Unfortunately, the received signal level was not recorded.
 Further research should be done to correct errors dependent on the level of the received signal.
 
+Results and ranging multiple static responders with UWB is demonstrated in Appendix C.
+
 ```{julia}
 #| label: fig-angle
 #| fig-cap: "Comparison between different radiation angles."
@@ -152,10 +154,13 @@ The algorithm was inspired by the *UVDAR System for Visual Relative Localization
 
 Unfortunately, due to an incorrect configuration of the experiment, the test has not been successfully conducted in real-life.
 A simulated test using the Gazebo simulator[^gazebo] was conducted as an alternative approach.
+A special node was made to simulate results from UWB, the node calculates a distance between UAVs from ground truth and then adds noise with distribution $\mathcal{N}(0, 0.05)$.
 The test was repeated two times. First, the UWB and UVDAR fusion was kept for the whole time, providing an accurate position of the leader UAV. During the second test, the fusion process was halted mid-way and only UVDAR measurements were utilized. 
 
 The results depicted in Figure @fig-leader-follower-result demonstrate the advantages of fusing the UWB and UVDAR technologies.
 Due to the absence of precise distance measurements from UWB (Ultra-Wideband) technology, the follower UAV could not maintain track of the leader UAV.
+
+More simulated tests of the Object tracker can be seen in Appendix C.
 
 ```{julia}
 
